@@ -277,7 +277,7 @@ namespace whowell {
     ///////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////
 
-	short int validate_string_as_single_digit_integer_in_range(std::string buffer, short int min, short int max) {
+	short int validate_string_as_single_digit_integer_in_range( std::string buffer, short int min, short int max ) {
 		std::string::size_type sz = 0;
 		bool is_valid = false;
 		short int user_short = 0;
@@ -286,217 +286,123 @@ namespace whowell {
 			try {
 				std::cin >> buffer;
 
-				if (buffer.length() > 1) {
+				if ( buffer.length() > 1 ) {
 					throw InvalidStringLengthException();
 				}
 
-				if (!isdigit(buffer.at(0))) {
+				if ( !isdigit( buffer.at( 0 ) ) ) {
 					throw InvalidCharacterInputException();
 				}
 
-				for (std::size_t i = 0; i < buffer.length(); ++i) {
-					if (!isdigit(buffer.at(i))) {
+				for ( std::size_t i = 0; i < buffer.length(); ++i ) {
+					if ( !isdigit( buffer.at( i ) ) ) {
 						throw InvalidCharacterInputException();
 					}
 				}
 
-				//Now, convert the string to an integer, store it in userShort
+				//Now, convert the string to an integer, store it in user_short
 				//Then, check that the value is within the expected range
-				user_short = std::stoi(buffer, &sz);
+				user_short = std::stoi( buffer, &sz );
 
-				if (user_short < min || user_short > max) {
+				if ( user_short < min || user_short > max ) {
 					throw IntegerOutOfRangeException();
 				}
 				//If no exception has been thrown by this point, then the input is valid.
 				is_valid = true;
-			} catch (InvalidStringLengthException& e) {
+			} catch ( InvalidStringLengthException& e ) {
 				is_valid = false;
                 std::cerr << e.what() << std::endl;
-			} catch (InvalidCharacterInputException& e) {
+			} catch ( InvalidCharacterInputException& e ) {
 				is_valid = false;
                 std::cerr << e.what() << std::endl;
-			} catch (IntegerOutOfRangeException& e) {
+			} catch ( IntegerOutOfRangeException& e ) {
 				is_valid = false;
                 std::cerr << e.what() << std::endl;
 			}
-		} while (!isValid);
+		} while ( !is_valid );
 
-		return userShort;
+		return user_short;
 	}
 
-	short int validateStringAsDoubleDigitIntegerInRange(std::string buffer, short int min, short int max) {
+	short int validate_string_as_double_digit_integer_in_range( std::string buffer, short int min, short int max ) {
 		std::string::size_type sz = 0;
-		bool isValid = false;
-		short int userShort = 0;
+		bool is_valid = false;
+		short int user_short = 0;
 
 		do {
 			try {
 				std::cin >> buffer;
 
-				if (buffer.length() > 2) {
+				if ( buffer.length() > 2 ) {
 					throw InvalidStringLengthException();
 				}
 
-				if (!isdigit(buffer.at(0))) {
+				if ( !isdigit( buffer.at( 0 ) ) ) {
 					throw InvalidCharacterInputException();
 				}
 
-				for (std::size_t i = 0; i < buffer.length(); i++) {
-					if (!isdigit(buffer.at(i))) {
+				for ( std::size_t i = 0; i < buffer.length(); ++i ) {
+					if ( !isdigit( buffer.at( i ) ) ) {
 						throw InvalidCharacterInputException();
 					}
 				}
 
 				//Now, convert the string to an integer, store it in userShort
 				//Then, check that the value is within the expected range
-				userShort = std::stoi(buffer, &sz);
+				user_short = std::stoi( buffer, &sz );
 
-				if (userShort < min || userShort > max) {
+				if ( user_short < min || user_short > max ) {
 					throw IntegerOutOfRangeException();
 				}
 				//If no exception has been thrown by this point, then the input is valid.
-				isValid = true;
-			} catch (InvalidStringLengthException& e) {
-				isValid = false;
+				is_valid = true;
+			} catch ( InvalidStringLengthException& e ) {
+				is_valid = false;
                 std::cout << e.what() << std::endl;
-			} catch (InvalidCharacterInputException& e) {
-				isValid = false;
+			} catch ( InvalidCharacterInputException& e ) {
+				is_valid = false;
                 std::cout << e.what() << std::endl;
-			} catch (IntegerOutOfRangeException& e) {
-				isValid = false;
+			} catch ( IntegerOutOfRangeException& e ) {
+				is_valid = false;
                 std::cout << e.what() << std::endl;
 			}
-		} while (!isValid);
+		} while (!is_valid);
 
-		return userShort;
+		return user_short;
 	}
 
-    int validateStringAsDoubleDigitIntegerInRange(std::string buffer, int min, int max) {
-        std::string::size_type sz = 0;
-        bool isValid = false;
-        int userInt = 0;
-
-        do {
-            try {
-                std::cin >> buffer;
-
-                if (buffer.length() > 2) {
-                    throw InvalidStringLengthException();
-                }
-
-                if (!isdigit(buffer.at(0))) {
-                    throw InvalidCharacterInputException();
-                }
-
-                for (std::size_t i = 0; i < buffer.length(); i++) {
-                    if (!isdigit(buffer.at(i))) {
-                        throw InvalidCharacterInputException();
-                    }
-                }
-
-                //Now, convert the string to an integer, store it in userShort
-                //Then, check that the value is within the expected range
-                userInt = std::stoi(buffer, &sz);
-
-                if (userInt < min || userInt > max) {
-                    throw IntegerOutOfRangeException();
-                }
-                //If no exception has been thrown by this point, then the input is valid.
-                isValid = true;
-            } catch (InvalidStringLengthException& e) {
-                isValid = false;
-                std::cout << e.what() << std::endl;
-            } catch (InvalidCharacterInputException& e) {
-                isValid = false;
-                std::cout << e.what() << std::endl;
-            } catch (IntegerOutOfRangeException& e) {
-                isValid = false;
-                std::cout << e.what() << std::endl;
-            }
-        } while (!isValid);
-
-        return userInt;
-    }
-
-    long int validateStringAsDoubleDigitIntegerInRange(std::string buffer, long int min, long int max) {
-        std::string::size_type sz = 0;
-        bool isValid = false;
-        long int userLong = 0;
-
-        do {
-            try {
-                std::cin >> buffer;
-
-                if (buffer.length() > 2) {
-                    throw InvalidStringLengthException();
-                }
-
-                if (!isdigit(buffer.at(0))) {
-                    throw InvalidCharacterInputException();
-                }
-
-                for (std::size_t i = 0; i < buffer.length(); i++) {
-                    if (!isdigit(buffer.at(i))) {
-                        throw InvalidCharacterInputException();
-                    }
-                }
-
-                //Now, convert the string to an integer, store it in userShort
-                //Then, check that the value is within the expected range
-                userLong = std::stol(buffer, &sz);
-
-                if (userLong < min || userLong > max) {
-                    throw IntegerOutOfRangeException();
-                }
-                //If no exception has been thrown by this point, then the input is valid.
-                isValid = true;
-            } catch (InvalidStringLengthException& e) {
-                isValid = false;
-                std::cout << e.what() << std::endl;
-            } catch (InvalidCharacterInputException& e) {
-                isValid = false;
-                std::cout << e.what() << std::endl;
-            } catch (IntegerOutOfRangeException& e) {
-                isValid = false;
-                std::cout << e.what() << std::endl;
-            }
-        } while (!isValid);
-
-        return userLong;
-    }
-
-	char validateStringAsCharacter(std::string buffer, char upperCaseCharacter) {
-		bool isValid = false;
-		char userChar = '\n';
+	char validate_string_as_character(std::string buffer, char upper_case_character) {
+		bool is_valid = false;
+		char user_char = '\n';
 
 		do {
 			try {
 				std::cin >> buffer;
 
-				if (buffer.length() > 1) {
+				if ( buffer.length() > 1 ) {
 					throw InvalidStringLengthException();
 				}
 
 				//Now, convert the string to an integer, store it in userShort
 				//Then, check that the value is within the expected range
-				userChar = buffer.at(0);
+				user_char = buffer.at(0);
 
-				if (toupper(userChar) == upperCaseCharacter) {
-					isValid = true;
+				if ( toupper( user_char ) == upper_case_character ) {
+					is_valid = true;
 				} else {
 					throw InvalidCharacterInputException();
 				}
 
-			} catch (InvalidStringLengthException& e) {
-				isValid = false;
+			} catch ( InvalidStringLengthException& e ) {
+				is_valid = false;
                 std::cout << e.what() << std::endl;
-			} catch (InvalidCharacterInputException& e) {
-				isValid = false;
+			} catch ( InvalidCharacterInputException& e ) {
+				is_valid = false;
                 std::cout << e.what() << std::endl;
 			}
-		} while (!isValid);
+		} while (!is_valid);
 
-		return userChar;
+		return user_char;
 	}
 
 } /* namespace whowell */

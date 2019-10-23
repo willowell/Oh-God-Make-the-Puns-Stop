@@ -44,9 +44,9 @@ namespace whowell {
 
 	class NodeNotFoundException : public std::exception {
 		public:
-			NodeNotFoundException();
-			~NodeNotFoundException() throw();
-			const char* what() const throw();
+			NodeNotFoundException() noexcept;
+			~NodeNotFoundException() noexcept;
+			const char* what() const noexcept;
 	};
 
 	class UnableToReserveASeatException : public std::exception {
@@ -62,21 +62,15 @@ namespace whowell {
 
 	void performReservationsWithVectors( std::list<Seat>* list, Auditorium* auditorium, std::vector< short > rows, short tickets );
 
-	void load_list_from_file( std::fstream* from_file, Auditorium* corresponding );
-
 	// Validation Functions ///////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////
 
-	short int validateStringAsSingleDigitIntegerInRange( std::string buffer, short int min, short int max );
+	short int validate_string_as_single_digit_integer_in_range( std::string buffer, short int min, short int max );
 
-	short int validateStringAsDoubleDigitIntegerInRange( std::string buffer, short int min, short int max );
+	short int validate_string_as_double_digit_integer_in_range( std::string buffer, short int min, short int max );
 
-	int validateStringAsIntegerInRange( std::string buffer, int min, int max );
-
-	long int validateStringAsLongIntegerInRange( std::string buffer, long int min, long int max );
-
-	char validateStringAsCharacter( std::string buffer, char upperCaseCharacter );
+	char validate_string_as_character( std::string buffer, char upper_case_character );
 
 
 } /* namespace whowell */

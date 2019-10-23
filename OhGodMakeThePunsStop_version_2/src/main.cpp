@@ -16,7 +16,10 @@
 
 #include <boost/format.hpp>
 
+#include "Auditorium.h"
 #include "Seat.h"
+#include "SeatList.h"
+#include "Theatre.h"
 #include "Utilities.h"
 
 
@@ -26,12 +29,12 @@ using namespace whowell;
 int main() {
 	cout << boost::format("!!!Hello %1%!!!") % __func__ << endl; // prints !!!Hello World!!!
 
-	std::unique_ptr< std::fstream >      file_1;
-	std::unique_ptr< std::fstream >      file_2;
-	std::unique_ptr< std::fstream >      file_3;
-	std::unique_ptr< std::list< Seat > > list_1;
-	std::unique_ptr< std::list< Seat > > list_2;
-	std::unique_ptr< std::list< Seat > > list_3;
+	std::fstream      file_1;
+	std::fstream      file_2;
+	std::fstream      file_3;
+	Auditorium        auditorium_1;
+	Auditorium        auditorium_2;
+	Auditorium        auditorium_3;
 
 
 

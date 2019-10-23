@@ -44,7 +44,7 @@ void Auditorium :: set_num_seats_open(     int s ) { num_seats_open = s;       }
 void Auditorium :: set_num_seats_reserved( int s ) { num_seats_reserved = s;   }
 void Auditorium :: set_sales(              int s ) { sales = s;                }
 
-void Auditorium :: load_from_file( std::ifstream from_file) {
+void Auditorium :: load_from_file( std::ifstream from_file ) {
 
 			std::string input_line;
 			short open_seats = 0;
@@ -54,7 +54,7 @@ void Auditorium :: load_from_file( std::ifstream from_file) {
 			//Clear any altered bits, ensure the file is good before doing anything with it.
 			from_file.clear();
 
-			while ( std::getline(from_file, input_line) ) {
+			while ( std::getline( from_file, input_line ) ) {
 				//currentString now contains the contents of one row.
 				//Tell the Auditorium how many rows we have encountered.
 				//The number of columns in the auditorium needs to be set only once
@@ -66,14 +66,14 @@ void Auditorium :: load_from_file( std::ifstream from_file) {
 				num_rows = i;
 
 				/* Examine the individual row. */
-				for ( short j = 1; j <= num_seats; j++ ) {
+				for ( short j = 1; j <= num_seats; ++j ) {
 					if ( input_line.at( j ) == '*' ) { //RESERVED SEAT
 						//CREATE NEW NODE WITH ROW NUM (i), SEAT NUM (j), and TRUE (RESERVED)
-						seat_list.push_back(Seat(i, j, true));
+						seat_list.push_back( Seat( i, j, true ) );
 						res_seats++;
 					} else if ( input_line.at( j ) == '#' ) { //EMPTY SEAT
 						//CREATE NEW NODE WITH ROW NUM (i), SEAT NUM (j), and FALSE (NOT RESERVED)
-						seat_list.push_back(Seat(i, j, false));
+						seat_list.push_back( Seat( i, j, false ) );
 						open_seats++;
 					}
 				}
@@ -89,13 +89,13 @@ void Auditorium :: load_from_file( std::ifstream from_file) {
 
 Seat* Auditorium :: search_for_seat( int row_num, int seat_num ) {
 
-		Seat query(row_num, seat_num, false);
+		Seat query( row_num, seat_num, false );
 		try {
 
-			std::list<Seat>::iterator find_iter = std::find(seat_list.begin(), seat_list.end(), query);
+			std::list<Seat>::iterator find_iter = std::find( seat_list.begin(), seat_list.end(), query );
 
-			if (find_iter != seat_list.end()) {
-				Seat* found = &(*find_iter);
+			if ( find_iter != seat_list.end() ) {
+				Seat* found = &( *find_iter );
 				return found;
 			}
 
@@ -113,13 +113,13 @@ Seat* Auditorium :: search_for_seat( int row_num, int seat_num ) {
  * Returns true is seat is unavailable or cannot be found.
  */
 bool Auditorium :: is_seat_already_reserved( int row_num, int seat_num ) {
-		Seat query(row_num, seat_num, false);
+		Seat query( row_num, seat_num, false );
 
 		try {
 
-			std::list<Seat>::iterator find_iter = std::find(seat_list.begin(), seat_list.end(), query);
+			std::list<Seat>::iterator find_iter = std::find( seat_list.begin(), seat_list.end(), query );
 
-			if (find_iter != seat_list.end()) {
+			if ( find_iter != seat_list.end() ) {
 				return find_iter->is_seat_reserved();
 			}
 
@@ -150,10 +150,10 @@ void Auditorium :: display() const {
 void Auditorium :: display_list() const {
 	std::cout << "List contents:" << std::endl;
 
-	if (seat_list.empty()) {
-		std::cout << "List is empty!" << std::endl;
+	if ( seat_list.empty() ) {
+		std::cerr << "List is empty!" << std::endl;
 	} else {
-		for (auto const& seat : seat_list) {
+		for ( auto const& seat : seat_list ) {
 			seat.display();
 		}
 		std::cout << "End of list." << std::endl;

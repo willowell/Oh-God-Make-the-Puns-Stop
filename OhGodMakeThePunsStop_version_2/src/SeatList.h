@@ -14,12 +14,12 @@
 
 namespace whowell {
 
-class Seat_List {
+class SeatList {
 private:
 	std::list<Seat> seat_list;
 public:
-	Seat_List();
-	virtual ~Seat_List();
+	SeatList();
+	virtual ~SeatList();
 };
 
 } /* namespace whowell */

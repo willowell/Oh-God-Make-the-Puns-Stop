@@ -21,9 +21,9 @@ Theatre :: Theatre():
 
 Theatre :: ~Theatre() {}
 
-void Theatre :: set_total_seats_open(     int seats ) { total_seats_open = seats;     }
+void Theatre :: set_total_seats_open(     int seats ) { total_seats_open     = seats; }
 void Theatre :: set_total_seats_reserved( int seats ) { total_seats_reserved = seats; }
-void Theatre :: set_user_seats(           int seats ) { user_seats = seats;           }
+void Theatre :: set_user_seats(           int seats ) { user_seats           = seats; }
 
 void Theatre :: calculate_total_sales() {
 	total_sales = ( total_seats_reserved * ticket_price );

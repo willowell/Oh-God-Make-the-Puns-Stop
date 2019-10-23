@@ -9,12 +9,12 @@
 
 namespace whowell {
 
-Seat_List::Seat_List() {
+SeatList::SeatList() {
 	// TODO Auto-generated constructor stub
 
 }
 
-Seat_List::~Seat_List() {
+SeatList::~SeatList() {
 	// TODO Auto-generated destructor stub
 }
 
