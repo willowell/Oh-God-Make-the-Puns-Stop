@@ -23,6 +23,7 @@ Auditorium :: Auditorium():
 	auditorium_id(0),
 	num_seats(0),
 	num_rows(0),
+	total_seats(0),
 	num_seats_open(0),
 	num_seats_reserved(0),
 	sales(0)
@@ -33,18 +34,20 @@ Auditorium :: ~Auditorium() {}
 int Auditorium :: get_auditorium_id()      const { return auditorium_id;       }
 int Auditorium :: get_num_seats()          const { return num_seats;           }
 int Auditorium :: get_num_rows()           const { return num_rows;            }
+int Auditorium :: get_total_seats()        const { return total_seats;         }
 int Auditorium :: get_num_seats_open()     const { return num_seats_open;      }
 int Auditorium :: get_num_seats_reserved() const { return num_seats_reserved;  }
 int Auditorium :: get_sales()              const { return sales;               }
 
-void Auditorium :: set_auditorium_id(      int i ) { auditorium_id = i;        }
-void Auditorium :: set_num_seats(          int s ) { num_seats = s;            }
-void Auditorium :: set_num_rows(           int r ) { num_rows = r;             }
-void Auditorium :: set_num_seats_open(     int s ) { num_seats_open = s;       }
-void Auditorium :: set_num_seats_reserved( int s ) { num_seats_reserved = s;   }
-void Auditorium :: set_sales(              int s ) { sales = s;                }
+void Auditorium :: set_auditorium_id(      int i ) { auditorium_id = i;                  }
+void Auditorium :: set_num_seats(          int s ) { num_seats = s;                      }
+void Auditorium :: set_num_rows(           int r ) { num_rows = r;                       }
+void Auditorium :: set_total_seats(              ) { total_seats = num_seats * num_rows; }
+void Auditorium :: set_num_seats_open(     int s ) { num_seats_open = s;                 }
+void Auditorium :: set_num_seats_reserved( int s ) { num_seats_reserved = s;             }
+void Auditorium :: set_sales(              int s ) { sales = s;                          }
 
-void Auditorium :: load_from_file( std::ifstream from_file ) {
+void Auditorium :: load_from_file( std::fstream& from_file ) {
 
 			std::string input_line;
 			short open_seats = 0;
@@ -59,14 +62,14 @@ void Auditorium :: load_from_file( std::ifstream from_file ) {
 				//Tell the Auditorium how many rows we have encountered.
 				//The number of columns in the auditorium needs to be set only once
 				if ( i == 0 ) {
-					num_seats = input_line.length() - 1;
+					num_seats = input_line.length();
 				}
 
 				i++;
 				num_rows = i;
 
 				/* Examine the individual row. */
-				for ( short j = 1; j <= num_seats; ++j ) {
+				for ( short j = 0; j < num_seats; ++j ) {
 					if ( input_line.at( j ) == '*' ) { //RESERVED SEAT
 						//CREATE NEW NODE WITH ROW NUM (i), SEAT NUM (j), and TRUE (RESERVED)
 						seat_list.push_back( Seat( i, j, true ) );
@@ -81,6 +84,7 @@ void Auditorium :: load_from_file( std::ifstream from_file ) {
 
 			num_seats_reserved = res_seats;
 			num_seats_open = open_seats;
+			set_total_seats();
 
 			//List is now loaded and Auditorium contains numRows, numSeats, numSeatsReserved, and numSeatsOpen
 			//Under this algorithm, the list will automatically be sorted such that ROW ONE SEATS
@@ -140,6 +144,7 @@ void Auditorium :: reserve_seat( int row_num, int seat_num ) {
 void Auditorium :: display() const {
 	std::cout << "Auditorium Info:\n"
 			  << "\tID Number: " << auditorium_id << '\n'
+			  << "\tTotal Number of Seats: " << total_seats << '\n'
 			  << "\tNumber of Seats in Each Row: " << num_seats << '\n'
 			  << "\tNumber of Rows: " << num_rows << '\n'
 			  << "\tNumber of Seats Open: " << num_seats_open << '\n'

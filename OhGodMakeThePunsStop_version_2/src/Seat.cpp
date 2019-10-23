@@ -35,10 +35,11 @@ void Seat :: set_reserved( bool seat_state  ) { is_reserved = seat_state; }
 
 //For debug/tracking
 void Seat :: display() const {
-	std::cout << "CONTENTS OF NODE: \n"
-			  << "\tROW: "    << row         << '\n'
-			  << "\tSEAT: "   << column      << '\n'
-			  << "\tSTATUS: " << is_reserved << '\n';
+	std::cout << "Seat Info:"
+			  << '\t' << "Row: "      << row
+			  << '\t' << "Column: "   << column
+			  << '\t' << "Reserved? " << (is_reserved ? "yes" : "no")
+			  << std::endl;
 }
 
 } /* namespace whowell */

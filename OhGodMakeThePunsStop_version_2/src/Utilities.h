@@ -24,27 +24,27 @@ namespace whowell {
 	class IntegerOutOfRangeException : public std::exception {
 		public:
 			IntegerOutOfRangeException();
-			~IntegerOutOfRangeException() throw();
-			const char* what() const throw();
+			~IntegerOutOfRangeException() noexcept;
+			const char* what() const noexcept;
 	};
 
 	class InvalidCharacterInputException : public std::exception {
 		public:
 			InvalidCharacterInputException();
-			~InvalidCharacterInputException() throw();
-			const char* what() const throw();
+			~InvalidCharacterInputException() noexcept;
+			const char* what() const noexcept;
 	};
 
 	class InvalidStringLengthException : public std::exception {
 		public:
 			InvalidStringLengthException();
-			~InvalidStringLengthException() throw();
-			const char* what() const throw();
+			~InvalidStringLengthException() noexcept;
+			const char* what() const noexcept;
 	};
 
 	class NodeNotFoundException : public std::exception {
 		public:
-			NodeNotFoundException() noexcept;
+			NodeNotFoundException();
 			~NodeNotFoundException() noexcept;
 			const char* what() const noexcept;
 	};
@@ -52,8 +52,8 @@ namespace whowell {
 	class UnableToReserveASeatException : public std::exception {
 		public:
 			UnableToReserveASeatException();
-			~UnableToReserveASeatException() throw();
-			const char* what() const throw();
+			~UnableToReserveASeatException() noexcept;
+			const char* what() const noexcept;
 	};
 
 	// List Modification Functions ////////////////////////////////////////////////////

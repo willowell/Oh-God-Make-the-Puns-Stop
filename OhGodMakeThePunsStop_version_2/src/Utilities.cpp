@@ -21,9 +21,9 @@ namespace whowell {
 
 	IntegerOutOfRangeException :: IntegerOutOfRangeException() {}
 
-	IntegerOutOfRangeException :: ~IntegerOutOfRangeException() throw() {}
+	IntegerOutOfRangeException :: ~IntegerOutOfRangeException() noexcept {}
 
-	const char* IntegerOutOfRangeException :: what() const throw() {
+	const char* IntegerOutOfRangeException :: what() const noexcept {
 		return "Integer value out of range. Please try again.\n";
 	}
 
@@ -31,9 +31,9 @@ namespace whowell {
 
 	InvalidCharacterInputException :: InvalidCharacterInputException() {}
 
-	InvalidCharacterInputException :: ~InvalidCharacterInputException() throw() {}
+	InvalidCharacterInputException :: ~InvalidCharacterInputException() noexcept {}
 
-	const char* InvalidCharacterInputException :: what() const throw() {
+	const char* InvalidCharacterInputException :: what() const noexcept {
 		return "Invalid character. Please try again.\n";
 	}
 
@@ -41,9 +41,9 @@ namespace whowell {
 
 	InvalidStringLengthException :: InvalidStringLengthException() {}
 
-	InvalidStringLengthException :: ~InvalidStringLengthException() throw() {}
+	InvalidStringLengthException :: ~InvalidStringLengthException() noexcept {}
 
-	const char* InvalidStringLengthException :: what() const throw() {
+	const char* InvalidStringLengthException :: what() const noexcept {
 		return "String too long. Please try again.\n";
 	}
 
@@ -51,17 +51,17 @@ namespace whowell {
 
 	NodeNotFoundException :: NodeNotFoundException() {}
 
-	NodeNotFoundException :: ~NodeNotFoundException() throw() {}
+	NodeNotFoundException :: ~NodeNotFoundException() noexcept {}
 
-	const char* NodeNotFoundException :: what() const throw() {
+	const char* NodeNotFoundException :: what() const noexcept {
 		return "Node not found in list.\n";
 	}
 
 	UnableToReserveASeatException :: UnableToReserveASeatException() {}
 
-	UnableToReserveASeatException :: ~UnableToReserveASeatException() throw() {}
+	UnableToReserveASeatException :: ~UnableToReserveASeatException() noexcept {}
 
-	const char* UnableToReserveASeatException :: what() const throw() {
+	const char* UnableToReserveASeatException :: what() const noexcept {
 		return "Unable to reserve seat.\n";
 	}
 

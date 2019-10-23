@@ -36,7 +36,44 @@ int main() {
 	Auditorium        auditorium_2;
 	Auditorium        auditorium_3;
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ///INIT PHASE
 
+	try {
+		file_1 = std::fstream( "A1.txt", std::ios::in );
+		file_2 = std::fstream( "A2.txt", std::ios::in );
+		file_3 = std::fstream( "A3.txt", std::ios::in );
+	} catch (...) {
+		std::cerr << "Something went wrong with the files!" << std::endl;
+		return EXIT_FAILURE;
+	}
 
-	return 0;
+	auditorium_1.set_auditorium_id(1);
+	auditorium_2.set_auditorium_id(2);
+	auditorium_3.set_auditorium_id(3);
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ///LOAD PHASE
+
+	auditorium_1.load_from_file(file_1);
+	auditorium_2.load_from_file(file_2);
+	auditorium_3.load_from_file(file_3);
+
+    //Close the input files - they aren't needed until the end of the program.
+    file_1.close();
+    file_2.close();
+    file_3.close();
+
+    auditorium_1.display();
+    auditorium_1.display_list();
+
+    auditorium_2.display();
+    auditorium_2.display_list();
+
+    auditorium_3.display();
+    auditorium_3.display_list();
+
+	return EXIT_SUCCESS;
 }
