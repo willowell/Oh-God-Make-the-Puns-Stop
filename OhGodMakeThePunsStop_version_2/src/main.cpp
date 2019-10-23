@@ -29,12 +29,24 @@ using namespace whowell;
 int main() {
 	cout << boost::format("!!!Hello %1%!!!") % __func__ << endl; // prints !!!Hello World!!!
 
+	bool is_debug = true;
+
 	std::fstream      file_1;
 	std::fstream      file_2;
 	std::fstream      file_3;
 	Auditorium        auditorium_1;
 	Auditorium        auditorium_2;
 	Auditorium        auditorium_3;
+	Theatre           theatre;
+
+	/// User input
+
+	short int user_short = 0;
+	short int user_selected_tickets = 0;
+	short int user_choice = 0;
+	std::string buffer;
+	std::vector < short int > user_selected_seats;
+	std::vector < short int > user_selected_rows;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -66,14 +78,24 @@ int main() {
     file_2.close();
     file_3.close();
 
-    auditorium_1.display();
-    auditorium_1.display_list();
+    if (is_debug) {
+    	auditorium_1.display();
+    	auditorium_1.display_list();
 
-    auditorium_2.display();
-    auditorium_2.display_list();
+    	auditorium_2.display();
+    	auditorium_2.display_list();
 
-    auditorium_3.display();
-    auditorium_3.display_list();
+    	auditorium_3.display();
+    	auditorium_3.display_list();
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ///MAIN LOOP
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    ///FILE OUTPUT
 
 	return EXIT_SUCCESS;
 }
