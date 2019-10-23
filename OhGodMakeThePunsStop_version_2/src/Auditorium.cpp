@@ -6,9 +6,10 @@
  */
 
 #include <algorithm>
+#include <cctype>
+#include <fstream>
 #include <iostream>
 #include <list>
-#include <sstream>
 #include <string>
 
 #include <boost/format.hpp>
@@ -43,7 +44,7 @@ void Auditorium :: set_num_seats_open(     int s ) { num_seats_open = s;       }
 void Auditorium :: set_num_seats_reserved( int s ) { num_seats_reserved = s;   }
 void Auditorium :: set_sales(              int s ) { sales = s;                }
 
-void Auditorium :: load_from_file( std::fstream from_file) {
+void Auditorium :: load_from_file( std::ifstream from_file) {
 
 			std::string input_line;
 			short open_seats = 0;
@@ -86,7 +87,7 @@ void Auditorium :: load_from_file( std::fstream from_file) {
 			//come BEFORE ROW TWO SEATS, etc.
 		} //close push method
 
-Seat& Auditorium :: search_for_seat( int row_num, int seat_num ) {
+Seat* Auditorium :: search_for_seat( int row_num, int seat_num ) {
 
 		Seat query(row_num, seat_num, false);
 		try {
@@ -94,7 +95,8 @@ Seat& Auditorium :: search_for_seat( int row_num, int seat_num ) {
 			std::list<Seat>::iterator find_iter = std::find(seat_list.begin(), seat_list.end(), query);
 
 			if (find_iter != seat_list.end()) {
-				return *find_iter;
+				Seat* found = &(*find_iter);
+				return found;
 			}
 
 			//If the node still has not been found, then it probably isn't in the list.
@@ -106,31 +108,21 @@ Seat& Auditorium :: search_for_seat( int row_num, int seat_num ) {
 		}
 	}
 
-bool Auditorium :: search_for_seat_and_get_status(int row_num, int seat_num ) const {
-		Node* current = head;
-		try {
-			if ( current->getRow() == rowNum && current->getSeat() == seatNum ) {
-				//Then the first node is the one the user is looking for.
-				//Return TRUE if it is RESERVED
-				if ( current->isReserved() == true )
-					return true;
-				//Return FALSE if it is NOT RESERVED
-				if ( current->isReserved() == false )
-					return false;
-			} else {
-				//Cycle through the list.
-				while ( current != nullptr ) {
-					current = current->getNext();
+/**
+ * Returns false if seat is available
+ * Returns true is seat is unavailable or cannot be found.
+ */
+bool Auditorium :: is_seat_already_reserved( int row_num, int seat_num ) {
+		Seat query(row_num, seat_num, false);
 
-					//Continue checking each node in the list.
-					if ( current->getRow() == rowNum && current->getSeat() == seatNum ) {
-						if ( current->isReserved() == true )
-							return true;
-						if ( current->isReserved() == false )
-							return false;
-					}
-				}
+		try {
+
+			std::list<Seat>::iterator find_iter = std::find(seat_list.begin(), seat_list.end(), query);
+
+			if (find_iter != seat_list.end()) {
+				return find_iter->is_seat_reserved();
 			}
+
 			//If the node still has not been found, then it probably isn't in the list.
 			//Throw an exception
 			throw NodeNotFoundException();
@@ -140,6 +132,10 @@ bool Auditorium :: search_for_seat_and_get_status(int row_num, int seat_num ) co
 		}
 
 	}
+
+void Auditorium :: reserve_seat( int row_num, int seat_num ) {
+
+}
 
 void Auditorium :: display() const {
 	std::cout << "Auditorium Info:\n"

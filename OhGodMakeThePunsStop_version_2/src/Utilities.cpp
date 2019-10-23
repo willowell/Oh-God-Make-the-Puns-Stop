@@ -27,6 +27,8 @@ namespace whowell {
 		return "Integer value out of range. Please try again.\n";
 	}
 
+
+
 	InvalidCharacterInputException :: InvalidCharacterInputException() {}
 
 	InvalidCharacterInputException :: ~InvalidCharacterInputException() throw() {}
@@ -34,6 +36,8 @@ namespace whowell {
 	const char* InvalidCharacterInputException :: what() const throw() {
 		return "Invalid character. Please try again.\n";
 	}
+
+
 
 	InvalidStringLengthException :: InvalidStringLengthException() {}
 
@@ -43,10 +47,28 @@ namespace whowell {
 		return "String too long. Please try again.\n";
 	}
 
+
+
+	NodeNotFoundException :: NodeNotFoundException() {}
+
+	NodeNotFoundException :: ~NodeNotFoundException() throw() {}
+
+	const char* NodeNotFoundException :: what() const throw() {
+		return "Node not found in list.\n";
+	}
+
+	UnableToReserveASeatException :: UnableToReserveASeatException() {}
+
+	UnableToReserveASeatException :: ~UnableToReserveASeatException() throw() {}
+
+	const char* UnableToReserveASeatException :: what() const throw() {
+		return "Unable to reserve seat.\n";
+	}
+
 	// List Modification Functions ////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////
-
+/*
 	void performReservationsWithVectors( std::list<Seat>* list, Auditorium* auditorium,
 					std::vector< short > rows, short tickets ) {
 				std::string buffer;
@@ -250,15 +272,15 @@ namespace whowell {
 			h++;
 		}
 	}
-
+*/
     // Validation Functions ///////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////
 
-	short int validateStringAsSingleDigitIntegerInRange(std::string buffer, short int min, short int max) {
+	short int validate_string_as_single_digit_integer_in_range(std::string buffer, short int min, short int max) {
 		std::string::size_type sz = 0;
-		bool isValid = false;
-		short int userShort = 0;
+		bool is_valid = false;
+		short int user_short = 0;
 
 		do {
 			try {
@@ -272,7 +294,7 @@ namespace whowell {
 					throw InvalidCharacterInputException();
 				}
 
-				for (std::size_t i = 0; i < buffer.length(); i++) {
+				for (std::size_t i = 0; i < buffer.length(); ++i) {
 					if (!isdigit(buffer.at(i))) {
 						throw InvalidCharacterInputException();
 					}
@@ -280,22 +302,22 @@ namespace whowell {
 
 				//Now, convert the string to an integer, store it in userShort
 				//Then, check that the value is within the expected range
-				userShort = std::stoi(buffer, &sz);
+				user_short = std::stoi(buffer, &sz);
 
-				if (userShort < min || userShort > max) {
+				if (user_short < min || user_short > max) {
 					throw IntegerOutOfRangeException();
 				}
 				//If no exception has been thrown by this point, then the input is valid.
-				isValid = true;
+				is_valid = true;
 			} catch (InvalidStringLengthException& e) {
-				isValid = false;
-                std::cout << e.what() << std::endl;
+				is_valid = false;
+                std::cerr << e.what() << std::endl;
 			} catch (InvalidCharacterInputException& e) {
-				isValid = false;
-                std::cout << e.what() << std::endl;
+				is_valid = false;
+                std::cerr << e.what() << std::endl;
 			} catch (IntegerOutOfRangeException& e) {
-				isValid = false;
-                std::cout << e.what() << std::endl;
+				is_valid = false;
+                std::cerr << e.what() << std::endl;
 			}
 		} while (!isValid);
 

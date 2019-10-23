@@ -12,7 +12,7 @@ namespace whowell {
 
 class Theatre {
 	private:
-		static const float ticket_price = 7.99;
+		static constexpr float ticket_price = 7.99;
 
 		int total_seats_open;
 		int total_seats_reserved;

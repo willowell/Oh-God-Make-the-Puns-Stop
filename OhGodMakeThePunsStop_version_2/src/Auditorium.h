@@ -8,15 +8,12 @@
 #ifndef AUDITORIUM_H_
 #define AUDITORIUM_H_
 
-#include <list>
-
 #include "Seat.h"
 
 namespace whowell {
 
 class Auditorium {
 	private:
-		static const int ticket_price = 7;
 		int auditorium_id;
 		int num_seats; //(Seats per row)
 		int num_rows;
@@ -44,12 +41,14 @@ class Auditorium {
 		void set_num_seats_reserved( int s );
 		void set_sales(              int s );
 
-		void load_from_file( std::fstream from_file );
-		Seat& search_for_seat( int row_num, int seat_num );
-		bool search_for_seat_and_get_status( int row_num, int seat_num ) const;
+		void load_from_file(           std::ifstream from_file   );
+		Seat* search_for_seat(         int row_num, int seat_num );
+		bool is_seat_already_reserved( int row_num, int seat_num );
 
-		void display() const;
-		void display_list() const;
+		void reserve_seat(             int row_num, int seat_num );
+
+		void display()                                             const;
+		void display_list()                                        const;
 };
 
 } /* namespace whowell */
