@@ -1,0 +1,480 @@
+/*
+ * Utilities.cpp
+ *
+ *  Created on: Oct. 7, 2019
+ *      Author: whowell
+ */
+
+#include <cctype>
+#include <iostream>
+#include <string>
+#include <vector>
+
+#include "Utilities.h"
+
+using namespace std;
+
+namespace whowell {
+	// Exceptions /////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////
+
+	IntegerOutOfRangeException :: IntegerOutOfRangeException() {}
+
+	IntegerOutOfRangeException :: ~IntegerOutOfRangeException() throw() {}
+
+	const char* IntegerOutOfRangeException :: what() const throw() {
+		return "Integer value out of range. Please try again.\n";
+	}
+
+	InvalidCharacterInputException :: InvalidCharacterInputException() {}
+
+	InvalidCharacterInputException :: ~InvalidCharacterInputException() throw() {}
+
+	const char* InvalidCharacterInputException :: what() const throw() {
+		return "Invalid character. Please try again.\n";
+	}
+
+	InvalidStringLengthException :: InvalidStringLengthException() {}
+
+	InvalidStringLengthException :: ~InvalidStringLengthException() throw() {}
+
+	const char* InvalidStringLengthException :: what() const throw() {
+		return "String too long. Please try again.\n";
+	}
+
+	// List Modification Functions ////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////
+
+	void performReservationsWithVectors( std::list<Seat>* list, Auditorium* auditorium,
+					std::vector< short > rows, short tickets ) {
+				std::string buffer;
+				char yetAnotherUserChar;
+
+				try {
+					for ( short i = 0; i < tickets; i++ ) {
+						if ( list->searchForNodeAndGetStatus(
+							//assume all the seats are on the first selected row
+							( auditorium->getNumRows() / 2 ),
+							//then, look at the seat in the middle
+							//and subtract half the number of tickets that the user selected
+							//so that the middle ticket is exactly in the middle of the row
+							( auditorium->getNumSeats() / 2 ) - ( tickets / 2 ) + i ) == true )
+								throw UnableToReserveASeatException();
+					} //close for-loop
+
+					//If no exception has been thrown, then all of the seats are available
+					//and can now be reserved.
+					printf( "The seats in the middle of the row are available!\n" );
+					printf( "Would you like to reserve them? (\"Y\" or \"N\")\n" );
+					yetAnotherUserChar = validateStringAsCharacter( buffer, 'Y', 'N' );
+
+					if ( toupper( yetAnotherUserChar ) == 'Y' ) {
+						//Reserve the seats.
+						//These should not throw an exception, but if they do,
+						//it will be handled by the catch block below.
+						for ( short j = 0; j < tickets; j++ )
+							list->reserveASeatWithoutInput( auditorium, ( auditorium->getNumRows() / 2 ),
+								                          ( auditorium->getNumSeats() / 2 ) - ( tickets / 2 ) + j );
+						printf( "Seats reserved!\n" );
+
+					} else if ( toupper( yetAnotherUserChar ) == 'N' )
+						printf( "The seats will not be reserved.\n" );
+				} catch ( UnableToReserveASeatException& e ) {
+					std::cout << e.what() << '\n';
+				} //close try-catch block
+			}
+
+
+	bool search_for_seat_and_get_status_from_list( std::list<Seat> from_list, int rowNum, int seatNum ) const {
+		Node* current = head;
+		try {
+			if ( current->getRow() == rowNum && current->getSeat() == seatNum ) {
+				//Then the first node is the one the user is looking for.
+				//Return TRUE if it is RESERVED
+				if ( current->isReserved() == true )
+					return true;
+				//Return FALSE if it is NOT RESERVED
+				if ( current->isReserved() == false )
+					return false;
+			} else {
+				//Cycle through the list.
+				while ( current != nullptr ) {
+					current = current->getNext();
+
+					//Continue checking each node in the list.
+					if ( current->getRow() == rowNum && current->getSeat() == seatNum ) {
+						if ( current->isReserved() == true )
+							return true;
+						if ( current->isReserved() == false )
+							return false;
+					}
+				}
+			}
+			//If the node still has not been found, then it probably isn't in the list.
+			//Throw an exception
+			throw NodeNotFoundException();
+		} catch ( NodeNotFoundException& e ) {
+			e.what();
+			return true;
+		}
+
+	}
+
+	Seat* search_for_and_get_seat_from_list( int rowNum, int seatNum ) {
+		Node* current = head;
+		Node* seek = nullptr;
+
+		try {
+			if ( current->getRow() == rowNum && current->getSeat() == seatNum ) {
+				seek = current;
+				return seek;
+			} else {
+				//Cycle through the list.
+				while ( current != nullptr ) {
+					current = current->getNext();
+
+					//Continue checking each node in the list.
+					if ( current->getRow() == rowNum && current->getSeat() == seatNum ) {
+						seek = current;
+						return seek;
+					}
+				}
+			}
+			//If the node still has not been found, then it probably isn't in the list.
+			//Throw an exception
+			throw NodeNotFoundException();
+		} catch ( NodeNotFoundException& e ) {
+			e.what();
+			return nullptr;
+		}
+	}
+
+	void reserve_a_seat( Auditorium* corresponding, int rowNum, int seatNum ) {
+		std::string str;
+		char userChar;
+
+		if ( searchForNodeAndGetStatus( rowNum, seatNum ) == true )
+			throw UnableToReserveASeatException();
+		else {
+			//Then the seat is available.
+			std::cout << "The seat you have chosen is available!\n";
+			std::cout << "Would you like to reserve it? (\"Y\" or \"N\")\n";
+			userChar = validateStringAsCharacter( str, 'Y', 'N' );
+
+			if ( toupper( userChar ) == 'Y' ) {
+				std::cout << "I will reserve the seat for you.\n";
+				searchForAndGetNode( rowNum, seatNum )->setReserved( true );
+				std::cout << "The seat is now reserved!\n";
+				corresponding->setNumSeatsReserved( corresponding->getNumSeatsReserved() + 1 );
+				corresponding->setNumSeatsOpen( corresponding->getNumSeatsOpen() - 1 );
+
+			} else if ( toupper( userChar ) == 'N' )
+				std::cout << "The seat will not be reserved.\n";
+		}
+	}
+
+	void reserve_a_seat_without_input( Auditorium* corresponding, int rowNum, int seatNum ) {
+		if ( searchForNodeAndGetStatus( rowNum, seatNum ) == true )
+			throw UnableToReserveASeatException();
+		else {
+			searchForAndGetNode( rowNum, seatNum )->setReserved( true );
+			corresponding->setNumSeatsReserved( corresponding->getNumSeatsReserved() + 1 );
+			corresponding->setNumSeatsOpen( corresponding->getNumSeatsOpen() - 1 );
+		}
+	}
+
+	void display_list_as_auditorium( Auditorium* corresponding ) const {
+		Node* current = head;
+
+		const short WIDTH = corresponding->getNumSeats();
+		const short HEIGHT = corresponding->getNumRows();
+		short h;
+		short w;
+
+		std::cout << "  ";
+		for ( short i = 1; i <= WIDTH; i++ ) {
+			if ( i > 9 )
+				std::cout << ( i - 10 );
+			else
+				std::cout << i;
+		}
+		std::cout << '\n';
+
+		h = 1;
+		while ( h <= HEIGHT ) {
+			//As long as the current node and the next node have the same row number,
+			//This is the same line
+			std::cout << h << ' ';
+			w = 1;
+			while ( w <= WIDTH ) {
+				if ( current->isReserved() )
+					std::cout << '*';
+				if ( !current->isReserved() )
+					std::cout << '#';
+				current = current->getNext();
+				w++;
+			}
+			//Otherwise, print a newline
+			std::cout << '\n';
+			h++;
+		}
+	}
+
+	void write_to_file( std::fstream* file, Auditorium* corresponding ) const {
+		Node* current = head;
+
+		const short WIDTH = corresponding->getNumSeats();
+		const short HEIGHT = corresponding->getNumRows();
+		short h = 1;
+		short w = 1;
+
+		file->clear();
+
+		while ( h <= HEIGHT ) {
+			w = 1;
+			while ( w <= WIDTH ) {
+				if ( current->isReserved() )
+					*file << '*';
+				if ( !current->isReserved() )
+					*file << '#';
+				current = current->getNext();
+				w++;
+			}
+			//eliminate extra newline.
+			if ( w == WIDTH + 1 && h < HEIGHT ) {
+				//Otherwise, print a newline
+				*file << '\n';
+			}
+			h++;
+		}
+	}
+
+    // Validation Functions ///////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////
+
+	short int validateStringAsSingleDigitIntegerInRange(std::string buffer, short int min, short int max) {
+		std::string::size_type sz = 0;
+		bool isValid = false;
+		short int userShort = 0;
+
+		do {
+			try {
+				std::cin >> buffer;
+
+				if (buffer.length() > 1) {
+					throw InvalidStringLengthException();
+				}
+
+				if (!isdigit(buffer.at(0))) {
+					throw InvalidCharacterInputException();
+				}
+
+				for (std::size_t i = 0; i < buffer.length(); i++) {
+					if (!isdigit(buffer.at(i))) {
+						throw InvalidCharacterInputException();
+					}
+				}
+
+				//Now, convert the string to an integer, store it in userShort
+				//Then, check that the value is within the expected range
+				userShort = std::stoi(buffer, &sz);
+
+				if (userShort < min || userShort > max) {
+					throw IntegerOutOfRangeException();
+				}
+				//If no exception has been thrown by this point, then the input is valid.
+				isValid = true;
+			} catch (InvalidStringLengthException& e) {
+				isValid = false;
+                std::cout << e.what() << std::endl;
+			} catch (InvalidCharacterInputException& e) {
+				isValid = false;
+                std::cout << e.what() << std::endl;
+			} catch (IntegerOutOfRangeException& e) {
+				isValid = false;
+                std::cout << e.what() << std::endl;
+			}
+		} while (!isValid);
+
+		return userShort;
+	}
+
+	short int validateStringAsDoubleDigitIntegerInRange(std::string buffer, short int min, short int max) {
+		std::string::size_type sz = 0;
+		bool isValid = false;
+		short int userShort = 0;
+
+		do {
+			try {
+				std::cin >> buffer;
+
+				if (buffer.length() > 2) {
+					throw InvalidStringLengthException();
+				}
+
+				if (!isdigit(buffer.at(0))) {
+					throw InvalidCharacterInputException();
+				}
+
+				for (std::size_t i = 0; i < buffer.length(); i++) {
+					if (!isdigit(buffer.at(i))) {
+						throw InvalidCharacterInputException();
+					}
+				}
+
+				//Now, convert the string to an integer, store it in userShort
+				//Then, check that the value is within the expected range
+				userShort = std::stoi(buffer, &sz);
+
+				if (userShort < min || userShort > max) {
+					throw IntegerOutOfRangeException();
+				}
+				//If no exception has been thrown by this point, then the input is valid.
+				isValid = true;
+			} catch (InvalidStringLengthException& e) {
+				isValid = false;
+                std::cout << e.what() << std::endl;
+			} catch (InvalidCharacterInputException& e) {
+				isValid = false;
+                std::cout << e.what() << std::endl;
+			} catch (IntegerOutOfRangeException& e) {
+				isValid = false;
+                std::cout << e.what() << std::endl;
+			}
+		} while (!isValid);
+
+		return userShort;
+	}
+
+    int validateStringAsDoubleDigitIntegerInRange(std::string buffer, int min, int max) {
+        std::string::size_type sz = 0;
+        bool isValid = false;
+        int userInt = 0;
+
+        do {
+            try {
+                std::cin >> buffer;
+
+                if (buffer.length() > 2) {
+                    throw InvalidStringLengthException();
+                }
+
+                if (!isdigit(buffer.at(0))) {
+                    throw InvalidCharacterInputException();
+                }
+
+                for (std::size_t i = 0; i < buffer.length(); i++) {
+                    if (!isdigit(buffer.at(i))) {
+                        throw InvalidCharacterInputException();
+                    }
+                }
+
+                //Now, convert the string to an integer, store it in userShort
+                //Then, check that the value is within the expected range
+                userInt = std::stoi(buffer, &sz);
+
+                if (userInt < min || userInt > max) {
+                    throw IntegerOutOfRangeException();
+                }
+                //If no exception has been thrown by this point, then the input is valid.
+                isValid = true;
+            } catch (InvalidStringLengthException& e) {
+                isValid = false;
+                std::cout << e.what() << std::endl;
+            } catch (InvalidCharacterInputException& e) {
+                isValid = false;
+                std::cout << e.what() << std::endl;
+            } catch (IntegerOutOfRangeException& e) {
+                isValid = false;
+                std::cout << e.what() << std::endl;
+            }
+        } while (!isValid);
+
+        return userInt;
+    }
+
+    long int validateStringAsDoubleDigitIntegerInRange(std::string buffer, long int min, long int max) {
+        std::string::size_type sz = 0;
+        bool isValid = false;
+        long int userLong = 0;
+
+        do {
+            try {
+                std::cin >> buffer;
+
+                if (buffer.length() > 2) {
+                    throw InvalidStringLengthException();
+                }
+
+                if (!isdigit(buffer.at(0))) {
+                    throw InvalidCharacterInputException();
+                }
+
+                for (std::size_t i = 0; i < buffer.length(); i++) {
+                    if (!isdigit(buffer.at(i))) {
+                        throw InvalidCharacterInputException();
+                    }
+                }
+
+                //Now, convert the string to an integer, store it in userShort
+                //Then, check that the value is within the expected range
+                userLong = std::stol(buffer, &sz);
+
+                if (userLong < min || userLong > max) {
+                    throw IntegerOutOfRangeException();
+                }
+                //If no exception has been thrown by this point, then the input is valid.
+                isValid = true;
+            } catch (InvalidStringLengthException& e) {
+                isValid = false;
+                std::cout << e.what() << std::endl;
+            } catch (InvalidCharacterInputException& e) {
+                isValid = false;
+                std::cout << e.what() << std::endl;
+            } catch (IntegerOutOfRangeException& e) {
+                isValid = false;
+                std::cout << e.what() << std::endl;
+            }
+        } while (!isValid);
+
+        return userLong;
+    }
+
+	char validateStringAsCharacter(std::string buffer, char upperCaseCharacter) {
+		bool isValid = false;
+		char userChar = '\n';
+
+		do {
+			try {
+				std::cin >> buffer;
+
+				if (buffer.length() > 1) {
+					throw InvalidStringLengthException();
+				}
+
+				//Now, convert the string to an integer, store it in userShort
+				//Then, check that the value is within the expected range
+				userChar = buffer.at(0);
+
+				if (toupper(userChar) == upperCaseCharacter) {
+					isValid = true;
+				} else {
+					throw InvalidCharacterInputException();
+				}
+
+			} catch (InvalidStringLengthException& e) {
+				isValid = false;
+                std::cout << e.what() << std::endl;
+			} catch (InvalidCharacterInputException& e) {
+				isValid = false;
+                std::cout << e.what() << std::endl;
+			}
+		} while (!isValid);
+
+		return userChar;
+	}
+
+} /* namespace whowell */
