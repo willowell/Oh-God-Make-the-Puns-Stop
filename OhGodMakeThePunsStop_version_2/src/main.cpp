@@ -44,6 +44,8 @@ int main() {
 	short int user_short = 0;
 	short int user_selected_tickets = 0;
 	short int user_choice = 0;
+	char user_char = 'a';
+	bool user_wants_to_quit = false;
 	std::string buffer;
 	std::vector < short int > user_selected_seats;
 	std::vector < short int > user_selected_rows;
@@ -92,6 +94,45 @@ int main() {
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ///MAIN LOOP
+
+    do {
+    	user_short = -1;
+    	user_choice = -1;
+
+    	std::cout << "Please enter a number corresponding to a menu item.\n"
+    			  << "(1) View an auditorium.\n"
+				  << "(2) Make a reservation.\n"
+				  << "(3) Print a sales report.\n"
+				  << "(4) Save and quit."
+    			  << std::endl;
+
+    	user_short = validate_string_as_single_digit_integer_in_range( buffer, 1, 4 );
+    	user_choice = user_short;
+
+    	switch ( user_choice ) {
+    	case 1:
+    	case 2:
+    	case 3:
+    	case 4:
+    		user_wants_to_quit = yes_or_no_prompt(
+    				"Are you sure you want to quit? [y/n]\nChanges to the data will be saved."
+    		);
+
+    		if (user_wants_to_quit) {
+    			std::cout << "Quitting the program.\n"
+    					  << "Please wait while the data is saved." << std::endl;
+    		} else {
+    			std::cout << "Returning to the main menu." << std::endl;
+    		}
+    		break;
+    	default:
+    		std::cerr << "This should be unreachable!\n"
+					  << "(short int) user_choice is " << user_choice
+					  << std::endl;
+    		break;
+    	}
+
+    } while (!user_wants_to_quit);
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////

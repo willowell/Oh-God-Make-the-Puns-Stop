@@ -72,6 +72,7 @@ namespace whowell {
 
 	char validate_string_as_character( std::string buffer, char upper_case_character );
 
+	bool yes_or_no_prompt( std::string prompt );
 
 } /* namespace whowell */
 

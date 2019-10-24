@@ -402,7 +402,24 @@ namespace whowell {
 			}
 		} while (!is_valid);
 
-		return user_char;
+		return toupper(user_char);
+	}
+
+	bool yes_or_no_prompt( std::string prompt ) {
+		char answer = 'a';
+
+		do {
+			std::cout << prompt << std::endl;
+			std::cin >> answer;
+
+			answer = toupper(answer);
+
+			if ( answer != 'Y' && answer != 'N' ) {
+				std::cout << "Please try again!" << std::endl;
+			}
+		} while ( answer != 'Y' && answer != 'N' );
+
+		return (answer == 'Y');
 	}
 
 } /* namespace whowell */
