@@ -406,16 +406,21 @@ namespace whowell {
 	}
 
 	bool yes_or_no_prompt( std::string prompt ) {
+		std::string buffer;
 		char answer = 'a';
-
 		do {
 			std::cout << prompt << std::endl;
-			std::cin >> answer;
+			std::cin >> buffer;
 
-			answer = toupper(answer);
+			if (buffer.length() != 1) {
+				std::cout << "Please enter only one character!" << std::endl;
+				continue;
+			}
+
+			answer = toupper(buffer.at(0));
 
 			if ( answer != 'Y' && answer != 'N' ) {
-				std::cout << "Please try again!" << std::endl;
+				std::cout << "Please enter only 'y' or 'n'!" << std::endl;
 			}
 		} while ( answer != 'Y' && answer != 'N' );
 
