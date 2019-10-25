@@ -165,4 +165,74 @@ void Auditorium :: display_list() const {
 	}
 }
 
+void Auditorium :: display_grid() {
+	// Set the iterator to the start of the list.
+	// The older project used a doubly linked list
+	// with raw pointers.
+
+	// As a predicate, the list must not be empty.
+	if ( seat_list.empty() ) {
+		std::cerr << "List is empty!" << std::endl;
+		return;
+	}
+
+	// This function would be readonly, but for some reason,
+	// marking this function as readonly causes the program to expect
+	// this iterator to be const,
+	// which then means it cannot be moved across the list.
+	std::list<Seat>::iterator iter = seat_list.begin();
+
+	// both of these are for making the grid of #'s and *'s
+	short int y = 0;
+	short int x = 0;
+
+	// Create padding for the top line of numbers
+	// output:  Auditorium [ID Number]
+	//          __12345...
+	//          1 #####
+	//          2 *****
+	//          3 #####
+	//          4 *****
+	//          5 #####
+	//          .
+	//          .
+	//          .
+
+	// Print the auditorium's ID number
+	std::cout << "Auditorium ID: " << auditorium_id << std::endl;
+
+	// First two spaces for the top left corner
+	std::cout << "  ";
+	// Use num_seats to print the top line of numbers
+	for (short int i = 0; i < num_seats; ++i) {
+		std::cout << i;
+	}
+	std::cout << std::endl;
+
+	// Iterate through the rest of the grid.
+	// First, print the row number, then a space,
+	// and then the actual seats.
+	while ( y < num_rows ) {
+
+		// This statement generates the line of numbers along the left side
+		std::cout << y << ' ';
+
+		// This inner loop prints out the actual seats using the iterator.
+		// Reset x with each iteration of this inner loop.
+		x = 0;
+		while ( x < num_seats ) {
+			// Get the status of the seat and print the correcponding
+			// character. Then, move the iterator, and increment x.
+			iter->is_seat_reserved() ? std::cout << '*' : std::cout << '#';
+			iter++;
+			x++;
+		}
+
+		// End the line, and increment y for the next number
+		// for the start of the next line
+		std::cout << std::endl;
+		y++;
+	}
+}
+
 } /* namespace whowell */

@@ -110,26 +110,71 @@ int main() {
     	user_choice = user_short;
 
     	switch ( user_choice ) {
-    	case 1:
-    	case 2:
-    	case 3:
-    	case 4:
-    		user_wants_to_quit = yes_or_no_prompt(
-    				"Are you sure you want to quit? [y/n]\nChanges to the data will be saved."
-    		);
+			case 1: {
+				user_short = -1;
 
-    		if (user_wants_to_quit) {
-    			std::cout << "Quitting the program.\n"
-    					  << "Please wait while the data is saved." << std::endl;
-    		} else {
-    			std::cout << "Returning to the main menu." << std::endl;
-    		}
-    		break;
-    	default:
-    		std::cerr << "This should be unreachable!\n"
-					  << "(short int) user_choice is " << user_choice
-					  << std::endl;
-    		break;
+				std::cout << "Please enter the number of the auditorium you wish to view.\n"
+						  << "You can choose Auditorium (1), (2), or (3).\n"
+						  << std::endl;
+
+				user_short = validate_string_as_single_digit_integer_in_range( buffer, 1, 3 );
+
+				switch ( user_short ) {
+					case 1: {
+						auditorium_1.display_grid();
+						break;
+					}
+					case 2: {
+						auditorium_2.display_grid();
+						break;
+					}
+					case 3: {
+						auditorium_3.display_grid();
+						break;
+					}
+					default: {
+						std::cerr << "This should be unreachable!\n"
+								  << "(short int) user_short is " << user_short
+								  << std::endl;
+						break;
+					}
+				}
+
+				break;
+			} // END CASE 1 ****************************************************
+
+
+			case 2: {
+				break;
+			}
+
+
+			case 3: {
+				break;
+			}
+
+
+			case 4: {
+				user_wants_to_quit = yes_or_no_prompt(
+						"Are you sure you want to quit? [y/n]\nChanges to the data will be saved."
+				);
+
+				if (user_wants_to_quit) {
+					std::cout << "Quitting the program.\n"
+							  << "Please wait while the data is saved." << std::endl;
+				} else {
+					std::cout << "Returning to the main menu." << std::endl;
+				}
+				break;
+			}
+
+
+			default: {
+				std::cerr << "This should be unreachable!\n"
+						  << "(short int) user_choice is " << user_choice
+						  << std::endl;
+				break;
+			}
     	}
 
     } while (!user_wants_to_quit);

@@ -52,6 +52,7 @@ class Auditorium {
 
 		void display()                                             const;
 		void display_list()                                        const;
+		void display_grid();
 };
 
 } /* namespace whowell */
