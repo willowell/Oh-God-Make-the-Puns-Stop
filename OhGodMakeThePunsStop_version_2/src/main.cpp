@@ -6,12 +6,14 @@
 // Description : Hello World in C++, Ansi-style
 //============================================================================
 
+#include <chrono>
 #include <exception>
 #include <fstream>
 #include <iostream>
 #include <list>
 #include <memory>
 #include <string>
+#include <thread>
 #include <vector>
 
 #include <boost/format.hpp>
@@ -103,13 +105,22 @@ int main() {
     			  << "(1) View an auditorium.\n"
 				  << "(2) Make a reservation.\n"
 				  << "(3) Print a sales report.\n"
-				  << "(4) Save and quit."
+				  << "(4) Advanced options.\n"
+				  << "(5) Save and quit."
     			  << std::endl;
 
-    	user_short = validate_string_as_single_digit_integer_in_range( buffer, 1, 4 );
+    	user_short = validate_string_as_single_digit_integer_in_range( buffer, 1, 5 );
     	user_choice = user_short;
 
+    	// Wait a little bit after accepting user input to show the next menu.
+    	std::this_thread::sleep_for(std::chrono::milliseconds(250));
+
     	switch ( user_choice ) {
+    		/**
+    		 * AUDITORIUM_DISPLAY_MENU
+    		 * In this menu, the user can choose an auditorium to display.
+    		 * The auditorium will then display its seating as a grid.
+    		 */
 			case 1: {
 				user_short = -1;
 
@@ -118,6 +129,9 @@ int main() {
 						  << std::endl;
 
 				user_short = validate_string_as_single_digit_integer_in_range( buffer, 1, 3 );
+
+				// Wait a little bit after accepting user input to show an auditorium.
+				std::this_thread::sleep_for(std::chrono::milliseconds(250));
 
 				switch ( user_short ) {
 					case 1: {
@@ -141,32 +155,89 @@ int main() {
 				}
 
 				break;
-			} // END CASE 1 ****************************************************
+			}
+			////////////////////////////////////////////////////////////////////
+			/// END AUDITORIUM_DISPLAY_MENU ////////////////////////////////////
+			////////////////////////////////////////////////////////////////////
 
-
+			/**
+			 *
+			 */
 			case 2: {
 				break;
 			}
+			///
+			///
+			///
 
-
+			/**
+			 *
+			 */
 			case 3: {
 				break;
 			}
+			///
+			///
+			///
 
-
+			/**
+			 * ADVANCED_OPTIONS_MENU
+			 * In this menu, the user can choose to reset the auditoriums,
+			 * either by reloading the files, thereby undoing the current session
+			 * or by resetting all seats to be unreserved.
+			 * The user can also choose to backup the current files.
+			 * The user must enter a password in order to access this menu.
+			 * For debug purposes, this password is "admin".
+			 */
 			case 4: {
+				break;
+			}
+			///
+			///
+			///
+
+			/**
+			 * QUIT_MENU
+			 * Ask the user if they are sure they want to quit [y/n].
+			 * If yes, quit the program. If no, return to the main menu.
+			 */
+			case 5: {
 				user_wants_to_quit = yes_or_no_prompt(
 						"Are you sure you want to quit? [y/n]\nChanges to the data will be saved."
 				);
 
 				if (user_wants_to_quit) {
+					// Wait a little bit after accepting user input to show the next text.
+					std::this_thread::sleep_for(std::chrono::milliseconds(250));
+
 					std::cout << "Quitting the program.\n"
 							  << "Please wait while the data is saved." << std::endl;
+
+					file_1.open( "A1.txt", std::ios::out | std::ios::trunc );
+					file_2.open( "A2.txt", std::ios::out | std::ios::trunc );
+					file_3.open( "A3.txt", std::ios::out | std::ios::trunc );
+
+					auditorium_1.write_to_file( file_1 );
+					auditorium_2.write_to_file( file_2 );
+					auditorium_3.write_to_file( file_3 );
+
+					file_1.close();
+					file_2.close();
+					file_3.close();
+
+					std::cout << "The data has been saved to the files." << std::endl;
+
 				} else {
+					// Wait a little bit after accepting user input to show the next text.
+					std::this_thread::sleep_for(std::chrono::milliseconds(250));
+
 					std::cout << "Returning to the main menu." << std::endl;
 				}
 				break;
 			}
+			////////////////////////////////////////////////////////////////////
+			/// END QUIT_MENU //////////////////////////////////////////////////
+			////////////////////////////////////////////////////////////////////
 
 
 			default: {
@@ -177,12 +248,11 @@ int main() {
 			}
     	}
 
+    	// Wait a little bit before returning to the main menu or exiting.
+    	std::this_thread::sleep_for(std::chrono::milliseconds(250));
     } while (!user_wants_to_quit);
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    ///FILE OUTPUT
-
     std::cout << "Exiting." << std::endl;
+
 	return EXIT_SUCCESS;
 }

@@ -91,6 +91,51 @@ void Auditorium :: load_from_file( std::fstream& from_file ) {
 			//come BEFORE ROW TWO SEATS, etc.
 		} //close push method
 
+void Auditorium :: write_to_file( std::fstream& to_file ) {
+	// Set the iterator to the start of the list.
+	// The older project used a doubly linked list
+	// with raw pointers.
+
+	// As a predicate, the list must not be empty.
+	if ( seat_list.empty() ) {
+		std::cerr << "List is empty!" << std::endl;
+		return;
+	}
+
+	std::list<Seat>::iterator iter = seat_list.begin();
+
+	// both of these are for making the grid of #'s and *'s
+	short int y = 0;
+	short int x = 0;
+
+	to_file.clear();
+
+	while ( y < num_rows ) {
+		x = 0;
+		while ( x < num_seats ) {
+			// Get the status of the seat and print the correcponding
+			// character. Then, move the iterator, and increment x.
+			iter->is_seat_reserved() ? to_file << '*' : to_file << '#';
+			iter++;
+			x++;
+			std::cout << "x: " << x << std::endl;
+		}
+
+		// Terminate the line with a newline,
+		// and increment y and move to the next line.
+		// Skip the newline if this is the last line.
+		// This will not run on the last cycle of the loop.
+		// Incrementing y before the test ensures that y == 10
+		// on the last cycle. So, this part runs from 1 to 9
+		// rather than from 0 to 9 as in the inner loop.
+		// In the original version, the loop condition was y <= num_rows.
+		y++;
+		if ( y < num_rows ) {
+			to_file << '\n';
+		}
+	}
+}
+
 Seat* Auditorium :: search_for_seat( int row_num, int seat_num ) {
 
 		Seat query( row_num, seat_num, false );

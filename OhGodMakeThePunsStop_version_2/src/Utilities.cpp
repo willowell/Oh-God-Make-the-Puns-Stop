@@ -207,43 +207,6 @@ namespace whowell {
 		}
 	}
 
-	void display_list_as_auditorium( Auditorium* corresponding ) const {
-		Node* current = head;
-
-		const short WIDTH = corresponding->getNumSeats();
-		const short HEIGHT = corresponding->getNumRows();
-		short h;
-		short w;
-
-		std::cout << "  ";
-		for ( short i = 1; i <= WIDTH; i++ ) {
-			if ( i > 9 )
-				std::cout << ( i - 10 );
-			else
-				std::cout << i;
-		}
-		std::cout << '\n';
-
-		h = 1;
-		while ( h <= HEIGHT ) {
-			//As long as the current node and the next node have the same row number,
-			//This is the same line
-			std::cout << h << ' ';
-			w = 1;
-			while ( w <= WIDTH ) {
-				if ( current->isReserved() )
-					std::cout << '*';
-				if ( !current->isReserved() )
-					std::cout << '#';
-				current = current->getNext();
-				w++;
-			}
-			//Otherwise, print a newline
-			std::cout << '\n';
-			h++;
-		}
-	}
-
 	void write_to_file( std::fstream* file, Auditorium* corresponding ) const {
 		Node* current = head;
 
@@ -279,25 +242,20 @@ namespace whowell {
 
 	short int validate_string_as_single_digit_integer_in_range( std::string buffer, short int min, short int max ) {
 		std::string::size_type sz = 0;
-		bool is_valid = false;
 		short int user_short = 0;
 
-		do {
+		while (true) {
 			try {
 				std::cin >> buffer;
 
-				if ( buffer.length() > 1 ) {
-					throw InvalidStringLengthException();
+				if ( buffer.length() != 1 ) {
+					std::cout << "Please enter only one character!" << std::endl;
+					continue;
 				}
 
 				if ( !isdigit( buffer.at( 0 ) ) ) {
-					throw InvalidCharacterInputException();
-				}
-
-				for ( std::size_t i = 0; i < buffer.length(); ++i ) {
-					if ( !isdigit( buffer.at( i ) ) ) {
-						throw InvalidCharacterInputException();
-					}
+					std::cout << "Please enter only a number!" << std::endl;
+					continue;
 				}
 
 				//Now, convert the string to an integer, store it in user_short
@@ -305,46 +263,36 @@ namespace whowell {
 				user_short = std::stoi( buffer, &sz );
 
 				if ( user_short < min || user_short > max ) {
-					throw IntegerOutOfRangeException();
+					std::cout << "Please enter a number between " << min << " and " << max << '!' << std::endl;
+					continue;
 				}
+
 				//If no exception has been thrown by this point, then the input is valid.
-				is_valid = true;
-			} catch ( InvalidStringLengthException& e ) {
-				is_valid = false;
-                std::cerr << e.what() << std::endl;
-			} catch ( InvalidCharacterInputException& e ) {
-				is_valid = false;
-                std::cerr << e.what() << std::endl;
-			} catch ( IntegerOutOfRangeException& e ) {
-				is_valid = false;
-                std::cerr << e.what() << std::endl;
+				break;
+			} catch ( ... ) {
+				std::cerr << "Some other exception has occurred. Your input was: [" << buffer << "]." << std::endl;
 			}
-		} while ( !is_valid );
+		}
 
 		return user_short;
 	}
 
 	short int validate_string_as_double_digit_integer_in_range( std::string buffer, short int min, short int max ) {
 		std::string::size_type sz = 0;
-		bool is_valid = false;
 		short int user_short = 0;
 
-		do {
+		while (true) {
 			try {
 				std::cin >> buffer;
 
-				if ( buffer.length() > 2 ) {
-					throw InvalidStringLengthException();
+				if ( buffer.length() != 2 ) {
+					std::cout << "Please enter only one double digit number!" << std::endl;
+					continue;
 				}
 
-				if ( !isdigit( buffer.at( 0 ) ) ) {
-					throw InvalidCharacterInputException();
-				}
-
-				for ( std::size_t i = 0; i < buffer.length(); ++i ) {
-					if ( !isdigit( buffer.at( i ) ) ) {
-						throw InvalidCharacterInputException();
-					}
+				if ( !isdigit( buffer.at( 0 ) ) || !isdigit( buffer.at( 1 ) ) ) {
+					std::cout << "Please enter only a number!" << std::endl;
+					continue;
 				}
 
 				//Now, convert the string to an integer, store it in userShort
@@ -352,35 +300,30 @@ namespace whowell {
 				user_short = std::stoi( buffer, &sz );
 
 				if ( user_short < min || user_short > max ) {
-					throw IntegerOutOfRangeException();
+					std::cout << "Please enter a number between " << min << " and " << max << '!' << std::endl;
+					continue;
 				}
+
 				//If no exception has been thrown by this point, then the input is valid.
-				is_valid = true;
-			} catch ( InvalidStringLengthException& e ) {
-				is_valid = false;
-                std::cout << e.what() << std::endl;
-			} catch ( InvalidCharacterInputException& e ) {
-				is_valid = false;
-                std::cout << e.what() << std::endl;
-			} catch ( IntegerOutOfRangeException& e ) {
-				is_valid = false;
-                std::cout << e.what() << std::endl;
+				break;
+			} catch ( ... ) {
+				std::cerr << "Some other exception has occurred. Your input was: [" << buffer << "]." << std::endl;
 			}
-		} while (!is_valid);
+		}
 
 		return user_short;
 	}
 
 	char validate_string_as_character(std::string buffer, char upper_case_character) {
-		bool is_valid = false;
 		char user_char = '\n';
 
-		do {
+		while (true) {
 			try {
 				std::cin >> buffer;
 
-				if ( buffer.length() > 1 ) {
-					throw InvalidStringLengthException();
+				if ( buffer.length() != 1 ) {
+					std::cout << "Please enter only one character!" << std::endl;
+					continue;
 				}
 
 				//Now, convert the string to an integer, store it in userShort
@@ -388,21 +331,19 @@ namespace whowell {
 				user_char = buffer.at(0);
 
 				if ( toupper( user_char ) == upper_case_character ) {
-					is_valid = true;
+					break;
+
 				} else {
-					throw InvalidCharacterInputException();
+					std::cout << "Please enter another character!" << std::endl;
+					continue;
 				}
 
-			} catch ( InvalidStringLengthException& e ) {
-				is_valid = false;
-                std::cout << e.what() << std::endl;
-			} catch ( InvalidCharacterInputException& e ) {
-				is_valid = false;
-                std::cout << e.what() << std::endl;
+			} catch ( ... ) {
+				std::cerr << "Some other exception has occurred. Your input was: [" << buffer << "]." << std::endl;
 			}
-		} while (!is_valid);
+		}
 
-		return toupper(user_char);
+		return toupper( user_char );
 	}
 
 	bool yes_or_no_prompt( std::string prompt ) {
@@ -412,19 +353,19 @@ namespace whowell {
 			std::cout << prompt << std::endl;
 			std::cin >> buffer;
 
-			if (buffer.length() != 1) {
+			if ( buffer.length() != 1 ) {
 				std::cout << "Please enter only one character!" << std::endl;
 				continue;
 			}
 
-			answer = toupper(buffer.at(0));
+			answer = toupper( buffer.at( 0 ) );
 
 			if ( answer != 'Y' && answer != 'N' ) {
 				std::cout << "Please enter only 'y' or 'n'!" << std::endl;
 			}
 		} while ( answer != 'Y' && answer != 'N' );
 
-		return (answer == 'Y');
+		return ( answer == 'Y' );
 	}
 
 } /* namespace whowell */

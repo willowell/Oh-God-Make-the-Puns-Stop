@@ -45,6 +45,7 @@ class Auditorium {
 		void set_sales(              int s );
 
 		void load_from_file(           std::fstream& from_file   );
+		void write_to_file(            std::fstream& to_file     );
 		Seat* search_for_seat(         int row_num, int seat_num );
 		bool is_seat_already_reserved( int row_num, int seat_num );
 
