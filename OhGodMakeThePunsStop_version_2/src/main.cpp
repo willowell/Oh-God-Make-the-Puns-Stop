@@ -161,14 +161,137 @@ int main() {
 			////////////////////////////////////////////////////////////////////
 
 			/**
-			 *
+			 * RESERVATION_MENU
 			 */
 			case 2: {
+				user_short = -1;
+
+				std::cout << "Please enter the number of the auditorium you wish to view.\n"
+						  << "You can choose Auditorium (1), (2), or (3).\n"
+						  << std::endl;
+
+				user_short = validate_string_as_single_digit_integer_in_range( buffer, 1, 3 );
+
+				// Wait a little bit after accepting user input to show an auditorium.
+				std::this_thread::sleep_for(std::chrono::milliseconds(250));
+
+				switch ( user_short ) {
+					case 1: {
+						auditorium_1.display_grid();
+						break;
+					}
+					case 2: {
+						auditorium_2.display_grid();
+						break;
+					}
+					case 3: {
+						auditorium_3.display_grid();
+						break;
+					}
+					default: {
+						std::cerr << "This should be unreachable!\n"
+								  << "(short int) user_short is " << user_short
+								  << std::endl;
+						break;
+					}
+				}
+				std::cout << std::endl;
+
+				std::cout << "Please enter the number of tickets you wish to purchase."
+						  << std::endl;
+
+				user_selected_tickets = validate_string_as_double_digit_integer_in_range( buffer, 1, 100 );
+
+				short int loop_limit = user_selected_tickets;
+
+				// For every ticket the user wants, set aside a slot for a seat.
+				for ( short int i = 0; i < loop_limit; ++i ) {
+					user_selected_rows.push_back( i );
+					user_selected_seats.push_back( i );
+				}
+
+				// The vectors are now big enough to store the user's desired seats.
+				// Request values for the seat positions.
+				for (short int k = 0; k < loop_limit; k++) {
+					std::cout << "Please enter the row number for the "
+							  << boost::format("%1% seat that you want to purchase.")
+							  % ( k + 1 )
+					          << std::endl;
+					user_selected_rows[ k ] = validate_string_as_double_digit_integer_in_range( buffer, 1, 100 );
+
+					std::cout << "Please enter the seat number for the "
+							  << boost::format("%1% seat that you want to purchase.")
+							  % ( k + 1 )
+					          << std::endl;
+					user_selected_seats[ k ] = validate_string_as_double_digit_integer_in_range( buffer, 1, 100 );
+				}
+
+				// The vectors shoul now hold all the seats that the user wants.
+				// Check the availability of the seats.
+				try {
+					switch ( user_short ) {
+						// Auditorium 1
+						case 1: {
+							break;
+						}
+
+						// Auditorium 2
+						case 2: {
+							break;
+						}
+
+						// Auditorium 3
+						case 3: {
+							break;
+						}
+
+						default: {
+							std::cerr << "This should be unreachable!\n"
+									  << "(short int) user_short is " << user_short
+									  << std::endl;
+							break;
+						}
+					}
+				} catch ( UnableToReserveASeatException& e ) {
+					std::cout << e.what() << std::endl;
+					std::cout << "Attempting to locate available seats..." << std::endl;
+
+					switch ( user_short ) {
+						// Auditorium 1
+						case 1: {
+							break;
+						}
+
+						// Auditorium 2
+						case 2: {
+							break;
+						}
+
+						// Auditorium 3
+						case 3: {
+							break;
+						}
+
+						default: {
+							std::cerr << "This should be unreachable!\n"
+									  << "(short int) user_short is " << user_short
+									  << std::endl;
+							break;
+						}
+					}
+				}
+
+				// Reset the vectors.
+				user_selected_rows.clear();
+				user_selected_seats.clear();
+
+				std::cout << "Returning to the main menu." << std::endl;
+
 				break;
 			}
-			///
-			///
-			///
+			////////////////////////////////////////////////////////////////////
+			/// END RESERVATION_MENU ///////////////////////////////////////////
+			////////////////////////////////////////////////////////////////////
 
 			/**
 			 *

@@ -207,34 +207,6 @@ namespace whowell {
 		}
 	}
 
-	void write_to_file( std::fstream* file, Auditorium* corresponding ) const {
-		Node* current = head;
-
-		const short WIDTH = corresponding->getNumSeats();
-		const short HEIGHT = corresponding->getNumRows();
-		short h = 1;
-		short w = 1;
-
-		file->clear();
-
-		while ( h <= HEIGHT ) {
-			w = 1;
-			while ( w <= WIDTH ) {
-				if ( current->isReserved() )
-					*file << '*';
-				if ( !current->isReserved() )
-					*file << '#';
-				current = current->getNext();
-				w++;
-			}
-			//eliminate extra newline.
-			if ( w == WIDTH + 1 && h < HEIGHT ) {
-				//Otherwise, print a newline
-				*file << '\n';
-			}
-			h++;
-		}
-	}
 */
     // Validation Functions ///////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////
