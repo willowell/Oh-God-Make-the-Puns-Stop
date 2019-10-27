@@ -6,6 +6,7 @@
  */
 
 #include <cctype>
+#include <exception>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -170,40 +171,6 @@ namespace whowell {
 		} catch ( NodeNotFoundException& e ) {
 			e.what();
 			return nullptr;
-		}
-	}
-
-	void reserve_a_seat( Auditorium* corresponding, int rowNum, int seatNum ) {
-		std::string str;
-		char userChar;
-
-		if ( searchForNodeAndGetStatus( rowNum, seatNum ) == true )
-			throw UnableToReserveASeatException();
-		else {
-			//Then the seat is available.
-			std::cout << "The seat you have chosen is available!\n";
-			std::cout << "Would you like to reserve it? (\"Y\" or \"N\")\n";
-			userChar = validateStringAsCharacter( str, 'Y', 'N' );
-
-			if ( toupper( userChar ) == 'Y' ) {
-				std::cout << "I will reserve the seat for you.\n";
-				searchForAndGetNode( rowNum, seatNum )->setReserved( true );
-				std::cout << "The seat is now reserved!\n";
-				corresponding->setNumSeatsReserved( corresponding->getNumSeatsReserved() + 1 );
-				corresponding->setNumSeatsOpen( corresponding->getNumSeatsOpen() - 1 );
-
-			} else if ( toupper( userChar ) == 'N' )
-				std::cout << "The seat will not be reserved.\n";
-		}
-	}
-
-	void reserve_a_seat_without_input( Auditorium* corresponding, int rowNum, int seatNum ) {
-		if ( searchForNodeAndGetStatus( rowNum, seatNum ) == true )
-			throw UnableToReserveASeatException();
-		else {
-			searchForAndGetNode( rowNum, seatNum )->setReserved( true );
-			corresponding->setNumSeatsReserved( corresponding->getNumSeatsReserved() + 1 );
-			corresponding->setNumSeatsOpen( corresponding->getNumSeatsOpen() - 1 );
 		}
 	}
 

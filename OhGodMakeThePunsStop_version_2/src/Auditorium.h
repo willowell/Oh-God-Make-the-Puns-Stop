@@ -9,6 +9,7 @@
 #define AUDITORIUM_H_
 
 #include "Seat.h"
+#include "Utilities.h"
 
 namespace whowell {
 
@@ -46,10 +47,13 @@ class Auditorium {
 
 		void load_from_file(           std::fstream& from_file   );
 		void write_to_file(            std::fstream& to_file     );
-		Seat* search_for_seat(         int row_num, int seat_num );
-		bool is_seat_already_reserved( int row_num, int seat_num );
+		Seat* search_for_seat(         short int row_num, short int seat_num );
+		bool is_seat_already_reserved( short int row_num, short int seat_num );
 
-		void reserve_seat(             int row_num, int seat_num );
+		void reserve_seat(                  short int row_num, short int seat_num ) throw( UnableToReserveASeatException );
+		void reserve_seat_without_input(    short int row_num, short int seat_num ) throw( UnableToReserveASeatException );
+		void perform_automatic_reservation( short int num_of_tickets  );
+
 
 		void display()                                             const;
 		void display_list()                                        const;

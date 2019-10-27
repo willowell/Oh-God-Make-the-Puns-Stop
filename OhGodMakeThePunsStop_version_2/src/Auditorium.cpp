@@ -136,7 +136,7 @@ void Auditorium :: write_to_file( std::fstream& to_file ) {
 	}
 }
 
-Seat* Auditorium :: search_for_seat( int row_num, int seat_num ) {
+Seat* Auditorium :: search_for_seat( short int row_num, short int seat_num ) {
 
 		Seat query( row_num, seat_num, false );
 		try {
@@ -161,7 +161,7 @@ Seat* Auditorium :: search_for_seat( int row_num, int seat_num ) {
  * Returns false if seat is available
  * Returns true is seat is unavailable or cannot be found.
  */
-bool Auditorium :: is_seat_already_reserved( int row_num, int seat_num ) {
+bool Auditorium :: is_seat_already_reserved( short int row_num, short int seat_num ) {
 		Seat query( row_num, seat_num, false );
 
 		try {
@@ -182,7 +182,52 @@ bool Auditorium :: is_seat_already_reserved( int row_num, int seat_num ) {
 
 	}
 
-void Auditorium :: reserve_seat( int row_num, int seat_num ) {
+void Auditorium :: reserve_seat( short int row_num, short int seat_num ) throw ( UnableToReserveASeatException ) {
+	std::string buffer;
+	bool user_wants_to_reserve_seat = false;
+
+	if ( is_seat_already_reserved( row_num, seat_num ) ) {
+			throw UnableToReserveASeatException();
+	} else {
+		user_wants_to_reserve_seat = yes_or_no_prompt(
+				"The seat is available!\nWould you like to reserve it? [y/n]"
+		);
+
+		if ( user_wants_to_reserve_seat ) {
+			std::cout << "Reserving the seat..." << std::endl;
+			search_for_seat( row_num, seat_num )->set_reserved( true );
+			std::cout << "The seat is now reserved!" << std::endl;
+			num_seats_reserved++;
+			num_seats_open--;
+		} else {
+			std::cout << "The seat will not be reserved." << std::endl;
+		}
+	}
+}
+
+void Auditorium :: reserve_seat_without_input( short int row_num, short int seat_num ) throw ( UnableToReserveASeatException ) {
+	if ( is_seat_already_reserved( row_num, seat_num ) ) {
+		throw UnableToReserveASeatException();
+	} else {
+		search_for_seat( row_num, seat_num )->set_reserved( true );
+		num_seats_reserved++;
+		num_seats_open--;
+	}
+}
+
+/**
+ * Uses @param num_of_tickets to find a corresponding free number of seats in
+ * an auditorium on a per-row basis. For example, if num of tickets is less than
+ * the number of seats per row, this function will find a row with that many
+ * seats free. If num of tickets is greater than the number of seats per row,
+ * this function will find more than one row, and so on.
+ *
+ * This is an exceptional function and is only called when manual reservation fails.
+ *
+ * In the old project, this is performReservationsWithVectors, which had an
+ * elaborate algorithm for choosing seats to reserve.
+ */
+void Auditorium :: perform_automatic_reservation( short int num_of_tickets ) {
 
 }
 

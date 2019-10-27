@@ -232,6 +232,12 @@ int main() {
 					switch ( user_short ) {
 						// Auditorium 1
 						case 1: {
+							for ( short int i = 0; i < user_selected_tickets; ++i ) {
+								auditorium_1.reserve_seat_without_input(
+										user_selected_rows[ i ], user_selected_seats[ i ]
+								);
+
+							}
 							break;
 						}
 
