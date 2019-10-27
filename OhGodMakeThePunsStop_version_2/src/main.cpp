@@ -20,7 +20,6 @@
 
 #include "Auditorium.h"
 #include "Seat.h"
-#include "SeatList.h"
 #include "Theatre.h"
 #include "Utilities.h"
 
