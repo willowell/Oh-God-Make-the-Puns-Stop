@@ -61,6 +61,8 @@ namespace whowell {
 
 	bool yes_or_no_prompt( std::string prompt );
 
+	bool check_password( std::string attempt, std::string key );
+
 } /* namespace whowell */
 
 #endif /* UTILITIES_H_ */

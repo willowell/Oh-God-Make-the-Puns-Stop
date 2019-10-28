@@ -21,7 +21,6 @@ class Auditorium {
 		int total_seats;
 		int num_seats_open;
 		int num_seats_reserved;
-		int sales;
 
 		std::list<Seat> seat_list;
 
@@ -35,7 +34,6 @@ class Auditorium {
 		int get_total_seats()        const;
 		int get_num_seats_open()     const;
 		int get_num_seats_reserved() const;
-		int get_sales()              const;
 
 		void set_auditorium_id(      int i );
 		void set_num_seats(          int s );
@@ -43,7 +41,6 @@ class Auditorium {
 		void set_total_seats(              );
 		void set_num_seats_open(     int s );
 		void set_num_seats_reserved( int s );
-		void set_sales(              int s );
 
 		void load_from_file(           std::fstream& from_file   );
 		void write_to_file(            std::fstream& to_file     );
@@ -53,6 +50,8 @@ class Auditorium {
 		void reserve_seat(                  short int row_num, short int seat_num ) throw( UnableToReserveASeatException );
 		void reserve_seat_without_input(    short int row_num, short int seat_num ) throw( UnableToReserveASeatException );
 		void perform_automatic_reservation( short int num_of_tickets  );
+
+		void reset_auditorium();
 
 
 		void display()                                             const;

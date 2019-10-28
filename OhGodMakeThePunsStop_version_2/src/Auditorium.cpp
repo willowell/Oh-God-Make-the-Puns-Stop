@@ -15,6 +15,7 @@
 #include <boost/format.hpp>
 
 #include "Auditorium.h"
+#include "Seat.h"
 #include "Utilities.h"
 
 namespace whowell {
@@ -25,8 +26,7 @@ Auditorium :: Auditorium():
 	num_rows(0),
 	total_seats(0),
 	num_seats_open(0),
-	num_seats_reserved(0),
-	sales(0)
+	num_seats_reserved(0)
 {}
 
 Auditorium :: ~Auditorium() {}
@@ -37,7 +37,6 @@ int Auditorium :: get_num_rows()           const { return num_rows;            }
 int Auditorium :: get_total_seats()        const { return total_seats;         }
 int Auditorium :: get_num_seats_open()     const { return num_seats_open;      }
 int Auditorium :: get_num_seats_reserved() const { return num_seats_reserved;  }
-int Auditorium :: get_sales()              const { return sales;               }
 
 void Auditorium :: set_auditorium_id(      int i ) { auditorium_id = i;                  }
 void Auditorium :: set_num_seats(          int s ) { num_seats = s;                      }
@@ -45,7 +44,6 @@ void Auditorium :: set_num_rows(           int r ) { num_rows = r;              
 void Auditorium :: set_total_seats(              ) { total_seats = num_seats * num_rows; }
 void Auditorium :: set_num_seats_open(     int s ) { num_seats_open = s;                 }
 void Auditorium :: set_num_seats_reserved( int s ) { num_seats_reserved = s;             }
-void Auditorium :: set_sales(              int s ) { sales = s;                          }
 
 void Auditorium :: load_from_file( std::fstream& from_file ) {
 
@@ -228,7 +226,46 @@ void Auditorium :: reserve_seat_without_input( short int row_num, short int seat
  * elaborate algorithm for choosing seats to reserve.
  */
 void Auditorium :: perform_automatic_reservation( short int num_of_tickets ) {
+/*
+ * void performReservationsWithVectors( std::list<Seat>* list, Auditorium* auditorium,
+					std::vector< short > rows, short tickets ) {
+				std::string buffer;
+				char yetAnotherUserChar;
 
+				try {
+					for ( short i = 0; i < tickets; i++ ) {
+						if ( list->searchForNodeAndGetStatus(
+							//assume all the seats are on the first selected row
+							( auditorium->getNumRows() / 2 ),
+							//then, look at the seat in the middle
+							//and subtract half the number of tickets that the user selected
+							//so that the middle ticket is exactly in the middle of the row
+							( auditorium->getNumSeats() / 2 ) - ( tickets / 2 ) + i ) == true )
+								throw UnableToReserveASeatException();
+					} //close for-loop
+
+					//If no exception has been thrown, then all of the seats are available
+					//and can now be reserved.
+					printf( "The seats in the middle of the row are available!\n" );
+					printf( "Would you like to reserve them? (\"Y\" or \"N\")\n" );
+					yetAnotherUserChar = validateStringAsCharacter( buffer, 'Y', 'N' );
+
+					if ( toupper( yetAnotherUserChar ) == 'Y' ) {
+						//Reserve the seats.
+						//These should not throw an exception, but if they do,
+						//it will be handled by the catch block below.
+						for ( short j = 0; j < tickets; j++ )
+							list->reserveASeatWithoutInput( auditorium, ( auditorium->getNumRows() / 2 ),
+								                          ( auditorium->getNumSeats() / 2 ) - ( tickets / 2 ) + j );
+						printf( "Seats reserved!\n" );
+
+					} else if ( toupper( yetAnotherUserChar ) == 'N' )
+						printf( "The seats will not be reserved.\n" );
+				} catch ( UnableToReserveASeatException& e ) {
+					std::cout << e.what() << '\n';
+				} //close try-catch block
+			}
+ */
 }
 
 void Auditorium :: display() const {

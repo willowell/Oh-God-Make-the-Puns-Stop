@@ -58,6 +58,7 @@ namespace whowell {
 		return "Node not found in list.\n";
 	}
 
+
 	UnableToReserveASeatException :: UnableToReserveASeatException() {}
 
 	UnableToReserveASeatException :: ~UnableToReserveASeatException() noexcept {}
@@ -66,115 +67,6 @@ namespace whowell {
 		return "Unable to reserve seat.\n";
 	}
 
-	// List Modification Functions ////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////////////
-/*
-	void performReservationsWithVectors( std::list<Seat>* list, Auditorium* auditorium,
-					std::vector< short > rows, short tickets ) {
-				std::string buffer;
-				char yetAnotherUserChar;
-
-				try {
-					for ( short i = 0; i < tickets; i++ ) {
-						if ( list->searchForNodeAndGetStatus(
-							//assume all the seats are on the first selected row
-							( auditorium->getNumRows() / 2 ),
-							//then, look at the seat in the middle
-							//and subtract half the number of tickets that the user selected
-							//so that the middle ticket is exactly in the middle of the row
-							( auditorium->getNumSeats() / 2 ) - ( tickets / 2 ) + i ) == true )
-								throw UnableToReserveASeatException();
-					} //close for-loop
-
-					//If no exception has been thrown, then all of the seats are available
-					//and can now be reserved.
-					printf( "The seats in the middle of the row are available!\n" );
-					printf( "Would you like to reserve them? (\"Y\" or \"N\")\n" );
-					yetAnotherUserChar = validateStringAsCharacter( buffer, 'Y', 'N' );
-
-					if ( toupper( yetAnotherUserChar ) == 'Y' ) {
-						//Reserve the seats.
-						//These should not throw an exception, but if they do,
-						//it will be handled by the catch block below.
-						for ( short j = 0; j < tickets; j++ )
-							list->reserveASeatWithoutInput( auditorium, ( auditorium->getNumRows() / 2 ),
-								                          ( auditorium->getNumSeats() / 2 ) - ( tickets / 2 ) + j );
-						printf( "Seats reserved!\n" );
-
-					} else if ( toupper( yetAnotherUserChar ) == 'N' )
-						printf( "The seats will not be reserved.\n" );
-				} catch ( UnableToReserveASeatException& e ) {
-					std::cout << e.what() << '\n';
-				} //close try-catch block
-			}
-
-
-	bool search_for_seat_and_get_status_from_list( std::list<Seat> from_list, int rowNum, int seatNum ) const {
-		Node* current = head;
-		try {
-			if ( current->getRow() == rowNum && current->getSeat() == seatNum ) {
-				//Then the first node is the one the user is looking for.
-				//Return TRUE if it is RESERVED
-				if ( current->isReserved() == true )
-					return true;
-				//Return FALSE if it is NOT RESERVED
-				if ( current->isReserved() == false )
-					return false;
-			} else {
-				//Cycle through the list.
-				while ( current != nullptr ) {
-					current = current->getNext();
-
-					//Continue checking each node in the list.
-					if ( current->getRow() == rowNum && current->getSeat() == seatNum ) {
-						if ( current->isReserved() == true )
-							return true;
-						if ( current->isReserved() == false )
-							return false;
-					}
-				}
-			}
-			//If the node still has not been found, then it probably isn't in the list.
-			//Throw an exception
-			throw NodeNotFoundException();
-		} catch ( NodeNotFoundException& e ) {
-			e.what();
-			return true;
-		}
-
-	}
-
-	Seat* search_for_and_get_seat_from_list( int rowNum, int seatNum ) {
-		Node* current = head;
-		Node* seek = nullptr;
-
-		try {
-			if ( current->getRow() == rowNum && current->getSeat() == seatNum ) {
-				seek = current;
-				return seek;
-			} else {
-				//Cycle through the list.
-				while ( current != nullptr ) {
-					current = current->getNext();
-
-					//Continue checking each node in the list.
-					if ( current->getRow() == rowNum && current->getSeat() == seatNum ) {
-						seek = current;
-						return seek;
-					}
-				}
-			}
-			//If the node still has not been found, then it probably isn't in the list.
-			//Throw an exception
-			throw NodeNotFoundException();
-		} catch ( NodeNotFoundException& e ) {
-			e.what();
-			return nullptr;
-		}
-	}
-
-*/
     // Validation Functions ///////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////

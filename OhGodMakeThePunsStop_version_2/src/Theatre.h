@@ -14,6 +14,7 @@ class Theatre {
 	private:
 		static constexpr float ticket_price = 7.99;
 
+		int total_seats;
 		int total_seats_open;
 		int total_seats_reserved;
 		float total_sales;
@@ -23,6 +24,7 @@ class Theatre {
 		Theatre();
 		virtual ~Theatre();
 
+		void set_total_seats(          int seats );
 		void set_total_seats_open(     int seats );
 		void set_total_seats_reserved( int seats );
 		void set_user_seats(           int seats );

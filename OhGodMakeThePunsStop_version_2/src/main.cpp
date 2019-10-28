@@ -46,6 +46,7 @@ int main() {
 	short int user_selected_tickets = 0;
 	short int user_choice = 0;
 	char user_char = 'a';
+	bool user_wants_manual_reservation = false;
 	bool user_wants_to_quit = false;
 	std::string buffer;
 	std::vector < short int > user_selected_seats;
@@ -164,6 +165,7 @@ int main() {
 			 */
 			case 2: {
 				user_short = -1;
+				user_wants_manual_reservation = false;
 
 				std::cout << "Please enter the number of the auditorium you wish to view.\n"
 						  << "You can choose Auditorium (1), (2), or (3).\n"
@@ -201,6 +203,11 @@ int main() {
 
 				user_selected_tickets = validate_string_as_double_digit_integer_in_range( buffer, 1, 100 );
 
+				user_wants_manual_reservation = yes_or_no_prompt(
+						"Would you like to manually reserve the seats? [y/n]\n"
+						"Otherwise, the program will automatically find available seats for you.\n"
+				);
+
 				short int loop_limit = user_selected_tickets;
 
 				// For every ticket the user wants, set aside a slot for a seat.
@@ -209,83 +216,107 @@ int main() {
 					user_selected_seats.push_back( i );
 				}
 
-				// The vectors are now big enough to store the user's desired seats.
-				// Request values for the seat positions.
-				for (short int k = 0; k < loop_limit; k++) {
-					std::cout << "Please enter the row number for the "
-							  << boost::format("%1% seat that you want to purchase.")
-							  % ( k + 1 )
-					          << std::endl;
-					user_selected_rows[ k ] = validate_string_as_double_digit_integer_in_range( buffer, 1, 100 );
+				if ( user_wants_manual_reservation ) {
+					// The vectors are now big enough to store the user's desired seats.
+					// Request values for the seat positions.
+					for (short int k = 0; k < loop_limit; k++) {
+						std::cout << "Please enter the row number for the "
+								  << boost::format("%1% seat that you want to purchase.")
+								  % ( k + 1 )
+								  << std::endl;
+						user_selected_rows[ k ] = validate_string_as_double_digit_integer_in_range( buffer, 1, 100 );
 
-					std::cout << "Please enter the seat number for the "
-							  << boost::format("%1% seat that you want to purchase.")
-							  % ( k + 1 )
-					          << std::endl;
-					user_selected_seats[ k ] = validate_string_as_double_digit_integer_in_range( buffer, 1, 100 );
-				}
+						std::cout << "Please enter the seat number for the "
+								  << boost::format("%1% seat that you want to purchase.")
+								  % ( k + 1 )
+								  << std::endl;
+						user_selected_seats[ k ] = validate_string_as_double_digit_integer_in_range( buffer, 1, 100 );
+					}
 
-				// The vectors shoul now hold all the seats that the user wants.
-				// Check the availability of the seats.
-				try {
-					switch ( user_short ) {
-						// Auditorium 1
-						case 1: {
-							for ( short int i = 0; i < user_selected_tickets; ++i ) {
-								auditorium_1.reserve_seat_without_input(
-										user_selected_rows[ i ], user_selected_seats[ i ]
-								);
+					// The vectors shoul now hold all the seats that the user wants.
+					// Check the availability of the seats.
+					try {
+						switch ( user_short ) {
+							// Auditorium 1
+							case 1: {
+								for ( short int i = 0; i < user_selected_tickets; ++i ) {
+									auditorium_1.reserve_seat_without_input(
+											user_selected_rows[ i ], user_selected_seats[ i ]
+									);
+								}
+								std::cout << "Seats reserved!" << std::endl;
 
+								break;
 							}
-							break;
-						}
 
-						// Auditorium 2
-						case 2: {
-							break;
-						}
+							// Auditorium 2
+							case 2: {
+								for ( short int i = 0; i < user_selected_tickets; ++i ) {
+									auditorium_2.reserve_seat_without_input(
+											user_selected_rows[ i ], user_selected_seats[ i ]
+									);
+								}
+								std::cout << "Seats reserved!" << std::endl;
 
-						// Auditorium 3
-						case 3: {
-							break;
-						}
+								break;
+							}
 
-						default: {
-							std::cerr << "This should be unreachable!\n"
-									  << "(short int) user_short is " << user_short
-									  << std::endl;
-							break;
-						}
+							// Auditorium 3
+							case 3: {
+								for ( short int i = 0; i < user_selected_tickets; ++i ) {
+									auditorium_3.reserve_seat_without_input(
+											user_selected_rows[ i ], user_selected_seats[ i ]
+									);
+								}
+								std::cout << "Seats reserved!" << std::endl;
+
+								break;
+							}
+
+							default: {
+								std::cerr << "This should be unreachable!\n"
+										  << "(short int) user_short is " << user_short
+										  << std::endl;
+								break;
+							}
+						} // Close switch-case
+					} catch ( UnableToReserveASeatException& e ) {
+						std::cout << e.what() << std::endl;
 					}
-				} catch ( UnableToReserveASeatException& e ) {
-					std::cout << e.what() << std::endl;
-					std::cout << "Attempting to locate available seats..." << std::endl;
+				} else {
+					std::cout << "The program will use the number of tickets you want to purchase "
+							  << "to find as many consecutive seats free in an auditorium.\n"
+							  << "If the program cannot find the number of seats you want, "
+							  << "the program will ask you if you want to log your request\n"
+							  << "so that a manager can view your request and take care of it."
+							  << std::endl;
 
-					switch ( user_short ) {
-						// Auditorium 1
-						case 1: {
-							break;
+					try {
+						switch ( user_short ) {
+							case 1: {
+								auditorium_1.perform_automatic_reservation( user_selected_tickets );
+								break;
+							}
+							case 2: {
+								auditorium_2.perform_automatic_reservation( user_selected_tickets );
+								break;
+							}
+							case 3: {
+								auditorium_3.perform_automatic_reservation( user_selected_tickets );
+								break;
+							}
+							default: {
+								std::cerr << "This should be unreachable!\n"
+										  << "(short int) user_short is " << user_short
+										  << std::endl;
+								break;
+							}
 						}
 
-						// Auditorium 2
-						case 2: {
-							break;
-						}
-
-						// Auditorium 3
-						case 3: {
-							break;
-						}
-
-						default: {
-							std::cerr << "This should be unreachable!\n"
-									  << "(short int) user_short is " << user_short
-									  << std::endl;
-							break;
-						}
+					} catch ( UnableToReserveASeatException& e ) {
+							//! TODO: handle logging request to file
 					}
 				}
-
 				// Reset the vectors.
 				user_selected_rows.clear();
 				user_selected_seats.clear();
@@ -299,21 +330,49 @@ int main() {
 			////////////////////////////////////////////////////////////////////
 
 			/**
-			 *
+			 * SALES_REPORT_MENU
 			 */
 			case 3: {
+				theatre.set_total_seats(
+						auditorium_1.get_total_seats() +
+						auditorium_2.get_total_seats() +
+						auditorium_3.get_total_seats()
+				);
+
+				theatre.set_total_seats_open(
+						auditorium_1.get_num_seats_open() +
+						auditorium_2.get_num_seats_open() +
+						auditorium_3.get_num_seats_open()
+				);
+
+				theatre.set_total_seats_reserved(
+						auditorium_1.get_num_seats_reserved() +
+						auditorium_2.get_num_seats_reserved() +
+						auditorium_3.get_num_seats_reserved()
+				);
+
+				theatre.set_user_seats( user_selected_tickets );
+
+				theatre.calculate_total_sales();
+
+				theatre.display();
+
+				//! TODO: print these to a file?
+
+				std::cout << "Returning to the main menu." << std::endl;
+
 				break;
 			}
-			///
-			///
-			///
+			////////////////////////////////////////////////////////////////////
+			/// END SALES_REPORT_MENU //////////////////////////////////////////
+			////////////////////////////////////////////////////////////////////
 
 			/**
 			 * ADVANCED_OPTIONS_MENU
 			 * In this menu, the user can choose to reset the auditoriums,
-			 * either by reloading the files, thereby undoing the current session
+			 * either by (re)loading the files, thereby undoing the current session
 			 * or by resetting all seats to be unreserved.
-			 * The user can also choose to backup the current files.
+			 * The user can also choose to backup (write to different file) the current files.
 			 * The user must enter a password in order to access this menu.
 			 * For debug purposes, this password is "admin".
 			 */
