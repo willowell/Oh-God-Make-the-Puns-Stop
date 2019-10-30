@@ -51,6 +51,33 @@ namespace whowell {
 	std::vector < short int > user_selected_seats;
 	std::vector < short int > user_selected_rows;
 
+
+	void calculate_theatre_values() {
+			theatre.set_total_seats(
+					auditorium_1.get_total_seats() +
+					auditorium_2.get_total_seats() +
+					auditorium_3.get_total_seats()
+			);
+
+			theatre.set_total_seats_open(
+					auditorium_1.get_num_seats_open() +
+					auditorium_2.get_num_seats_open() +
+					auditorium_3.get_num_seats_open()
+			);
+
+			theatre.set_total_seats_reserved(
+					auditorium_1.get_num_seats_reserved() +
+					auditorium_2.get_num_seats_reserved() +
+					auditorium_3.get_num_seats_reserved()
+			);
+
+			theatre.set_user_seats( user_selected_tickets );
+
+			theatre.calculate_total_sales();
+
+			theatre.display();
+		}
+
 	void pause_thread(int for_milliseconds) {
 		std::this_thread::sleep_for( std::chrono::milliseconds( for_milliseconds ) );
 	}
@@ -332,32 +359,6 @@ namespace whowell {
 		} else {
 			return_to_main_menu();
 		}
-	}
-
-	void calculate_theatre_values() {
-		theatre.set_total_seats(
-				auditorium_1.get_total_seats() +
-				auditorium_2.get_total_seats() +
-				auditorium_3.get_total_seats()
-		);
-
-		theatre.set_total_seats_open(
-				auditorium_1.get_num_seats_open() +
-				auditorium_2.get_num_seats_open() +
-				auditorium_3.get_num_seats_open()
-		);
-
-		theatre.set_total_seats_reserved(
-				auditorium_1.get_num_seats_reserved() +
-				auditorium_2.get_num_seats_reserved() +
-				auditorium_3.get_num_seats_reserved()
-		);
-
-		theatre.set_user_seats( user_selected_tickets );
-
-		theatre.calculate_total_sales();
-
-		theatre.display();
 	}
 
 }
