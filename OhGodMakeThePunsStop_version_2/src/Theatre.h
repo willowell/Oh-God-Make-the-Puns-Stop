@@ -30,7 +30,7 @@ class Theatre {
 		void set_user_seats(           int seats );
 
 		void display();
-	protected:
+
 		void calculate_total_sales();
 };
 

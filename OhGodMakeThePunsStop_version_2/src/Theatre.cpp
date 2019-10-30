@@ -39,11 +39,11 @@ void Theatre :: display() {
 			  << "Total Seats: " << total_seats << '\n'
 			  << "Total Seats Open: " << total_seats_open << '\n'
 			  << "Total Seats Reserved: " << total_seats_reserved << '\n';
-	printf( "Total sales from theater: $%.2f\n\n", total_sales);
+	printf( "Total sales from theater: $%.2f\n\n", total_sales );
 
 	std::cout << "Tickets purchased this session:\n"
 		      << "Tickets purchased: " << user_seats << '\n';
-	printf( "Sales from user purchase: $%.2f\n\n", user_sale);
+	printf( "Sales from user purchase: $%.2f\n\n", user_sale );
 }
 
 } /* namespace whowell */

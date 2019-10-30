@@ -276,7 +276,7 @@ void Auditorium :: display() const {
 			  << "\tNumber of Rows: " << num_rows << '\n'
 			  << "\tNumber of Seats Open: " << num_seats_open << '\n'
 			  << "\tNumber of Seats Reserved " << num_seats_reserved << '\n'
-			  << "\tSales: " << sales << '\n' << std::endl;
+			  << '\n' << std::endl;
 }
 
 void Auditorium :: display_list() const {
