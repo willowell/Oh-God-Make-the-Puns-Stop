@@ -8,8 +8,8 @@
 #ifndef AUDITORIUM_H_
 #define AUDITORIUM_H_
 
+#include "Exceptions.h"
 #include "Seat.h"
-#include "Utilities.h"
 
 namespace whowell {
 

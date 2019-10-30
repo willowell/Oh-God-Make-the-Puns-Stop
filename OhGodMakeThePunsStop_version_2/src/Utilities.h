@@ -8,46 +8,35 @@
 #ifndef UTILITIES_H_
 #define UTILITIES_H_
 
+#include "Auditorium.h"
+#include "Exceptions.h"
+#include "Theatre.h"
+
 namespace whowell {
+	extern bool is_debug;
 
-	// Exceptions /////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////
+	extern std::fstream      file_1;
+	extern std::fstream      file_2;
+	extern std::fstream      file_3;
+	extern Auditorium        auditorium_1;
+	extern Auditorium        auditorium_2;
+	extern Auditorium        auditorium_3;
+	extern Theatre           theatre;
 
-	class IntegerOutOfRangeException : public std::exception {
-		public:
-			IntegerOutOfRangeException();
-			~IntegerOutOfRangeException() noexcept;
-			const char* what() const noexcept;
-	};
+	/// User input
 
-	class InvalidCharacterInputException : public std::exception {
-		public:
-			InvalidCharacterInputException();
-			~InvalidCharacterInputException() noexcept;
-			const char* what() const noexcept;
-	};
-
-	class InvalidStringLengthException : public std::exception {
-		public:
-			InvalidStringLengthException();
-			~InvalidStringLengthException() noexcept;
-			const char* what() const noexcept;
-	};
-
-	class NodeNotFoundException : public std::exception {
-		public:
-			NodeNotFoundException();
-			~NodeNotFoundException() noexcept;
-			const char* what() const noexcept;
-	};
-
-	class UnableToReserveASeatException : public std::exception {
-		public:
-			UnableToReserveASeatException();
-			~UnableToReserveASeatException() noexcept;
-			const char* what() const noexcept;
-	};
+	extern short int user_short;
+	extern short int user_selected_tickets;
+	extern short int user_choice;
+	extern int pause_time_ms;
+	extern char user_char;
+	extern bool user_wants_manual_reservation;
+	extern bool user_wants_to_quit;
+	extern bool is_password_good;
+	extern std::string buffer;
+	extern std::string key;
+	extern std::vector < short int > user_selected_seats;
+	extern std::vector < short int > user_selected_rows;
 
 	// Validation Functions ///////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////
@@ -63,6 +52,29 @@ namespace whowell {
 
 	bool check_password( std::string attempt, std::string key );
 
+	////////////////////////////////////////////////////////////////////////////
+	/// SUBROUTINES ////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////
+
+	void pause_thread(int for_milliseconds);
+
+	void calculate_theatre_values();
+
+	////////////////////////////////////////////////////////////////////////////
+	/// MENU ITEMS /////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////
+
+	void return_to_main_menu();
+
+	void handle_main_menu();
+
+	void handle_auditorium_display_menu();
+
+	void handle_reservation_menu();
+
+	void handle_advanced_options_menu();
+
+	void handle_quit_menu();
 } /* namespace whowell */
 
 #endif /* UTILITIES_H_ */

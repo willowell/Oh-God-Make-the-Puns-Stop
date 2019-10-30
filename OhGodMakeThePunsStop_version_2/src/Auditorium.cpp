@@ -15,6 +15,7 @@
 #include <boost/format.hpp>
 
 #include "Auditorium.h"
+#include "Exceptions.h"
 #include "Seat.h"
 #include "Utilities.h"
 
@@ -116,7 +117,6 @@ void Auditorium :: write_to_file( std::fstream& to_file ) {
 			iter->is_seat_reserved() ? to_file << '*' : to_file << '#';
 			iter++;
 			x++;
-			std::cout << "x: " << x << std::endl;
 		}
 
 		// Terminate the line with a newline,
