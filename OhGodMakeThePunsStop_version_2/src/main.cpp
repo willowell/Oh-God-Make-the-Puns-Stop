@@ -48,7 +48,9 @@ int main() {
 	char user_char = 'a';
 	bool user_wants_manual_reservation = false;
 	bool user_wants_to_quit = false;
+	bool is_password_good = false;
 	std::string buffer;
+	std::string key = "admin";
 	std::vector < short int > user_selected_seats;
 	std::vector < short int > user_selected_rows;
 
@@ -377,6 +379,25 @@ int main() {
 			 * For debug purposes, this password is "admin".
 			 */
 			case 4: {
+				user_short = -1;
+				buffer.clear();
+
+				std::cout << "Please enter the password to continue.\n"
+						  << "If the password is incorrect, you will be returned to the main menu."
+						  << std::endl;
+				std::cin >> buffer;
+
+				is_password_good = check_password( buffer, key );
+
+				if ( is_password_good ) {
+					std::cout << "Welcome, administator!" << std::endl;
+					std::cout << ""
+				} else {
+					std::cout << "The password you entered is incorrect." << std::endl;
+				}
+
+				std::cout << "Returning to the main menu." << std::endl;
+
 				break;
 			}
 			///

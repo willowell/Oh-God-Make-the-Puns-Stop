@@ -199,4 +199,13 @@ namespace whowell {
 		return ( answer == 'Y' );
 	}
 
+	bool check_password( std::string attempt, std::string key ) {
+
+		if (key.compare(attempt) == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 } /* namespace whowell */

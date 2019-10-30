@@ -1,0 +1,57 @@
+if (userShort == 1) {
+			while (i > 0) {
+				request_row_and_seat:
+				printf("Please enter the row number of the seat you want to purchase.\n");
+				userRow = (short) validateStringAsIntegerInRange(buffer, 1, audi1->getNumRows());
+
+				printf("Please enter the column number of the seat you want to purchase.\n");
+				userSeat = (short) validateStringAsIntegerInRange(buffer, 1, audi1->getNumSeats());
+
+				try {
+					list1->reserveASeat(audi1, userRow, userSeat);
+				} catch (UnableToReserveASeatException& e) {
+					std::cout << e.what() << '\n';
+					goto request_row_and_seat;
+				}
+				//i will only be decremented if a seat is successfully reserved.
+				i--;
+			} //close while (i > 0)
+		}
+		if (userShort == 2) {
+			while (i > 0) {
+				request_row_and_seat_2:
+				printf("Please enter the row number of the seat you want to purchase.\n");
+				userRow = (short) validateStringAsIntegerInRange(buffer, 1, audi2->getNumRows());
+
+				printf("Please enter the column number of the seat you want to purchase.\n");
+				userSeat = (short) validateStringAsIntegerInRange(buffer, 1, audi2->getNumSeats());
+
+				try {
+					list2->reserveASeat(audi2, userRow, userSeat);
+				} catch (UnableToReserveASeatException& e) {
+					std::cout << e.what() << '\n';
+					goto request_row_and_seat_2;
+				}
+				//i will only be decremented if a seat is successfully reserved.
+				i--;
+			} //close while (i > 0)
+		}
+		if (userShort == 3) {
+			while (i > 0) {
+				request_row_and_seat_3:
+				printf("Please enter the row number of the seat you want to purchase.\n");
+				userRow = (short) validateStringAsIntegerInRange(buffer, 1, audi3->getNumRows());
+
+				printf("Please enter the column number of the seat you want to purchase.\n");
+				userSeat = (short) validateStringAsIntegerInRange(buffer, 1, audi3->getNumSeats());
+
+				try {
+					list3->reserveASeat(audi3, userRow, userSeat);
+				} catch (UnableToReserveASeatException& e) {
+					std::cout << e.what() << '\n';
+					goto request_row_and_seat_3;
+				}
+				//i will only be decremented if a seat is successfully reserved.
+				i--;
+			} //close while (i > 0)
+		}
