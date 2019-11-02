@@ -194,8 +194,6 @@ namespace whowell {
 			theatre.set_user_seats( user_selected_tickets );
 
 			theatre.calculate_total_sales();
-
-			theatre.display();
 		}
 
 	////////////////////////////////////////////////////////////////////////////
@@ -444,8 +442,56 @@ namespace whowell {
 					  << "(6) Reset auditoriums.\n"
 					  << "(7) Return to main menu.\n"
 					  << std::endl;
+
+			user_short = validate_string_as_single_digit_integer_in_range( buffer, 1, 7 );
+
+			switch ( user_short ) {
+
+				case 1: {
+
+					break;
+				}
+
+				case 2: {
+
+					theatre.display();
+
+					break;
+				}
+
+				case 3: {
+
+					break;
+				}
+
+				case 4: {
+
+					break;
+				}
+
+				case 5: {
+
+					break;
+				}
+
+				case 6: {
+
+					break;
+				}
+
+				case 7: {
+
+					return_to_main_menu();
+					break;
+				}
+
+				default: {
+					break;
+				}
+			}
 		} else {
 			std::cout << "The password you entered is incorrect." << std::endl;
+			return_to_main_menu();
 		}
 	}
 

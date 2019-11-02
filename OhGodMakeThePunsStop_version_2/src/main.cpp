@@ -19,6 +19,7 @@
 #include <boost/format.hpp>
 
 #include "Auditorium.h"
+#include "Object.h"
 #include "Seat.h"
 #include "Theatre.h"
 #include "Utilities.h"
@@ -54,6 +55,9 @@ namespace whowell {
 
 int main() {
 	using namespace whowell;
+
+	Object o;
+	std::cout << o << std::endl;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -126,6 +130,10 @@ int main() {
 			case 2: {
 				handle_reservation_menu();
 
+				// Save any changes in the auditoriums
+				// to the Theatre
+				calculate_theatre_values();
+
 				return_to_main_menu();
 
 				break;
@@ -145,6 +153,13 @@ int main() {
 			 * For debug purposes, this password is "admin".
 			 */
 			case 3: {
+
+				// Recalculate any changes to the Theatre.
+				// The user can view and/or print a sales report in this menu,
+				// so this calculation should happen here. Otherwise, the
+				// sales report won't reflect the auditoriums' current state.
+				calculate_theatre_values();
+
 				handle_advanced_options_menu();
 
 				return_to_main_menu();

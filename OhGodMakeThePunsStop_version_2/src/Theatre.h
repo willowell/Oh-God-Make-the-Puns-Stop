@@ -8,6 +8,8 @@
 #ifndef THEATRE_H_
 #define THEATRE_H_
 
+#include <fstream>
+
 namespace whowell {
 
 class Theatre {
@@ -31,7 +33,11 @@ class Theatre {
 
 		void display();
 
+		void view_sales_report();
+
 		void calculate_total_sales();
+
+		void save_sales_report( std::fstream to_file );
 };
 
 } /* namespace whowell */
