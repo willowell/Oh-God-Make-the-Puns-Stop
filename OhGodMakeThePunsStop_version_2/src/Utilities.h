@@ -31,12 +31,14 @@ namespace whowell {
 	extern int pause_time_ms;
 	extern char user_char;
 	extern bool user_wants_manual_reservation;
+	extern bool user_wants_to_log_request;
 	extern bool user_wants_to_quit;
 	extern bool is_password_good;
 	extern std::string buffer;
 	extern std::string key;
 	extern std::vector < short int > user_selected_seats;
 	extern std::vector < short int > user_selected_rows;
+	extern std::vector < std::string > user_logged_requests;
 
 	// Validation Functions ///////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////

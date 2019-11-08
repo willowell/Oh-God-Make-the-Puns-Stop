@@ -19,7 +19,6 @@
 #include <boost/format.hpp>
 
 #include "Auditorium.h"
-#include "Object.h"
 #include "Seat.h"
 #include "Theatre.h"
 #include "Utilities.h"
@@ -45,19 +44,18 @@ namespace whowell {
 	int pause_time_ms = 250;
 	char user_char = 'a';
 	bool user_wants_manual_reservation = false;
+	bool user_wants_to_log_request;
 	bool user_wants_to_quit = false;
 	bool is_password_good = false;
 	std::string buffer;
 	std::string key = "admin";
 	std::vector < short int > user_selected_seats;
 	std::vector < short int > user_selected_rows;
+	std::vector < std::string > user_logged_requests;
 }
 
 int main() {
 	using namespace whowell;
-
-	Object o;
-	std::cout << o << std::endl;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////

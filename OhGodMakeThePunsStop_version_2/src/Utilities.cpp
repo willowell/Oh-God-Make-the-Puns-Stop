@@ -196,6 +196,13 @@ namespace whowell {
 			theatre.calculate_total_sales();
 		}
 
+	void log_reservation_request() {
+		std::string request;
+		request = std::string("User request: ") + std::to_string(user_selected_tickets)
+				+ std::string(" tickets.\n");
+
+		user_logged_requests.push_back( request );
+	}
 	////////////////////////////////////////////////////////////////////////////
 	/// MENU ITEMS /////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////
@@ -260,6 +267,7 @@ namespace whowell {
 	void handle_reservation_menu() {
 		user_short = -1;
 		user_wants_manual_reservation = false;
+		user_wants_to_log_request = false;
 
 		std::cout << "Please enter the number of the auditorium you wish to view.\n"
 				  << "You can choose Auditorium (1), (2), or (3).\n"
@@ -411,7 +419,21 @@ namespace whowell {
 				}
 
 			} catch ( UnableToReserveASeatException& e ) {
-					//! TODO: handle logging request to file
+
+				user_wants_to_log_request = yes_or_no_prompt(
+						"The program could not find the seats that you wanted.\n"
+						"Would you like to log your request so that a manager\n"
+						"can view your request and take care of it? [y/n]\n"
+				);
+
+				pause_thread( pause_time_ms );
+
+				if ( user_wants_to_log_request ) {
+					std::cout << "Okay! The program will save your request.\n"
+							  << std::endl;
+				} else {
+					std::cout << "Okay! Your request will not be saved." << std::endl;
+				}
 			}
 		}
 		// Reset the vectors.
