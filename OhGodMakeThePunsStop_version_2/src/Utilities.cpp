@@ -495,6 +495,23 @@ namespace whowell {
 				}
 
 				case 4: {
+					std::cout << "Backing up current auditorium files.\n"
+							  << "Warning: current backups will be overwritten!"
+							  << std::endl;
+
+					file_1.open( "A1_backup.txt", std::ios::out | std::ios::trunc );
+					file_2.open( "A2_backup.txt", std::ios::out | std::ios::trunc );
+					file_3.open( "A3_backup.txt", std::ios::out | std::ios::trunc );
+
+					auditorium_1.write_to_file( file_1 );
+					auditorium_2.write_to_file( file_2 );
+					auditorium_3.write_to_file( file_3 );
+
+					file_1.close();
+					file_2.close();
+					file_3.close();
+
+					std::cout << "The data has been backed up." << std::endl;
 
 					break;
 				}
@@ -516,6 +533,10 @@ namespace whowell {
 				}
 
 				default: {
+					std::cerr << "This should be unreachable!\n"
+							  << "(short int) user_short is " << user_short
+							  << std::endl;
+
 					break;
 				}
 			}

@@ -214,6 +214,14 @@ void Auditorium :: reserve_seat_without_input( short int row_num, short int seat
 }
 
 /**
+ * I realized investing this much time in a function that deals with
+ * edge-cases is probably a bad idea. I have decided to simply log the
+ * special request instead. This function might be better suited if this
+ * program was aware of multiple days; then this function could search through
+ * the other available days for the seats.
+ */
+
+/**
  * Uses @param num_of_tickets to find a corresponding free number of seats in
  * an auditorium on a per-row basis. For example, if num of tickets is less than
  * the number of seats per row, this function will find a row with that many
@@ -266,6 +274,19 @@ void Auditorium :: perform_automatic_reservation( short int num_of_tickets ) {
 				} //close try-catch block
 			}
  */
+}
+
+void Auditorium :: reset_auditorium() {
+	// As a predicate, the list must not be empty.
+	if ( seat_list.empty() ) {
+		std::cerr << "List is empty!" << std::endl;
+		return;
+	}
+
+	//TODO: correct way to mutate values?
+	for ( auto& seat : seat_list ) {
+		seat.set_reserved( false );
+	}
 }
 
 void Auditorium :: display() const {
