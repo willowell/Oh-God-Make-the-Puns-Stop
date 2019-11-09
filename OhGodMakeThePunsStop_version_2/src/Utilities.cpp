@@ -203,9 +203,11 @@ namespace whowell {
 
 		user_logged_requests.push_back( request );
 	}
+
 	////////////////////////////////////////////////////////////////////////////
 	/// MENU ITEMS /////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////
+
 	void return_to_main_menu() {
 		std::cout << "Returning to the main menu." << std::endl;
 		// Wait a little bit before returning to the main menu.
@@ -247,14 +249,17 @@ namespace whowell {
 				auditorium_1.display_grid();
 				break;
 			}
+
 			case 2: {
 				auditorium_2.display_grid();
 				break;
 			}
+
 			case 3: {
 				auditorium_3.display_grid();
 				break;
 			}
+
 			default: {
 				std::cerr << "This should be unreachable!\n"
 						  << "(short int) user_short is " << user_short
@@ -431,6 +436,8 @@ namespace whowell {
 				if ( user_wants_to_log_request ) {
 					std::cout << "Okay! The program will save your request.\n"
 							  << std::endl;
+					log_reservation_request();
+
 				} else {
 					std::cout << "Okay! Your request will not be saved." << std::endl;
 				}
@@ -440,6 +447,7 @@ namespace whowell {
 		user_selected_rows.clear();
 		user_selected_seats.clear();
 
+		return_to_main_menu();
 	}
 
 	void handle_advanced_options_menu() {
@@ -476,7 +484,7 @@ namespace whowell {
 
 				case 2: {
 
-					theatre.display();
+					theatre.view_sales_report();
 
 					break;
 				}
@@ -524,7 +532,7 @@ namespace whowell {
 
 		if (user_wants_to_quit) {
 			// Wait a little bit after accepting user input to show the next text.
-			std::this_thread::sleep_for(std::chrono::milliseconds(250));
+			pause_thread( pause_time_ms );
 
 			std::cout << "Quitting the program.\n"
 					  << "Please wait while the data is saved." << std::endl;
