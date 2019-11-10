@@ -204,6 +204,18 @@ namespace whowell {
 		user_logged_requests.push_back( request );
 	}
 
+	void save_reservation_requests_to_file() {
+		if ( user_logged_requests.empty() ) {
+			return;
+		}
+
+		file_1.open( "requests.txt", std::ios::out | std::ios::app );
+
+		for ( const auto& request : user_logged_requests ) {
+			file_1 << request << std::endl;
+		}
+	}
+
 	////////////////////////////////////////////////////////////////////////////
 	/// MENU ITEMS /////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////
