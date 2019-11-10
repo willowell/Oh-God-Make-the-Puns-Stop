@@ -209,11 +209,18 @@ namespace whowell {
 			return;
 		}
 
-		file_1.open( "requests.txt", std::ios::out | std::ios::app );
+		std::ofstream out_file( "requests.txt", std::ios::app );
+
+		if (out_file.fail()) {
+		    std::cout << "Couldn't open the file!" << std::endl;
+		    return;
+		}
 
 		for ( const auto& request : user_logged_requests ) {
-			file_1 << request << std::endl;
+			out_file << request << std::endl;
 		}
+
+		out_file.close();
 	}
 
 	////////////////////////////////////////////////////////////////////////////
@@ -405,6 +412,10 @@ namespace whowell {
 			} catch ( UnableToReserveASeatException& e ) {
 				std::cout << e.what() << std::endl;
 			}
+
+		// Automatic Reservation
+		//TODO: replace perform_automatic_reservation() -- it is unimplemented!
+		// maybe just default to logging the request?
 		} else {
 			std::cout << "The program will use the number of tickets you want to purchase "
 					  << "to find as many consecutive seats free in an auditorium.\n"
