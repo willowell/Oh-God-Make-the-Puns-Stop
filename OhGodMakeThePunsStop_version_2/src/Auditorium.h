@@ -26,6 +26,11 @@ class Auditorium {
 
 	public:
 		Auditorium();
+
+		Auditorium( int auditorium_id );
+
+		Auditorium( int auditorium_id, int num_seats, int num_rows);
+
 		virtual ~Auditorium();
 
 		int get_auditorium_id()      const;
@@ -51,7 +56,7 @@ class Auditorium {
 		void reserve_seat_without_input(    short int row_num, short int seat_num ) throw( UnableToReserveASeatException );
 		void perform_automatic_reservation( short int num_of_tickets  );
 
-		void reset_auditorium();
+		void reset();
 
 
 		void display()                                             const;

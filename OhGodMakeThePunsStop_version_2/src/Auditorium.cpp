@@ -30,6 +30,33 @@ Auditorium :: Auditorium():
 	num_seats_reserved(0)
 {}
 
+Auditorium :: Auditorium(int auditorium_id):
+	auditorium_id( auditorium_id ),
+	num_seats(0),
+	num_rows(0),
+	total_seats(0),
+	num_seats_open(0),
+	num_seats_reserved(0)
+{}
+
+Auditorium :: Auditorium( int auditorium_id, int num_seats, int num_rows):
+	auditorium_id( auditorium_id ),
+	num_seats( num_seats ),
+	num_rows( num_rows ) {
+
+	total_seats = this->num_seats * this->num_rows;
+
+	num_seats_open = total_seats;
+	num_seats_reserved = 0;
+
+	for ( int y = 0; y < this->num_rows; ++y ) {
+		for ( int x = 0; x < this->num_seats; ++x ) {
+			seat_list.push_back( Seat( y, x, false ) );
+		}
+	}
+
+}
+
 Auditorium :: ~Auditorium() {}
 
 int Auditorium :: get_auditorium_id()      const { return auditorium_id;       }
@@ -276,7 +303,7 @@ void Auditorium :: perform_automatic_reservation( short int num_of_tickets ) {
  */
 }
 
-void Auditorium :: reset_auditorium() {
+void Auditorium :: reset() {
 	// As a predicate, the list must not be empty.
 	if ( seat_list.empty() ) {
 		std::cerr << "List is empty!" << std::endl;

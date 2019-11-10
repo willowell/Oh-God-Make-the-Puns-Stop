@@ -532,12 +532,31 @@ namespace whowell {
 				}
 
 				case 6: {
+					bool is_user_sure = false;
+
+					is_user_sure = yes_or_no_prompt(
+							"Are you sure you want to reset the auditoriums? [y/n]"
+					);
+
+					if ( is_user_sure ) {
+						std::cout << "Okay! All of the seats in the auditorium"
+								  << "will be set to unreserved."
+								  << std::endl;
+
+						auditorium_1.reset();
+						auditorium_2.reset();
+						auditorium_3.reset();
+
+					} else {
+						std::cout << "Okay! Returning to the main menu instead." << std::endl;
+					}
 
 					break;
 				}
 
 				case 7: {
 					// Pass
+					// There is no need to do anything here.
 					break;
 				}
 
