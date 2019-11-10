@@ -26,7 +26,7 @@
 
 namespace whowell {
 
-	bool is_debug = true;
+	bool is_debug = false;
 
 	std::fstream      file_1;
 	std::fstream      file_2;

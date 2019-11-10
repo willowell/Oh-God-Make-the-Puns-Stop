@@ -283,7 +283,7 @@ void Auditorium :: reset_auditorium() {
 		return;
 	}
 
-	//TODO: correct way to mutate values?
+	// Unreserves every seat in the auditorium.
 	for ( auto& seat : seat_list ) {
 		seat.set_reserved( false );
 	}

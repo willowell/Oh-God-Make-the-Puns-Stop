@@ -1,0 +1,9 @@
+Sales report for theatre:
+Total seats in theatre: 300
+Total seats open: 224
+Total seats reserved: 76
+Total sales  from theatre: 607.24
+
+Tickets purchased this session:
+Tickets purchased: 0
+User sale from this session: 0

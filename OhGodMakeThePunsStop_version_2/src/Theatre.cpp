@@ -43,7 +43,7 @@ void Theatre :: display() {
 			  << "Total seats open: "                << total_seats_open << '\n'
 			  << "Total seats reserved: "            << total_seats_reserved << '\n'
 			  << "Total sales  from theatre: "       << total_sales
-			  << std::endl;
+			  << '\n' << std::endl;
 
 	std::cout << "Tickets purchased this session:\n"
 		      << "Tickets purchased: "               << user_seats << '\n'
@@ -53,14 +53,29 @@ void Theatre :: display() {
 
 void Theatre :: view_sales_report() {
 	calculate_total_sales();
-	std::cout << "Sales report for theatre:\n"
+	std::cout << "Sales report for theatre\n"
 			  << "Total seats in theatre: "          << total_seats << '\n'
 			  << "Total seats open: "                << total_seats_open << '\n'
 			  << "Total seats reserved: "            << total_seats_reserved << '\n'
 			  << "Total sales  from theatre: "       << total_sales
-			  << std::endl;
+			  << '\n' << std::endl;
 
-	std::cout << "Tickets purchased this session:\n"
+	std::cout << "Tickets purchased this session\n"
+		      << "Tickets purchased: "               << user_seats << '\n'
+			  << "User sale from this session: "     << user_sale
+			  << std::endl;
+}
+
+void Theatre :: save_sales_report( std::fstream& to_file ) {
+	calculate_total_sales();
+	to_file << "Sales report for theatre:\n"
+			  << "Total seats in theatre: "          << total_seats << '\n'
+			  << "Total seats open: "                << total_seats_open << '\n'
+			  << "Total seats reserved: "            << total_seats_reserved << '\n'
+			  << "Total sales  from theatre: "       << total_sales
+			  << '\n' << std::endl;
+
+	to_file << "Tickets purchased this session:\n"
 		      << "Tickets purchased: "               << user_seats << '\n'
 			  << "User sale from this session: "     << user_sale
 			  << std::endl;

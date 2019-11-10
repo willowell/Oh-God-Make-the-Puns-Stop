@@ -37,7 +37,7 @@ class Theatre {
 
 		void calculate_total_sales();
 
-		void save_sales_report( std::fstream to_file );
+		void save_sales_report( std::fstream& to_file );
 };
 
 } /* namespace whowell */

@@ -491,6 +491,16 @@ namespace whowell {
 
 				case 3: {
 
+					std::cout << "Printing sales report to file 'sales_report.txt'" << std::endl;
+
+					file_1.open( "sales_report.txt", std::ios::out | std::ios::trunc );
+
+					theatre.save_sales_report( file_1 );
+
+					file_1.close();
+
+					std::cout << "Printing done!" << std::endl;
+
 					break;
 				}
 
@@ -527,8 +537,7 @@ namespace whowell {
 				}
 
 				case 7: {
-
-					return_to_main_menu();
+					// Pass
 					break;
 				}
 
@@ -542,7 +551,6 @@ namespace whowell {
 			}
 		} else {
 			std::cout << "The password you entered is incorrect." << std::endl;
-			return_to_main_menu();
 		}
 	}
 
