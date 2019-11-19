@@ -467,18 +467,46 @@ namespace whowell {
 
 			switch ( user_short ) {
 
+				/**
+				 * View special seating requests
+				 */
 				case 1: {
+
+					std::cout << "Viewing special seating requests..." << std::endl;
+
+					std::ifstream in_file("sales_report.txt");
+					if (in_file.is_open()) {
+					    std::string line;
+					    while (std::getline(in_file, line)) {
+					    	std::cout << line;
+					    }
+					    in_file.close();
+					}
+
+					std::cout << '\n' << std::endl;
 
 					break;
 				}
+				////////////////////////////////////////////////////////////////
+				////////////////////////////////////////////////////////////////
+				////////////////////////////////////////////////////////////////
 
+				/**
+				 * View sales report
+				 */
 				case 2: {
 
 					theatre.view_sales_report();
 
 					break;
 				}
+				////////////////////////////////////////////////////////////////
+				////////////////////////////////////////////////////////////////
+				////////////////////////////////////////////////////////////////
 
+				/**
+				 * Print sales report
+				 */
 				case 3: {
 
 					std::cout << "Printing sales report to file 'sales_report.txt'" << std::endl;
@@ -493,7 +521,13 @@ namespace whowell {
 
 					break;
 				}
+				////////////////////////////////////////////////////////////////
+				////////////////////////////////////////////////////////////////
+				////////////////////////////////////////////////////////////////
 
+				/**
+				 * Backup current auditorium files
+				 */
 				case 4: {
 					std::cout << "Backing up current auditorium files.\n"
 							  << "Warning: current backups will be overwritten!"
@@ -515,12 +549,60 @@ namespace whowell {
 
 					break;
 				}
+				////////////////////////////////////////////////////////////////
+				////////////////////////////////////////////////////////////////
+				////////////////////////////////////////////////////////////////
 
+				/**
+				 * Undo current session.
+				 * Since the auditoriums are represented as an std::list
+				 * during the program,
+				 * reloading the files is enough to undo any changes to
+				 * the std::list.
+				 */
 				case 5: {
+					bool is_user_sure = false;
+
+					is_user_sure = yes_or_no_prompt(
+							"Are you sure you want to undo the current session? [y/n]"
+					);
+
+					if ( is_user_sure ) {
+						std::cout << "Okay! The auditoriums will be reloaded,\n"
+								  << "thereby undoing the current session."
+								  << std::endl;
+
+
+						// These are the same files from the start of the program.
+						// I am assuming that if they were successfully opened
+						// at the start of the program, they will not throw
+						// an error here.
+						file_1 = std::fstream( "A1.txt", std::ios::in );
+						file_2 = std::fstream( "A2.txt", std::ios::in );
+						file_3 = std::fstream( "A3.txt", std::ios::in );
+
+						auditorium_1.load_from_file(file_1);
+						auditorium_2.load_from_file(file_2);
+						auditorium_3.load_from_file(file_3);
+
+					    file_1.close();
+					    file_2.close();
+					    file_3.close();
+					} else {
+						std::cout << "Okay! Returning to the main menu instead." << std::endl;
+					}
+
+					std::cout << "The current session has been undone." << std::endl;
 
 					break;
 				}
+				////////////////////////////////////////////////////////////////
+				////////////////////////////////////////////////////////////////
+				////////////////////////////////////////////////////////////////
 
+				/**
+				 * Reset auditoriums
+				 */
 				case 6: {
 					bool is_user_sure = false;
 
@@ -541,14 +623,25 @@ namespace whowell {
 						std::cout << "Okay! Returning to the main menu instead." << std::endl;
 					}
 
+					std::cout << "The auditoriums have been reset." << std::endl;
+
 					break;
 				}
+				////////////////////////////////////////////////////////////////
+				////////////////////////////////////////////////////////////////
+				////////////////////////////////////////////////////////////////
 
+				/**
+				 * Return to main menu
+				 */
 				case 7: {
 					// Pass
 					// There is no need to do anything here.
 					break;
 				}
+				////////////////////////////////////////////////////////////////
+				////////////////////////////////////////////////////////////////
+				////////////////////////////////////////////////////////////////
 
 				default: {
 					std::cerr << "This should be unreachable!\n"

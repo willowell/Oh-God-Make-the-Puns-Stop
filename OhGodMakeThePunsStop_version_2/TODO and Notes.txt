@@ -1,7 +1,8 @@
-//TODO: Save sales report to file sales_report.txt
-//TODO: Save special seating requests to requests.txt
-//TODO: Implement resetting auditoriums to be empty.
-//TODO: Implement backing up auditorium files.
+//TODO: Save sales report to file sales_report.txt			[DONE]
+//TODO: Save special seating requests to requests.txt       [DONE]
+//TODO: Implement resetting auditoriums to be empty.        [DONE]
+//TODO: Implement backing up auditorium files.              [DONE]
+//TODO: Implement printing sales_report.txt to cout         [DONE]
 
 //TODO: Refactor code: examine code and exchange global variables for local variables where possible.
 //TODO: Examine switch-case statements and determine if it is possible to refactor them into a separate function.

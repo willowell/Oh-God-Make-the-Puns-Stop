@@ -87,7 +87,7 @@ int main() {
     file_2.close();
     file_3.close();
 
-    if (is_debug) {
+    if ( is_debug ) {
     	auditorium_1.display();
     	auditorium_1.display_list();
 
