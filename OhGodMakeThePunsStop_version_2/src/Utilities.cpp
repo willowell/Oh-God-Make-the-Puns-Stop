@@ -199,7 +199,7 @@ namespace whowell {
 	void log_reservation_request() {
 		std::string request;
 		request = std::string("User request: ") + std::to_string(user_selected_tickets)
-				+ std::string(" tickets.\n");
+				+ std::string(" tickets.");
 
 		user_logged_requests.push_back( request );
 	}
@@ -474,11 +474,11 @@ namespace whowell {
 
 					std::cout << "Viewing special seating requests..." << std::endl;
 
-					std::ifstream in_file("sales_report.txt");
-					if (in_file.is_open()) {
+					std::ifstream in_file( "requests.txt" );
+					if ( in_file.is_open() ) {
 					    std::string line;
-					    while (std::getline(in_file, line)) {
-					    	std::cout << line;
+					    while ( std::getline( in_file, line ) ) {
+					    	std::cout << line << std::endl;
 					    }
 					    in_file.close();
 					}
