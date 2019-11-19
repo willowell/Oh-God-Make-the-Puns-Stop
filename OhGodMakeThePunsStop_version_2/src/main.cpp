@@ -158,6 +158,14 @@ int main() {
 				// sales report won't reflect the auditoriums' current state.
 				calculate_theatre_values();
 
+				// In the event that the user had made any special requests
+				// this session, save them here before displaying
+				// the advanced options menu. An administrator can view
+				// special requests in this menu. Like the theatre values,
+				// this is to make sure the special requests menu reflects
+				// the current state of the auditoriums.
+				save_reservation_requests_to_file();
+
 				handle_advanced_options_menu();
 
 				return_to_main_menu();

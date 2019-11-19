@@ -62,6 +62,8 @@ namespace whowell {
 
 	void calculate_theatre_values();
 
+	void log_reservation_request();
+
 	void save_reservation_requests_to_file();
 
 	////////////////////////////////////////////////////////////////////////////

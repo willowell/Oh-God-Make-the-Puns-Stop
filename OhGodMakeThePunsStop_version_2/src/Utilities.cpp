@@ -221,6 +221,9 @@ namespace whowell {
 		}
 
 		out_file.close();
+
+		// Clear the vector.
+		user_logged_requests.clear();
 	}
 
 	////////////////////////////////////////////////////////////////////////////
@@ -334,7 +337,7 @@ namespace whowell {
 
 		user_wants_manual_reservation = yes_or_no_prompt(
 				"Would you like to manually reserve the seats? [y/n]\n"
-				"Otherwise, the program will automatically find available seats for you.\n"
+				"Otherwise, the program will ask if you want to log your request.\n"
 		);
 
 		short int loop_limit = user_selected_tickets;
@@ -413,64 +416,28 @@ namespace whowell {
 				std::cout << e.what() << std::endl;
 			}
 
-		// Automatic Reservation
-		//TODO: replace perform_automatic_reservation() -- it is unimplemented!
-		// maybe just default to logging the request?
+		// Special Request Logging
 		} else {
-			std::cout << "The program will use the number of tickets you want to purchase "
-					  << "to find as many consecutive seats free in an auditorium.\n"
-					  << "If the program cannot find the number of seats you want, "
-					  << "the program will ask you if you want to log your request\n"
-					  << "so that a manager can view your request and take care of it."
-					  << std::endl;
+			user_wants_to_log_request = yes_or_no_prompt(
+					"The program could not find the seats that you wanted.\n"
+					"Would you like to log your request so that a manager\n"
+					"can view your request and take care of it? [y/n]\n"
+			);
 
-			try {
-				switch ( user_short ) {
-					case 1: {
-						auditorium_1.perform_automatic_reservation( user_selected_tickets );
-						break;
-					}
-					case 2: {
-						auditorium_2.perform_automatic_reservation( user_selected_tickets );
-						break;
-					}
-					case 3: {
-						auditorium_3.perform_automatic_reservation( user_selected_tickets );
-						break;
-					}
-					default: {
-						std::cerr << "This should be unreachable!\n"
-								  << "(short int) user_short is " << user_short
-								  << std::endl;
-						break;
-					}
-				}
+			pause_thread( pause_time_ms );
 
-			} catch ( UnableToReserveASeatException& e ) {
+			if ( user_wants_to_log_request ) {
+				std::cout << "Okay! The program will save your request.\n"
+						  << std::endl;
+				log_reservation_request();
 
-				user_wants_to_log_request = yes_or_no_prompt(
-						"The program could not find the seats that you wanted.\n"
-						"Would you like to log your request so that a manager\n"
-						"can view your request and take care of it? [y/n]\n"
-				);
-
-				pause_thread( pause_time_ms );
-
-				if ( user_wants_to_log_request ) {
-					std::cout << "Okay! The program will save your request.\n"
-							  << std::endl;
-					log_reservation_request();
-
-				} else {
-					std::cout << "Okay! Your request will not be saved." << std::endl;
-				}
+			} else {
+				std::cout << "Okay! Your request will not be saved." << std::endl;
 			}
 		}
 		// Reset the vectors.
 		user_selected_rows.clear();
 		user_selected_seats.clear();
-
-		return_to_main_menu();
 	}
 
 	void handle_advanced_options_menu() {
@@ -620,12 +587,12 @@ namespace whowell {
 			file_2.close();
 			file_3.close();
 
+			save_reservation_requests_to_file();
+
 			std::cout << "The data has been saved to the files." << std::endl;
 
 		} else {
 			return_to_main_menu();
 		}
 	}
-
-
 } /* namespace whowell */
