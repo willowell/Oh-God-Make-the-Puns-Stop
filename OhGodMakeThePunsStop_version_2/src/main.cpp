@@ -70,17 +70,17 @@ int main() {
 		return EXIT_FAILURE;
 	}
 
-	auditorium_1.set_auditorium_id(1);
-	auditorium_2.set_auditorium_id(2);
-	auditorium_3.set_auditorium_id(3);
+	auditorium_1.set_auditorium_id( 1 );
+	auditorium_2.set_auditorium_id( 2 );
+	auditorium_3.set_auditorium_id( 3 );
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ///LOAD PHASE
 
-	auditorium_1.load_from_file(file_1);
-	auditorium_2.load_from_file(file_2);
-	auditorium_3.load_from_file(file_3);
+	auditorium_1.load_from_file( file_1 );
+	auditorium_2.load_from_file( file_2 );
+	auditorium_3.load_from_file( file_3 );
 
     //Close the input files - they aren't needed until the end of the program.
     file_1.close();
@@ -200,7 +200,7 @@ int main() {
 
     	// Wait a little bit before returning to the main menu or exiting.
     	pause_thread( pause_time_ms );
-    } while (!user_wants_to_quit);
+    } while ( !user_wants_to_quit );
 
     std::cout << "Exiting." << std::endl;
 

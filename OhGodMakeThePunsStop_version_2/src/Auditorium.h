@@ -29,7 +29,7 @@ class Auditorium {
 
 		Auditorium( int auditorium_id );
 
-		Auditorium( int auditorium_id, int num_seats, int num_rows);
+		Auditorium( int auditorium_id, int num_seats, int num_rows );
 
 		virtual ~Auditorium();
 

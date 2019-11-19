@@ -22,27 +22,27 @@
 namespace whowell {
 
 Auditorium :: Auditorium():
-	auditorium_id(0),
-	num_seats(0),
-	num_rows(0),
-	total_seats(0),
-	num_seats_open(0),
-	num_seats_reserved(0)
+	auditorium_id(      0 ),
+	num_seats(          0 ),
+	num_rows(           0 ),
+	total_seats(        0 ),
+	num_seats_open(     0 ),
+	num_seats_reserved( 0 )
 {}
 
-Auditorium :: Auditorium(int auditorium_id):
-	auditorium_id( auditorium_id ),
-	num_seats(0),
-	num_rows(0),
-	total_seats(0),
-	num_seats_open(0),
-	num_seats_reserved(0)
+Auditorium :: Auditorium( int auditorium_id ):
+	auditorium_id(      auditorium_id ),
+	num_seats(          0 ),
+	num_rows(           0 ),
+	total_seats(        0 ),
+	num_seats_open(     0 ),
+	num_seats_reserved( 0 )
 {}
 
-Auditorium :: Auditorium( int auditorium_id, int num_seats, int num_rows):
+Auditorium :: Auditorium( int auditorium_id, int num_seats, int num_rows ):
 	auditorium_id( auditorium_id ),
-	num_seats( num_seats ),
-	num_rows( num_rows ) {
+	num_seats(     num_seats     ),
+	num_rows(      num_rows      ) {
 
 	total_seats = this->num_seats * this->num_rows;
 
@@ -379,7 +379,7 @@ void Auditorium :: display_grid() {
 	// First two spaces for the top left corner
 	std::cout << "  ";
 	// Use num_seats to print the top line of numbers
-	for (short int i = 0; i < num_seats; ++i) {
+	for ( short int i = 0; i < num_seats; ++i ) {
 		std::cout << i;
 	}
 	std::cout << std::endl;

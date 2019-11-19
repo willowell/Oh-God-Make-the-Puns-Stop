@@ -31,7 +31,7 @@ namespace whowell {
 		std::string::size_type sz = 0;
 		short int user_short = 0;
 
-		while (true) {
+		while ( true ) {
 			try {
 				std::cin >> buffer;
 
@@ -68,7 +68,7 @@ namespace whowell {
 		std::string::size_type sz = 0;
 		short int user_short = 0;
 
-		while (true) {
+		while ( true ) {
 			try {
 				std::cin >> buffer;
 
@@ -101,7 +101,7 @@ namespace whowell {
 		return user_short;
 	}
 
-	char validate_string_as_character(std::string buffer, char upper_case_character) {
+	char validate_string_as_character( std::string buffer, char upper_case_character ) {
 		char user_char = '\n';
 
 		while (true) {
@@ -115,7 +115,7 @@ namespace whowell {
 
 				//Now, convert the string to an integer, store it in userShort
 				//Then, check that the value is within the expected range
-				user_char = buffer.at(0);
+				user_char = buffer.at( 0 );
 
 				if ( toupper( user_char ) == upper_case_character ) {
 					break;
@@ -157,7 +157,7 @@ namespace whowell {
 
 	bool check_password( std::string attempt, std::string key ) {
 
-		if (key.compare(attempt) == 0) {
+		if ( key.compare( attempt ) == 0 ) {
 			return true;
 		} else {
 			return false;
@@ -198,8 +198,8 @@ namespace whowell {
 
 	void log_reservation_request() {
 		std::string request;
-		request = std::string("User request: ") + std::to_string(user_selected_tickets)
-				+ std::string(" tickets.");
+		request = std::string( "User request: " ) + std::to_string( user_selected_tickets )
+				+ std::string( " tickets." );
 
 		user_logged_requests.push_back( request );
 	}
@@ -211,7 +211,7 @@ namespace whowell {
 
 		std::ofstream out_file( "requests.txt", std::ios::app );
 
-		if (out_file.fail()) {
+		if ( out_file.fail() ) {
 		    std::cout << "Couldn't open the file!" << std::endl;
 		    return;
 		}
@@ -310,14 +310,17 @@ namespace whowell {
 				auditorium_1.display_grid();
 				break;
 			}
+
 			case 2: {
 				auditorium_2.display_grid();
 				break;
 			}
+
 			case 3: {
 				auditorium_3.display_grid();
 				break;
 			}
+
 			default: {
 				std::cerr << "This should be unreachable!\n"
 						  << "(short int) user_short is " << user_short
@@ -351,7 +354,7 @@ namespace whowell {
 		if ( user_wants_manual_reservation ) {
 			// The vectors are now big enough to store the user's desired seats.
 			// Request values for the seat positions.
-			for (short int k = 0; k < loop_limit; k++) {
+			for ( short int k = 0; k < loop_limit; k++ ) {
 				std::cout << "Please enter the row number for the "
 						  << boost::format("%1% seat that you want to purchase.")
 						  % ( k + 1 )
@@ -471,7 +474,6 @@ namespace whowell {
 				 * View special seating requests
 				 */
 				case 1: {
-
 					std::cout << "Viewing special seating requests..." << std::endl;
 
 					std::ifstream in_file( "requests.txt" );
@@ -495,7 +497,6 @@ namespace whowell {
 				 * View sales report
 				 */
 				case 2: {
-
 					theatre.view_sales_report();
 
 					break;
@@ -508,7 +509,6 @@ namespace whowell {
 				 * Print sales report
 				 */
 				case 3: {
-
 					std::cout << "Printing sales report to file 'sales_report.txt'" << std::endl;
 
 					file_1.open( "sales_report.txt", std::ios::out | std::ios::trunc );
@@ -581,9 +581,9 @@ namespace whowell {
 						file_2 = std::fstream( "A2.txt", std::ios::in );
 						file_3 = std::fstream( "A3.txt", std::ios::in );
 
-						auditorium_1.load_from_file(file_1);
-						auditorium_2.load_from_file(file_2);
-						auditorium_3.load_from_file(file_3);
+						auditorium_1.load_from_file( file_1 );
+						auditorium_2.load_from_file( file_2 );
+						auditorium_3.load_from_file( file_3 );
 
 					    file_1.close();
 					    file_2.close();
@@ -661,7 +661,7 @@ namespace whowell {
 			"Are you sure you want to quit? [y/n]\nChanges to the data will be saved."
 		);
 
-		if (user_wants_to_quit) {
+		if ( user_wants_to_quit ) {
 			// Wait a little bit after accepting user input to show the next text.
 			pause_thread( pause_time_ms );
 

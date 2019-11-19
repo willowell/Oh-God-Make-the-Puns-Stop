@@ -12,12 +12,12 @@
 namespace whowell {
 
 Theatre :: Theatre():
-		total_seats(0),
-		total_seats_open(0),
-		total_seats_reserved(0),
-		total_sales(0),
-		user_seats(0),
-		user_sale(0)
+		total_seats(          0 ),
+		total_seats_open(     0 ),
+		total_seats_reserved( 0 ),
+		total_sales(          0 ),
+		user_seats(           0 ),
+		user_sale(            0 )
 {}
 
 Theatre :: ~Theatre() {}

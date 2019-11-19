@@ -12,15 +12,15 @@
 namespace whowell {
 
 Seat :: Seat():
-	row(0),
-	column(0),
-	is_reserved(false)
+	row(         0 ),
+	column(      0 ),
+	is_reserved( false )
 {}
 
 Seat :: Seat( int row_num, int column_num, bool seat_state ):
-	row(row_num),
-	column(column_num),
-	is_reserved(seat_state)
+	row(         row_num    ),
+	column(      column_num ),
+	is_reserved( seat_state )
 {}
 
 Seat :: ~Seat() {}
@@ -38,7 +38,7 @@ void Seat :: display() const {
 	std::cout << "Seat Info:"
 			  << '\t' << "Row: "      << row
 			  << '\t' << "Column: "   << column
-			  << '\t' << "Reserved? " << (is_reserved ? "yes" : "no")
+			  << '\t' << "Reserved? " << ( is_reserved ? "yes" : "no" )
 			  << std::endl;
 }
 

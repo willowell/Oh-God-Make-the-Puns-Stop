@@ -33,7 +33,9 @@ class Seat {
 		// Do not worry about whether or not the seat is reserved when comparing seats.
 		// The seat's position is enough to tell it apart from another seat.
 		bool operator ==( const Seat &seat ) const {
-			return ((get_row() == seat.get_row()) && (get_column() == seat.get_column()));
+			return ( ( get_row() == seat.get_row() ) &&
+					 ( get_column() == seat.get_column() )
+			       );
 		}
 };
 
