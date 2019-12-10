@@ -8,3 +8,35 @@
 //TODO: Examine switch-case statements and determine if it is possible to refactor them into a separate function. [DONE]
 
 //TODO: Add documentation.
+
+Notes:
+	2019 Dec 10
+	I have considered some ways to approach exchanging global variables for local variables, and I have made
+	a few observations:
+		• Files that hold global state or external state, such as the files, the auditoriums, and the single Theatre
+		  object, cannot be exchanged for local variables without passing each into most of the functions in Utilities as
+		  a const ref, which means the functions are now more complicated.
+		• Creating an auditorium array may help with the functions where I'm doing the same function over and over again.
+			-> This could simplify the switch statements from earlier.
+			   However, then I would have to deal with the overhead of keeping track of how many auditoriums there are.
+			   Right now, there are only three, and I am idealizing an indie movie theatre which has only three auditoriums.
+			   So, it wouldn't make much sense to make it easier to add more.
+			-> This would not simplify saving data to the Theatre object.
+				
+				theatre.set_total_seats(
+					auditorium_1.get_total_seats() +
+					auditorium_2.get_total_seats() +
+					auditorium_3.get_total_seats()
+				);
+				
+				This is simpler than using a for-loop for now, and does not incur the overhead of a for-loop or foreach (iterator) loop.
+				
+		• The variables under User Input are the best candidates for localization. However, variables
+		  that are local to the main program loop, such as user_wants_to_quit, have the same problem:
+		  factoring them out means they will have to be passed in by-ref to the function instead.
+		  
+		• It will be more obvious that the function is operating on global data, but my intention here
+		  is that these functions represent phases of the main program loop, rather than independent functions.
+		  So, while these functions are operating on global data, I have no intention of these functions ever being reusable
+		  because they are particular to the lifecycle of this program, much like how GameObjects work with Unity3D's main update loop.
+		  
