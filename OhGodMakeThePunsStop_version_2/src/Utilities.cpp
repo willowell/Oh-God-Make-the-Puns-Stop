@@ -172,6 +172,32 @@ namespace whowell {
 		std::this_thread::sleep_for( std::chrono::milliseconds( for_milliseconds ) );
 	}
 
+	void display_auditoriums_on_switch( int on_switch ) {
+		switch ( on_switch ) {
+			case 1: {
+				auditorium_1.display_grid();
+				break;
+			}
+
+			case 2: {
+				auditorium_2.display_grid();
+				break;
+			}
+
+			case 3: {
+				auditorium_3.display_grid();
+				break;
+			}
+
+			default: {
+				std::cerr << "This should be unreachable!\n"
+						  << "(short int) user_short is " << user_short
+						  << std::endl;
+				break;
+			}
+		}
+	}
+
 	void calculate_theatre_values() {
 			theatre.set_total_seats(
 					auditorium_1.get_total_seats() +
@@ -266,29 +292,7 @@ namespace whowell {
 		// Wait a little bit after accepting user input to show an auditorium.
 		pause_thread( pause_time_ms );
 
-		switch ( user_short ) {
-			case 1: {
-				auditorium_1.display_grid();
-				break;
-			}
-
-			case 2: {
-				auditorium_2.display_grid();
-				break;
-			}
-
-			case 3: {
-				auditorium_3.display_grid();
-				break;
-			}
-
-			default: {
-				std::cerr << "This should be unreachable!\n"
-						  << "(short int) user_short is " << user_short
-						  << std::endl;
-				break;
-			}
-		}
+		display_auditoriums_on_switch( user_short );
 	}
 
 	void handle_reservation_menu() {
@@ -305,29 +309,8 @@ namespace whowell {
 		// Wait a little bit after accepting user input to show an auditorium.
 		pause_thread( pause_time_ms );
 
-		switch ( user_short ) {
-			case 1: {
-				auditorium_1.display_grid();
-				break;
-			}
+		display_auditoriums_on_switch( user_short );
 
-			case 2: {
-				auditorium_2.display_grid();
-				break;
-			}
-
-			case 3: {
-				auditorium_3.display_grid();
-				break;
-			}
-
-			default: {
-				std::cerr << "This should be unreachable!\n"
-						  << "(short int) user_short is " << user_short
-						  << std::endl;
-				break;
-			}
-		}
 		std::cout << std::endl;
 
 		std::cout << "Please enter the number of tickets you wish to purchase."
