@@ -9,6 +9,59 @@
 
 //TODO: Add documentation.
 
+!!! Bug
+//TODO: Entering only one digit where two are possible causes the program to bug out:
+
+    Please enter the number of tickets you wish to purchase.
+    1
+    Please enter only one double digit number!
+    01
+    Would you like to manually reserve the seats? [y/n]
+    Otherwise, the program will ask if you want to log your request.
+
+    y
+    Please enter the row number for the 1 seat that you want to purchase.
+    9
+    Please enter only one double digit number!
+    09
+    Please enter the seat number for the 1 seat that you want to purchase.
+    09
+    Unable to reserve seat.
+
+    Returning to the main menu.
+
+    The source of this bug is therefore in:
+
+    short int validate_string_as_double_digit_integer_in_range( std::string buffer, short int min, short int max ) {}
+
+    The function needs to be modified to allow one digit as well as two.
+
+2019 Dec 13: Fixed by changing the buffer length check.
+
+
+!!! Bug
+//TODO: Auditorium display does not reflect changes to the state of the seats.
+    Steps: Reserve a seat
+    Re-display the auditorium in which the seat was reserved.
+
+    Resetting the auditorium works fine; the display reflects it accordingly.
+    So, the problem is probably in how I am reserving seats.
+
+    Additionally, there seems to be an offset problem: (x, y) = (9, 9) becomes (9, 8).
+    Likewise, (x, y) = (1, 1) becomes (1, 0).
+
+    So, something about how I am using row_num (y) is not working.
+
+    The problem is in Auditorium::load_from_file in Auditorium.cpp:
+
+        i++;
+        num_rows = i;
+
+    i++; here causes the first row to be 1 rather than 0.
+
+    That fixed the problem :-)
+
+
 Notes:
 	2019 Dec 10
 	I have considered some ways to approach exchanging global variables for local variables, and I have made

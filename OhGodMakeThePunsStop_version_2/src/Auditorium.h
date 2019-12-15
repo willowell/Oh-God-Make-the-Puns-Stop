@@ -52,8 +52,8 @@ class Auditorium {
 		Seat* search_for_seat(         short int row_num, short int seat_num );
 		bool is_seat_already_reserved( short int row_num, short int seat_num );
 
-		void reserve_seat(                  short int row_num, short int seat_num ) throw( UnableToReserveASeatException );
-		void reserve_seat_without_input(    short int row_num, short int seat_num ) throw( UnableToReserveASeatException );
+		void reserve_seat(                  short int row_num, short int seat_num );
+		void reserve_seat_without_input(    short int row_num, short int seat_num );
 		void perform_automatic_reservation( short int num_of_tickets  );
 
 		void reset();

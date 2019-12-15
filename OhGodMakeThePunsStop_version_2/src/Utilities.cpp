@@ -72,15 +72,23 @@ namespace whowell {
 			try {
 				std::cin >> buffer;
 
-				if ( buffer.length() != 2 ) {
+				// Check against the buffer being empty or the buffer containing more than 2 characters
+				if ( buffer.length() > 2 ) {
 					std::cout << "Please enter only one double digit number!" << std::endl;
 					continue;
 				}
 
-				if ( !isdigit( buffer.at( 0 ) ) || !isdigit( buffer.at( 1 ) ) ) {
-					std::cout << "Please enter only a number!" << std::endl;
-					continue;
-				}
+				if ( buffer.length() == 1 ) {
+				    if ( !isdigit( buffer.at( 0 ) ) ) {
+				        std::cout << "Please enter only a number!" << std::endl;
+				        continue;
+				    }
+				} else if ( buffer.length() == 2 ) {
+                    if (!isdigit(buffer.at(0)) || !isdigit(buffer.at(1))) {
+                        std::cout << "Please enter only a number!" << std::endl;
+                        continue;
+                    }
+                }
 
 				//Now, convert the string to an integer, store it in userShort
 				//Then, check that the value is within the expected range
@@ -235,7 +243,7 @@ namespace whowell {
 			return;
 		}
 
-		std::ofstream out_file( "requests.txt", std::ios::app );
+		std::ofstream out_file( "assets/requests.txt", std::ios::app );
 
 		if ( out_file.fail() ) {
 		    std::cout << "Couldn't open the file!" << std::endl;
@@ -351,7 +359,11 @@ namespace whowell {
 				user_selected_seats[ k ] = validate_string_as_double_digit_integer_in_range( buffer, 1, 100 );
 			}
 
-			// The vectors shoul now hold all the seats that the user wants.
+			for ( short int k = 0; k < loop_limit; k++ ) {
+			    std::cerr << "(seat, row) (x, y) = (" << user_selected_seats[ k ] << ", " << user_selected_rows[ k ] << "). " << std::endl;
+			}
+
+			// The vectors should now hold all the seats that the user wants.
 			// Check the availability of the seats.
 			try {
 				switch ( user_short ) {
@@ -459,14 +471,14 @@ namespace whowell {
 				case 1: {
 					std::cout << "Viewing special seating requests..." << std::endl;
 
-					std::ifstream in_file( "requests.txt" );
+					std::ifstream in_file( "assets/requests.txt" );
 					if ( in_file.is_open() ) {
 					    std::string line;
 					    while ( std::getline( in_file, line ) ) {
 					    	std::cout << line << std::endl;
 					    }
-					    in_file.close();
 					}
+                    in_file.close();
 
 					std::cout << '\n' << std::endl;
 
@@ -494,7 +506,7 @@ namespace whowell {
 				case 3: {
 					std::cout << "Printing sales report to file 'sales_report.txt'" << std::endl;
 
-					file_1.open( "sales_report.txt", std::ios::out | std::ios::trunc );
+					file_1.open( "assets/sales_report.txt", std::ios::out | std::ios::trunc );
 
 					theatre.save_sales_report( file_1 );
 
@@ -516,9 +528,9 @@ namespace whowell {
 							  << "Warning: current backups will be overwritten!"
 							  << std::endl;
 
-					file_1.open( "A1_backup.txt", std::ios::out | std::ios::trunc );
-					file_2.open( "A2_backup.txt", std::ios::out | std::ios::trunc );
-					file_3.open( "A3_backup.txt", std::ios::out | std::ios::trunc );
+					file_1.open( "assets/A1_backup.txt", std::ios::out | std::ios::trunc );
+					file_2.open( "assets/A2_backup.txt", std::ios::out | std::ios::trunc );
+					file_3.open( "assets/A3_backup.txt", std::ios::out | std::ios::trunc );
 
 					auditorium_1.write_to_file( file_1 );
 					auditorium_2.write_to_file( file_2 );
@@ -560,9 +572,9 @@ namespace whowell {
 						// I am assuming that if they were successfully opened
 						// at the start of the program, they will not throw
 						// an error here.
-						file_1 = std::fstream( "A1.txt", std::ios::in );
-						file_2 = std::fstream( "A2.txt", std::ios::in );
-						file_3 = std::fstream( "A3.txt", std::ios::in );
+						file_1 = std::fstream( "assets/A1.txt", std::ios::in );
+						file_2 = std::fstream( "assets/A2.txt", std::ios::in );
+						file_3 = std::fstream( "assets/A3.txt", std::ios::in );
 
 						auditorium_1.load_from_file( file_1 );
 						auditorium_2.load_from_file( file_2 );
@@ -651,9 +663,9 @@ namespace whowell {
 			std::cout << "Quitting the program.\n"
 					  << "Please wait while the data is saved." << std::endl;
 
-			file_1.open( "A1.txt", std::ios::out | std::ios::trunc );
-			file_2.open( "A2.txt", std::ios::out | std::ios::trunc );
-			file_3.open( "A3.txt", std::ios::out | std::ios::trunc );
+			file_1.open( "assets/A1.txt", std::ios::out | std::ios::trunc );
+			file_2.open( "assets/A2.txt", std::ios::out | std::ios::trunc );
+			file_3.open( "assets/A3.txt", std::ios::out | std::ios::trunc );
 
 			auditorium_1.write_to_file( file_1 );
 			auditorium_2.write_to_file( file_2 );

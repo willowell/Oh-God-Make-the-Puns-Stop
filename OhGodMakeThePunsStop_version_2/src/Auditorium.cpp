@@ -91,9 +91,6 @@ void Auditorium :: load_from_file( std::fstream& from_file ) {
 					num_seats = input_line.length();
 				}
 
-				i++;
-				num_rows = i;
-
 				/* Examine the individual row. */
 				for ( short j = 0; j < num_seats; ++j ) {
 					if ( input_line.at( j ) == '*' ) { //RESERVED SEAT
@@ -106,6 +103,15 @@ void Auditorium :: load_from_file( std::fstream& from_file ) {
 						open_seats++;
 					}
 				}
+
+				// Incrementing i here means that the first row is zero, like so:
+				// Seat Info:	Row: 0	Column: 0	Reserved? no
+				// Seat Info:	Row: 0	Column: 1	Reserved? no
+				// ...
+				// Seat Info:	Row: 0	Column: 9	Reserved? no
+                // Seat Info:	Row: 1	Column: 0	Reserved? no
+                i++;
+                num_rows = i;
 			} //end while (!file->eof())
 
 			num_seats_reserved = res_seats;
@@ -207,7 +213,7 @@ bool Auditorium :: is_seat_already_reserved( short int row_num, short int seat_n
 
 	}
 
-void Auditorium :: reserve_seat( short int row_num, short int seat_num ) throw ( UnableToReserveASeatException ) {
+void Auditorium :: reserve_seat( short int row_num, short int seat_num ) {
 	std::string buffer;
 	bool user_wants_to_reserve_seat = false;
 
@@ -230,12 +236,20 @@ void Auditorium :: reserve_seat( short int row_num, short int seat_num ) throw (
 	}
 }
 
-void Auditorium :: reserve_seat_without_input( short int row_num, short int seat_num ) throw ( UnableToReserveASeatException ) {
+void Auditorium :: reserve_seat_without_input( short int row_num, short int seat_num ) {
 	if ( is_seat_already_reserved( row_num, seat_num ) ) {
 		throw UnableToReserveASeatException();
 	} else {
-		search_for_seat( row_num, seat_num )->set_reserved( true );
-		num_seats_reserved++;
+	    // Find the seat.
+		Seat* seat = search_for_seat( row_num, seat_num );
+		// Use the pointer to mutate the seat object in the list.
+		seat->set_reserved( true );
+		// Nullify the pointer, just to be safe.
+		// This is not necessary since the seat pointer exists on the stack,
+		// and the data it is aliasing is in an std::vector.
+		std::cerr << "Seat state: " << seat->is_seat_reserved() << std::endl;
+		seat = nullptr;
+        num_seats_reserved++;
 		num_seats_open--;
 	}
 }

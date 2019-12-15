@@ -26,7 +26,7 @@
 
 namespace whowell {
 
-	bool is_debug = false;
+	bool is_debug = true;
 
 	std::fstream      file_1;
 	std::fstream      file_2;
@@ -62,9 +62,9 @@ int main() {
     ///INIT PHASE
 
 	try {
-		file_1 = std::fstream( "A1.txt", std::ios::in );
-		file_2 = std::fstream( "A2.txt", std::ios::in );
-		file_3 = std::fstream( "A3.txt", std::ios::in );
+		file_1 = std::fstream( "assets/A1.txt", std::ios::in );
+		file_2 = std::fstream( "assets/A2.txt", std::ios::in );
+		file_3 = std::fstream( "assets/A3.txt", std::ios::in );
 	} catch (...) {
 		std::cerr << "Something went wrong with the files!" << std::endl;
 		return EXIT_FAILURE;
