@@ -12,7 +12,7 @@
 #include <list>
 #include <string>
 
-#include <boost/format.hpp>
+#include <fmt/core.h>
 
 #include "Auditorium.h"
 #include "Exceptions.h"
@@ -225,13 +225,13 @@ void Auditorium :: reserve_seat( short int row_num, short int seat_num ) {
 		);
 
 		if ( user_wants_to_reserve_seat ) {
-			std::cout << "Reserving the seat..." << std::endl;
+			fmt::print(stdout, "Reserving the seat...\n");
 			search_for_seat( row_num, seat_num )->set_reserved( true );
-			std::cout << "The seat is now reserved!" << std::endl;
+			fmt::print(stdout, "The seat is now reserved!\n");
 			num_seats_reserved++;
 			num_seats_open--;
 		} else {
-			std::cout << "The seat will not be reserved." << std::endl;
+			fmt::print(stdout, "The seat will not be reserved.\n");
 		}
 	}
 }
@@ -247,7 +247,7 @@ void Auditorium :: reserve_seat_without_input( short int row_num, short int seat
 		// Nullify the pointer, just to be safe.
 		// This is not necessary since the seat pointer exists on the stack,
 		// and the data it is aliasing is in an std::vector.
-		std::cerr << "Seat state: " << seat->is_seat_reserved() << std::endl;
+		fmt::print(stderr, "Seat state: {}\n", seat->is_seat_reserved());
 		seat = nullptr;
         num_seats_reserved++;
 		num_seats_open--;
@@ -320,7 +320,7 @@ void Auditorium :: perform_automatic_reservation( short int num_of_tickets ) {
 void Auditorium :: reset() {
 	// As a predicate, the list must not be empty.
 	if ( seat_list.empty() ) {
-		std::cerr << "List is empty!" << std::endl;
+		fmt::print(stderr, "List is empty!\n");
 		return;
 	}
 
@@ -331,26 +331,24 @@ void Auditorium :: reset() {
 }
 
 void Auditorium :: display() const {
-	std::cout << "Auditorium Info:\n"
-			  << "\tID Number: " << auditorium_id << '\n'
-			  << "\tTotal Number of Seats: " << total_seats << '\n'
-			  << "\tNumber of Seats in Each Row: " << num_seats << '\n'
-			  << "\tNumber of Rows: " << num_rows << '\n'
-			  << "\tNumber of Seats Open: " << num_seats_open << '\n'
-			  << "\tNumber of Seats Reserved " << num_seats_reserved << '\n'
-			  << '\n' << std::endl;
+	fmt::print(stdout,
+			"Auditorium Info:\n\tID Number: {}\n\tTotal Number of Seats: {}\n"
+            "\tID Number: {}\n\tTotal Number of Seats: {}\n"
+	        "\tNumber of Seats in Each Row: {}\n\tNumber of Rows: {}\n"
+            "\tNumber of Seats Open: {}\n\tNumber of Seats Reserved {}\n\n"
+            , auditorium_id, total_seats, num_seats, num_rows, num_seats_open, num_seats_reserved);
 }
 
 void Auditorium :: display_list() const {
-	std::cout << "List contents:" << std::endl;
+	fmt::print(stdout, "List contents:\n");
 
 	if ( seat_list.empty() ) {
-		std::cerr << "List is empty!" << std::endl;
+		fmt::print(stderr, "List is empty!");
 	} else {
 		for ( auto const& seat : seat_list ) {
 			seat.display();
 		}
-		std::cout << "End of list." << std::endl;
+		fmt::print(stdout, "End of list.\n");
 	}
 }
 
@@ -361,7 +359,7 @@ void Auditorium :: display_grid() {
 
 	// As a predicate, the list must not be empty.
 	if ( seat_list.empty() ) {
-		std::cerr << "List is empty!" << std::endl;
+		fmt::print(stderr, "List is empty!");
 		return;
 	}
 
@@ -388,7 +386,7 @@ void Auditorium :: display_grid() {
 	//          .
 
 	// Print the auditorium's ID number
-	std::cout << "Auditorium ID: " << auditorium_id << std::endl;
+	fmt::print(stdout, "Auditorium ID: {}\n",  auditorium_id);
 
 	// First two spaces for the top left corner
 	std::cout << "  ";

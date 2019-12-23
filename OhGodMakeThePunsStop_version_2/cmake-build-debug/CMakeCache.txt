@@ -240,6 +240,9 @@ boost_headers_DIR:PATH=/usr/local/lib/cmake/boost_headers-1.71.0
 //The directory containing a CMake configuration file for boost_system.
 boost_system_DIR:PATH=/usr/local/lib/cmake/boost_system-1.71.0
 
+//The directory containing a CMake configuration file for fmt.
+fmt_DIR:PATH=/usr/local/lib/cmake/fmt
+
 
 ########################
 # INTERNAL cache entries

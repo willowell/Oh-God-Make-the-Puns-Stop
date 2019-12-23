@@ -1,19 +1,21 @@
 cmake_minimum_required(VERSION 3.15)
 project(OhGodMakeThePunsStop_version_2)
 
+message(STATUS "Starting CMake...")
+
 set(CMAKE_CXX_STANDARD 17)
 
-find_package(Boost 1.71.0 COMPONENTS system filesystem REQUIRED)
+find_package(fmt REQUIRED)
 
-if(Boost_FOUND)
+if(fmt_FOUND)
 
-    message(STATUS "Boost_INCLUDE_DIRS: ${Boost_INCLUDE_DIRS}")
-    message(STATUS "Boost_LIBRARIES: ${Boost_LIBRARIES}")
-    message(STATUS "Boost_VERSION: ${Boost_VERSION}")
+    message(STATUS "fmt_INCLUDE_DIRS: ${fmt_INCLUDE_DIRS}")
 
-    include_directories(${Boost_INCLUDE_DIRS})
+    include_directories(${fmt_INCLUDE_DIRS})
 
 endif()
+
+message(STATUS "Including source tree...")
 
 include_directories(src)
 
@@ -39,8 +41,10 @@ add_executable(OhGodMakeThePunsStop_version_2
         assets/sales_report.txt
         "TODO and Notes.txt")
 
-if(Boost_FOUND)
+if(fmt_FOUND)
 
-    target_link_libraries(OhGodMakeThePunsStop_version_2 ${Boost_LIBRARIES})
+    message(STATUS "Linking fmt...")
+
+    target_link_libraries(OhGodMakeThePunsStop_version_2 fmt::fmt)
 
 endif()
