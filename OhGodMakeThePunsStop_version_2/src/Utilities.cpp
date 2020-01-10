@@ -349,7 +349,7 @@ namespace Whowell {
 				fmt::print(stdout, "Please enter the row number for the {} seat that you want to purchase.\n", (k + 1));
 				user_selected_rows[k] = validate_string_as_double_digit_integer_in_range(buffer, 1, 100);
 				
-				fmt::print(stdout, "Please enter the seat number for the {} seat that you want to purchase.\n". (k + 1));
+				fmt::print(stdout, "Please enter the seat number for the {} seat that you want to purchase.\n", (k + 1));
 				user_selected_seats[k] = validate_string_as_double_digit_integer_in_range(buffer, 1, 100);
 			}
 			
