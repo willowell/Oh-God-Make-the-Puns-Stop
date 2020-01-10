@@ -16,8 +16,6 @@
 #include <thread>
 #include <vector>
 
-#include <boost/format.hpp>
-
 #include "Auditorium.h"
 #include "Seat.h"
 #include "Theatre.h"
