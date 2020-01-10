@@ -15,7 +15,7 @@
 #include <thread>
 #include <vector>
 
-#include <boost/format.hpp>
+#include <fmt/core.h>
 
 #include "Auditorium.h"
 #include "Seat.h"
@@ -346,16 +346,10 @@ namespace Whowell {
 			// The vectors are now big enough to store the user's desired seats.
 			// Request values for the seat positions.
 			for (short int k = 0; k < loop_limit; k++) {
-				std::cout << "Please enter the row number for the "
-						  << boost::format("%1% seat that you want to purchase.")
-							 % (k + 1)
-						  << std::endl;
+				fmt::print(stdout, "Please enter the row number for the {} seat that you want to purchase.\n", (k + 1));
 				user_selected_rows[k] = validate_string_as_double_digit_integer_in_range(buffer, 1, 100);
 				
-				std::cout << "Please enter the seat number for the "
-						  << boost::format("%1% seat that you want to purchase.")
-							 % (k + 1)
-						  << std::endl;
+				fmt::print(stdout, "Please enter the seat number for the {} seat that you want to purchase.\n". (k + 1));
 				user_selected_seats[k] = validate_string_as_double_digit_integer_in_range(buffer, 1, 100);
 			}
 			
