@@ -7,13 +7,13 @@ set(CMAKE_CXX_STANDARD 17)
 
 find_package(fmt REQUIRED)
 
-if(fmt_FOUND)
+if (fmt_FOUND)
 
     message(STATUS "fmt_INCLUDE_DIRS: ${fmt_INCLUDE_DIRS}")
 
     include_directories(${fmt_INCLUDE_DIRS})
 
-endif()
+endif ()
 
 message(STATUS "Including source tree...")
 
@@ -41,10 +41,10 @@ add_executable(OhGodMakeThePunsStop_version_2
         assets/sales_report.txt
         "TODO and Notes.txt")
 
-if(fmt_FOUND)
+if (fmt_FOUND)
 
     message(STATUS "Linking fmt...")
 
     target_link_libraries(OhGodMakeThePunsStop_version_2 fmt::fmt)
 
-endif()
+endif ()
