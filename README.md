@@ -4,5 +4,6 @@ Featuring {fmt}!
 
 I have included the original project for completeness, so that anyone viewing this repository can see the changes I have made from the original version.
 
-![Mirrored on GitLab](https://gitlab.com/willowell/Oh-God-Make-the-Puns-Stop-2)
+[Mirrored on GitLab](https://gitlab.com/willowell/Oh-God-Make-the-Puns-Stop-2)
+
 ![Gitlab pipeline status](https://img.shields.io/gitlab/pipeline/willowell/Oh-God-Make-the-Puns-Stop-2?label=GitLab%20CI%2FCD)
