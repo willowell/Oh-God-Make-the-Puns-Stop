@@ -5,8 +5,8 @@
  *      Author: Whowell
  */
 
-#ifndef SEAT_H_
-#define SEAT_H_
+#ifndef OHGODMAKETHEPUNSSTOP_VERSION_2_SEAT_H
+#define OHGODMAKETHEPUNSSTOP_VERSION_2_SEAT_H
 
 namespace Whowell {
 	
@@ -22,11 +22,11 @@ namespace Whowell {
 		
 		virtual ~Seat();
 		
-		int get_row() const;
+		[[nodiscard]] int get_row() const;
 		
-		int get_column() const;
+		[[nodiscard]] int get_column() const;
 		
-		bool is_seat_reserved() const;
+		[[nodiscard]] bool is_seat_reserved() const;
 		
 		void set_row(int row_num);
 		
@@ -47,4 +47,4 @@ namespace Whowell {
 	
 } /* namespace Whowell */
 
-#endif /* SEAT_H_ */
+#endif /*OHGODMAKETHEPUNSSTOP_VERSION_2_SEAT_H*/

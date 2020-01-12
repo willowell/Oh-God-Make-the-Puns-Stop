@@ -5,8 +5,8 @@
  *      Author: Whowell
  */
 
-#ifndef THEATRE_H_
-#define THEATRE_H_
+#ifndef OHGODMAKETHEPUNSSTOP_VERSION_2_THEATRE_H
+#define OHGODMAKETHEPUNSSTOP_VERSION_2_THEATRE_H
 
 #include <fstream>
 
@@ -46,4 +46,4 @@ namespace Whowell {
 	
 } /* namespace Whowell */
 
-#endif /* THEATRE_H_ */
+#endif /*OHGODMAKETHEPUNSSTOP_VERSION_2_THEATRE_H*/

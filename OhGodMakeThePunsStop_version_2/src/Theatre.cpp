@@ -19,7 +19,7 @@ namespace Whowell {
 			user_seats(0),
 			user_sale(0) { }
 	
-	Theatre::~Theatre() { }
+	Theatre::~Theatre() = default;
 	
 	void Theatre::set_total_seats(int seats) { total_seats = seats; }
 	

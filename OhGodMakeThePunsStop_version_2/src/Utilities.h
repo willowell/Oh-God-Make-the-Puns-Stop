@@ -5,8 +5,8 @@
  *      Author: Whowell
  */
 
-#ifndef UTILITIES_H_
-#define UTILITIES_H_
+#ifndef OHGODMAKETHEPUNSSTOP_VERSION_2_UTILITIES_H
+#define OHGODMAKETHEPUNSSTOP_VERSION_2_UTILITIES_H
 
 #include "Auditorium.h"
 #include "Exceptions.h"
@@ -51,7 +51,7 @@ namespace Whowell {
 	 *
 	 * This function works fine for checking if the user has given a whole number in the range [0, 9].
 	 */
-	short int validate_string_as_single_digit_integer_in_range(std::string buffer, short int min, short int max);
+	int validate_string_as_single_digit_integer_in_range(std::string buffer, short int min, short int max);
 	
 	/**
 	 * Validates user input as a double digit integer in a range [min, max].
@@ -60,7 +60,7 @@ namespace Whowell {
 	 *
 	 * This function works fine for checking if the user has given a whole number in the range [0, 99].
 	 */
-	short int validate_string_as_double_digit_integer_in_range(std::string buffer, short int min, short int max);
+	int validate_string_as_double_digit_integer_in_range(std::string buffer, short int min, short int max);
 	
 	/**
 	 * Validates user input as a single character regardless of character case.
@@ -76,12 +76,12 @@ namespace Whowell {
 	 *
 	 * Returns true if user entered 'y'; returns false otherwise.
 	 */
-	bool yes_or_no_prompt(std::string prompt);
+	bool yes_or_no_prompt(const std::string& prompt);
 	
 	/**
 	 * Simple wrapper around an if/else on string.compare().
 	 */
-	bool check_password(std::string attempt, std::string key);
+	bool check_password(const std::string& attempt, std::string answer);
 	
 	////////////////////////////////////////////////////////////////////////////
 	/// SUBROUTINES ////////////////////////////////////////////////////////////
@@ -162,4 +162,4 @@ namespace Whowell {
 	void handle_quit_menu();
 } /* namespace Whowell */
 
-#endif /* UTILITIES_H_ */
+#endif /*OHGODMAKETHEPUNSSTOP_VERSION_2_UTILITIES_H*/

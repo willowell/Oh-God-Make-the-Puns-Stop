@@ -5,8 +5,8 @@
  *      Author: Whowell
  */
 
-#ifndef EXCEPTIONS_H_
-#define EXCEPTIONS_H_
+#ifndef OHGODMAKETHEPUNSSTOP_VERSION_2_EXCEPTIONS_H
+#define OHGODMAKETHEPUNSSTOP_VERSION_2_EXCEPTIONS_H
 
 #include <exception>
 
@@ -16,47 +16,47 @@ namespace Whowell {
 	public:
 		IntegerOutOfRangeException();
 		
-		~IntegerOutOfRangeException() noexcept;
+		~IntegerOutOfRangeException() noexcept override;
 		
-		const char * what() const noexcept;
+		[[nodiscard]] const char * what() const noexcept override;
 	};
 	
 	class InvalidCharacterInputException : public std::exception {
 	public:
 		InvalidCharacterInputException();
 		
-		~InvalidCharacterInputException() noexcept;
+		~InvalidCharacterInputException() noexcept override;
 		
-		const char * what() const noexcept;
+		[[nodiscard]] const char * what() const noexcept override;
 	};
 	
 	class InvalidStringLengthException : public std::exception {
 	public:
 		InvalidStringLengthException();
 		
-		~InvalidStringLengthException() noexcept;
+		~InvalidStringLengthException() noexcept override;
 		
-		const char * what() const noexcept;
+		[[nodiscard]] const char * what() const noexcept override;
 	};
 	
 	class NodeNotFoundException : public std::exception {
 	public:
 		NodeNotFoundException();
 		
-		~NodeNotFoundException() noexcept;
+		~NodeNotFoundException() noexcept override;
 		
-		const char * what() const noexcept;
+		[[nodiscard]] const char * what() const noexcept override;
 	};
 	
 	class UnableToReserveASeatException : public std::exception {
 	public:
 		UnableToReserveASeatException();
 		
-		~UnableToReserveASeatException() noexcept;
+		~UnableToReserveASeatException() noexcept override;
 		
-		const char * what() const noexcept;
+		[[nodiscard]] const char * what() const noexcept override;
 	};
 	
 } /* namespace Whowell */
 
-#endif /* EXCEPTIONS_H_ */
+#endif /*OHGODMAKETHEPUNSSTOP_VERSION_2_EXCEPTIONS_H*/

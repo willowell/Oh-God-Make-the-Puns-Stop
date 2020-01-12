@@ -21,7 +21,7 @@ namespace Whowell {
 			column(column_num),
 			is_reserved(seat_state) { }
 	
-	Seat::~Seat() { }
+	Seat::~Seat() = default;
 	
 	int Seat::get_row() const { return row; }
 	

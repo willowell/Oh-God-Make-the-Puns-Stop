@@ -5,8 +5,8 @@
  *      Author: Whowell
  */
 
-#ifndef AUDITORIUM_H_
-#define AUDITORIUM_H_
+#ifndef OHGODMAKETHEPUNSSTOP_VERSION_2_AUDITORIUM_H
+#define OHGODMAKETHEPUNSSTOP_VERSION_2_AUDITORIUM_H
 
 #include "Exceptions.h"
 #include "Seat.h"
@@ -27,23 +27,23 @@ namespace Whowell {
 	public:
 		Auditorium();
 		
-		Auditorium(int auditorium_id);
+		explicit Auditorium(int auditorium_id);
 		
 		Auditorium(int auditorium_id, int num_seats, int num_rows);
 		
 		virtual ~Auditorium();
 		
-		int get_auditorium_id() const;
+		[[nodiscard]] int get_auditorium_id() const;
 		
-		int get_num_seats() const;
+		[[nodiscard]] int get_num_seats() const;
 		
-		int get_num_rows() const;
+		[[nodiscard]] int get_num_rows() const;
 		
-		int get_total_seats() const;
+		[[nodiscard]] int get_total_seats() const;
 		
-		int get_num_seats_open() const;
+		[[nodiscard]] int get_num_seats_open() const;
 		
-		int get_num_seats_reserved() const;
+		[[nodiscard]] int get_num_seats_reserved() const;
 		
 		void set_auditorium_id(int i);
 		
@@ -69,7 +69,7 @@ namespace Whowell {
 		
 		void reserve_seat_without_input(short int row_num, short int seat_num);
 		
-		void perform_automatic_reservation(short int num_of_tickets);
+		// void perform_automatic_reservation(short int num_of_tickets);
 		
 		void reset();
 		
@@ -83,4 +83,4 @@ namespace Whowell {
 	
 } /* namespace Whowell */
 
-#endif /* AUDITORIUM_H_ */
+#endif /*OHGODMAKETHEPUNSSTOP_VERSION_2_AUDITORIUM_H*/

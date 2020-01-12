@@ -49,13 +49,13 @@ namespace Whowell {
 		
 		for (int y = 0; y < this->num_rows; ++y) {
 			for (int x = 0; x < this->num_seats; ++x) {
-				seat_list.push_back(Seat(y, x, false));
+				seat_list.emplace_back(y, x, false);
 			}
 		}
 		
 	}
 	
-	Auditorium::~Auditorium() { }
+	Auditorium::~Auditorium() = default;
 	
 	int Auditorium::get_auditorium_id() const { return auditorium_id; }
 	
@@ -84,9 +84,9 @@ namespace Whowell {
 	void Auditorium::load_from_file(std::fstream & from_file) {
 		
 		std::string input_line;
-		short open_seats = 0;
-		short res_seats = 0;
-		short i = 0;
+		int open_seats = 0;
+		int res_seats = 0;
+		int i = 0;
 		
 		//Clear any altered bits, ensure the file is good before doing anything with it.
 		from_file.clear();
@@ -100,14 +100,14 @@ namespace Whowell {
 			}
 			
 			/* Examine the individual row. */
-			for (short j = 0; j < num_seats; ++j) {
+			for (int j = 0; j < num_seats; ++j) {
 				if (input_line.at(j) == '*') { //RESERVED SEAT
 					//CREATE NEW NODE WITH ROW NUM (i), SEAT NUM (j), and TRUE (RESERVED)
-					seat_list.push_back(Seat(i, j, true));
+					seat_list.emplace_back(i, j, true);
 					res_seats++;
 				} else if (input_line.at(j) == '#') { //EMPTY SEAT
 					//CREATE NEW NODE WITH ROW NUM (i), SEAT NUM (j), and FALSE (NOT RESERVED)
-					seat_list.push_back(Seat(i, j, false));
+					seat_list.emplace_back(i, j, false);
 					open_seats++;
 				}
 			}
@@ -142,7 +142,7 @@ namespace Whowell {
 			return;
 		}
 		
-		std::list<Seat>::iterator iter = seat_list.begin();
+		auto iter = seat_list.begin();
 		
 		// both of these are for making the grid of #'s and *'s
 		short int y = 0;
@@ -153,7 +153,7 @@ namespace Whowell {
 		while (y < num_rows) {
 			x = 0;
 			while (x < num_seats) {
-				// Get the status of the seat and print the correcponding
+				// Get the status of the seat and print the corresponding
 				// character. Then, move the iterator, and increment x.
 				iter->is_seat_reserved() ? to_file << '*' : to_file << '#';
 				iter++;
@@ -180,7 +180,7 @@ namespace Whowell {
 		Seat query(row_num, seat_num, false);
 		try {
 			
-			std::list<Seat>::iterator find_iter = std::find(seat_list.begin(), seat_list.end(), query);
+			auto find_iter = std::find(seat_list.begin(), seat_list.end(), query);
 			
 			if (find_iter != seat_list.end()) {
 				Seat * found = &(*find_iter);
@@ -205,7 +205,7 @@ namespace Whowell {
 		
 		try {
 			
-			std::list<Seat>::iterator find_iter = std::find(seat_list.begin(), seat_list.end(), query);
+			auto find_iter = std::find(seat_list.begin(), seat_list.end(), query);
 			
 			if (find_iter != seat_list.end()) {
 				return find_iter->is_seat_reserved();
@@ -282,7 +282,7 @@ namespace Whowell {
  * In the old project, this is performReservationsWithVectors, which had an
  * elaborate algorithm for choosing seats to reserve.
  */
-	void Auditorium::perform_automatic_reservation(short int num_of_tickets) {
+	// void Auditorium::perform_automatic_reservation(short int num_of_tickets) {
 /*
  * void performReservationsWithVectors( std::list<Seat>* list, Auditorium* auditorium,
 					std::vector< short > rows, short tickets ) {
@@ -323,7 +323,7 @@ namespace Whowell {
 				} //close try-catch block
 			}
  */
-	}
+	// }
 	
 	void Auditorium::reset() {
 		// As a predicate, the list must not be empty.
@@ -375,7 +375,7 @@ namespace Whowell {
 		// marking this function as readonly causes the program to expect
 		// this iterator to be const,
 		// which then means it cannot be moved across the list.
-		std::list<Seat>::iterator iter = seat_list.begin();
+		auto iter = seat_list.begin();
 		
 		// both of these are for making the grid of #'s and *'s
 		short int y = 0;
@@ -399,7 +399,7 @@ namespace Whowell {
 		// First two spaces for the top left corner
 		std::cout << "  ";
 		// Use num_seats to print the top line of numbers
-		for (short int i = 0; i < num_seats; ++i) {
+		for (int i = 0; i < num_seats; ++i) {
 			std::cout << i;
 		}
 		std::cout << std::endl;
@@ -416,7 +416,7 @@ namespace Whowell {
 			// Reset x with each iteration of this inner loop.
 			x = 0;
 			while (x < num_seats) {
-				// Get the status of the seat and print the correcponding
+				// Get the status of the seat and print the corresponding
 				// character. Then, move the iterator, and increment x.
 				iter->is_seat_reserved() ? std::cout << '*' : std::cout << '#';
 				iter++;

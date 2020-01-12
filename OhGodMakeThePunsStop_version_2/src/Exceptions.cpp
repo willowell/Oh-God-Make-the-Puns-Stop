@@ -18,36 +18,36 @@ namespace Whowell {
 	}
 	
 	
-	InvalidCharacterInputException::InvalidCharacterInputException() { }
+	InvalidCharacterInputException::InvalidCharacterInputException() = default;
 	
-	InvalidCharacterInputException::~InvalidCharacterInputException() noexcept { }
+	InvalidCharacterInputException::~InvalidCharacterInputException() noexcept = default;
 	
 	const char * InvalidCharacterInputException::what() const noexcept {
 		return "Invalid character. Please try again.\n";
 	}
 	
 	
-	InvalidStringLengthException::InvalidStringLengthException() { }
+	InvalidStringLengthException::InvalidStringLengthException() = default;
 	
-	InvalidStringLengthException::~InvalidStringLengthException() noexcept { }
+	InvalidStringLengthException::~InvalidStringLengthException() noexcept = default;
 	
 	const char * InvalidStringLengthException::what() const noexcept {
 		return "String too long. Please try again.\n";
 	}
 	
 	
-	NodeNotFoundException::NodeNotFoundException() { }
+	NodeNotFoundException::NodeNotFoundException() = default;
 	
-	NodeNotFoundException::~NodeNotFoundException() noexcept { }
+	NodeNotFoundException::~NodeNotFoundException() noexcept = default;
 	
 	const char * NodeNotFoundException::what() const noexcept {
 		return "Node not found in list.\n";
 	}
 	
 	
-	UnableToReserveASeatException::UnableToReserveASeatException() { }
+	UnableToReserveASeatException::UnableToReserveASeatException() = default;
 	
-	UnableToReserveASeatException::~UnableToReserveASeatException() noexcept { }
+	UnableToReserveASeatException::~UnableToReserveASeatException() noexcept = default;
 	
 	const char * UnableToReserveASeatException::what() const noexcept {
 		return "Unable to reserve seat.\n";

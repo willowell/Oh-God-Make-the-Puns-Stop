@@ -27,9 +27,9 @@ namespace Whowell {
 	///////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////
 	
-	short int validate_string_as_single_digit_integer_in_range(std::string buffer, short int min, short int max) {
+	int validate_string_as_single_digit_integer_in_range(std::string buffer, short int min, short int max) {
 		std::string::size_type sz = 0;
-		short int user_short = 0;
+		int user_input = 0;
 		
 		while (true) {
 			try {
@@ -45,11 +45,11 @@ namespace Whowell {
 					continue;
 				}
 				
-				//Now, convert the string to an integer, store it in user_short
+				//Now, convert the string to an integer, store it in user_input
 				//Then, check that the value is within the expected range
-				user_short = std::stoi(buffer, &sz);
+				user_input = std::stoi(buffer, &sz);
 				
-				if (user_short < min || user_short > max) {
+				if (user_input < min || user_input > max) {
 					std::cout << "Please enter a number between " << min << " and " << max << '!' << std::endl;
 					continue;
 				}
@@ -61,12 +61,12 @@ namespace Whowell {
 			}
 		}
 		
-		return user_short;
+		return user_input;
 	}
 	
-	short int validate_string_as_double_digit_integer_in_range(std::string buffer, short int min, short int max) {
+	int validate_string_as_double_digit_integer_in_range(std::string buffer, short int min, short int max) {
 		std::string::size_type sz = 0;
-		short int user_short = 0;
+		int user_input = 0;
 		
 		while (true) {
 			try {
@@ -92,9 +92,9 @@ namespace Whowell {
 				
 				//Now, convert the string to an integer, store it in userShort
 				//Then, check that the value is within the expected range
-				user_short = std::stoi(buffer, &sz);
+				user_input = std::stoi(buffer, &sz);
 				
-				if (user_short < min || user_short > max) {
+				if (user_input < min || user_input > max) {
 					std::cout << "Please enter a number between " << min << " and " << max << '!' << std::endl;
 					continue;
 				}
@@ -106,11 +106,11 @@ namespace Whowell {
 			}
 		}
 		
-		return user_short;
+		return user_input;
 	}
 	
 	char validate_string_as_character(std::string buffer, char upper_case_character) {
-		char user_char = '\n';
+		char user_input = '\n';
 		
 		while (true) {
 			try {
@@ -123,9 +123,9 @@ namespace Whowell {
 				
 				//Now, convert the string to an integer, store it in userShort
 				//Then, check that the value is within the expected range
-				user_char = buffer.at(0);
+				user_input = buffer.at(0);
 				
-				if (toupper(user_char) == upper_case_character) {
+				if (toupper(user_input) == upper_case_character) {
 					break;
 					
 				} else {
@@ -138,10 +138,10 @@ namespace Whowell {
 			}
 		}
 		
-		return toupper(user_char);
+		return toupper(user_input);
 	}
 	
-	bool yes_or_no_prompt(std::string prompt) {
+	bool yes_or_no_prompt(const std::string& prompt) {
 		std::string buffer;
 		char answer = 'a';
 		do {
@@ -163,13 +163,9 @@ namespace Whowell {
 		return (answer == 'Y');
 	}
 	
-	bool check_password(std::string attempt, std::string key) {
+	bool check_password(const std::string& attempt, std::string answer) {
 		
-		if (key.compare(attempt) == 0) {
-			return true;
-		} else {
-			return false;
-		}
+		return (answer == attempt);
 	}
 	
 	////////////////////////////////////////////////////////////////////////////
