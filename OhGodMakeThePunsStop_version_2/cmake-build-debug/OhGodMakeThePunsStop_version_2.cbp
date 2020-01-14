@@ -123,6 +123,12 @@
 		<Unit filename="/Users/whowell/GitHub_Repositories/Oh-God-Make-The-Puns-Stop-2/OhGodMakeThePunsStop_version_2/src/Exceptions.h">
 			<Option target="OhGodMakeThePunsStop_version_2"/>
 		</Unit>
+		<Unit filename="/Users/whowell/GitHub_Repositories/Oh-God-Make-The-Puns-Stop-2/OhGodMakeThePunsStop_version_2/src/Lifecycle.cpp">
+			<Option target="OhGodMakeThePunsStop_version_2"/>
+		</Unit>
+		<Unit filename="/Users/whowell/GitHub_Repositories/Oh-God-Make-The-Puns-Stop-2/OhGodMakeThePunsStop_version_2/src/Lifecycle.h">
+			<Option target="OhGodMakeThePunsStop_version_2"/>
+		</Unit>
 		<Unit filename="/Users/whowell/GitHub_Repositories/Oh-God-Make-The-Puns-Stop-2/OhGodMakeThePunsStop_version_2/src/Seat.cpp">
 			<Option target="OhGodMakeThePunsStop_version_2"/>
 		</Unit>

@@ -20,6 +20,7 @@
 #include "Seat.h"
 #include "Theatre.h"
 #include "Utilities.h"
+#include "Lifecycle.h"
 
 
 namespace Whowell {

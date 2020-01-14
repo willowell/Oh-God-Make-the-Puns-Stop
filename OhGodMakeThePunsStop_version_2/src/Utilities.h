@@ -12,6 +12,18 @@
 #include "Exceptions.h"
 #include "Theatre.h"
 
+#include <chrono>
+#include <exception>
+#include <fstream>
+#include <iostream>
+#include <list>
+#include <memory>
+#include <string>
+#include <thread>
+#include <vector>
+
+#include <fmt/core.h>
+
 namespace Whowell {
 	extern bool is_debug;
 	
@@ -121,45 +133,6 @@ namespace Whowell {
 	 * Each line in the file corresponds to an item in the vector.
 	 */
 	void save_reservation_requests_to_file();
-	
-	////////////////////////////////////////////////////////////////////////////
-	/// MENU ITEMS /////////////////////////////////////////////////////////////
-	////////////////////////////////////////////////////////////////////////////
-	
-	/**
-	 * Prints "Returning to main menu" and pauses the thread.
-	 */
-	void return_to_main_menu();
-	
-	/**
-	 * Prints the main menu, validates user input for the menu item choice,
-	 * and then pauses the thread before proceeding.
-	 */
-	void handle_main_menu();
-	
-	
-	/**
-	 * Asks the user for the number of an auditorium,
-	 * prints the auditorium to the console,
-	 * and then pauses the thread before proceeding.
-	 */
-	void handle_auditorium_display_menu();
-	
-	void handle_reservation_menu();
-	
-	void handle_advanced_options_menu();
-	
-	/**
-	 * First, prompts the user whether or not they are sure
-	 * that they want to quit.
-	 *
-	 * If the user says yes, the program saves the current state
-	 * of the auditoriums to file, as well as any special requests.
-	 * The main program loop breaks out here, causing the program to exit.
-	 *
-	 * If the user says no, the program simply returns to the main menu.
-	 */
-	void handle_quit_menu();
 } /* namespace Whowell */
 
 #endif /*OHGODMAKETHEPUNSSTOP_VERSION_2_UTILITIES_H*/

@@ -177,6 +177,33 @@ src/Exceptions.cpp.s:
 	$(MAKE) -f CMakeFiles/OhGodMakeThePunsStop_version_2.dir/build.make CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/Exceptions.cpp.s
 .PHONY : src/Exceptions.cpp.s
 
+src/Lifecycle.o: src/Lifecycle.cpp.o
+
+.PHONY : src/Lifecycle.o
+
+# target to build an object file
+src/Lifecycle.cpp.o:
+	$(MAKE) -f CMakeFiles/OhGodMakeThePunsStop_version_2.dir/build.make CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/Lifecycle.cpp.o
+.PHONY : src/Lifecycle.cpp.o
+
+src/Lifecycle.i: src/Lifecycle.cpp.i
+
+.PHONY : src/Lifecycle.i
+
+# target to preprocess a source file
+src/Lifecycle.cpp.i:
+	$(MAKE) -f CMakeFiles/OhGodMakeThePunsStop_version_2.dir/build.make CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/Lifecycle.cpp.i
+.PHONY : src/Lifecycle.cpp.i
+
+src/Lifecycle.s: src/Lifecycle.cpp.s
+
+.PHONY : src/Lifecycle.s
+
+# target to generate assembly for a file
+src/Lifecycle.cpp.s:
+	$(MAKE) -f CMakeFiles/OhGodMakeThePunsStop_version_2.dir/build.make CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/Lifecycle.cpp.s
+.PHONY : src/Lifecycle.cpp.s
+
 src/Seat.o: src/Seat.cpp.o
 
 .PHONY : src/Seat.o
@@ -300,6 +327,9 @@ help:
 	@echo "... src/Exceptions.o"
 	@echo "... src/Exceptions.i"
 	@echo "... src/Exceptions.s"
+	@echo "... src/Lifecycle.o"
+	@echo "... src/Lifecycle.i"
+	@echo "... src/Lifecycle.s"
 	@echo "... src/Seat.o"
 	@echo "... src/Seat.i"
 	@echo "... src/Seat.s"

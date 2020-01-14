@@ -11,6 +11,9 @@
 #include "Exceptions.h"
 #include "Seat.h"
 
+#include <fstream>
+#include <list>
+
 namespace Whowell {
 	
 	class Auditorium {

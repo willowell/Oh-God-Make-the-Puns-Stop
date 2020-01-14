@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/Auditorium.cpp.o"
   "CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/Exceptions.cpp.o"
+  "CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/Lifecycle.cpp.o"
   "CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/Seat.cpp.o"
   "CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/Theatre.cpp.o"
   "CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/Utilities.cpp.o"

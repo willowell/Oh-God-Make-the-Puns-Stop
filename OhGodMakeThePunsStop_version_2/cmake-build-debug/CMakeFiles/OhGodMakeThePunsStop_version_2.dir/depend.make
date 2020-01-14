@@ -12,6 +12,15 @@ CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/Auditorium.cpp.o: /usr/local/i
 CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/Exceptions.cpp.o: ../src/Exceptions.cpp
 CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/Exceptions.cpp.o: ../src/Exceptions.h
 
+CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/Lifecycle.cpp.o: ../src/Auditorium.h
+CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/Lifecycle.cpp.o: ../src/Exceptions.h
+CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/Lifecycle.cpp.o: ../src/Lifecycle.cpp
+CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/Lifecycle.cpp.o: ../src/Lifecycle.h
+CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/Lifecycle.cpp.o: ../src/Seat.h
+CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/Lifecycle.cpp.o: ../src/Theatre.h
+CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/Lifecycle.cpp.o: ../src/Utilities.h
+CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/Lifecycle.cpp.o: /usr/local/include/fmt/core.h
+
 CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/Seat.cpp.o: ../src/Seat.cpp
 CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/Seat.cpp.o: ../src/Seat.h
 
@@ -20,6 +29,7 @@ CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/Theatre.cpp.o: ../src/Theatre.
 
 CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/Utilities.cpp.o: ../src/Auditorium.h
 CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/Utilities.cpp.o: ../src/Exceptions.h
+CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/Utilities.cpp.o: ../src/Lifecycle.h
 CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/Utilities.cpp.o: ../src/Seat.h
 CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/Utilities.cpp.o: ../src/Theatre.h
 CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/Utilities.cpp.o: ../src/Utilities.cpp
@@ -28,8 +38,10 @@ CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/Utilities.cpp.o: /usr/local/in
 
 CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/main.cpp.o: ../src/Auditorium.h
 CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/main.cpp.o: ../src/Exceptions.h
+CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/main.cpp.o: ../src/Lifecycle.h
 CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/main.cpp.o: ../src/Seat.h
 CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/main.cpp.o: ../src/Theatre.h
 CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/main.cpp.o: ../src/Utilities.h
 CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/main.cpp.o: ../src/main.cpp
+CMakeFiles/OhGodMakeThePunsStop_version_2.dir/src/main.cpp.o: /usr/local/include/fmt/core.h
 

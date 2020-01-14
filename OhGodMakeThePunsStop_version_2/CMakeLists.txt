@@ -31,6 +31,8 @@ add_executable(OhGodMakeThePunsStop_version_2
         src/Theatre.h
         src/Utilities.cpp
         src/Utilities.h
+        src/Lifecycle.cpp
+        src/Lifecycle.h
         assets/A1.txt
         assets/A1_backup.txt
         assets/A2.txt

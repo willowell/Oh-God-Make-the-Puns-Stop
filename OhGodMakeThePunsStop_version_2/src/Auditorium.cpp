@@ -339,11 +339,11 @@ namespace Whowell {
 	}
 	
 	void Auditorium::display() const {
-		fmt::print(stdout,
-				   "Auditorium Info:\n\tID Number: {}\n\tTotal Number of Seats: {}\n"
-				   "\tID Number: {}\n\tTotal Number of Seats: {}\n"
-				   "\tNumber of Seats in Each Row: {}\n\tNumber of Rows: {}\n"
-				   "\tNumber of Seats Open: {}\n\tNumber of Seats Reserved {}\n\n", auditorium_id, total_seats,
+		std::string format = "Auditorium Info:\n\tID Number: {0}\n\tTotal Number of Seats: {1}\n"
+							 "\tNumber of Seats in Each Row: {2}\n\tNumber of Rows: {3}\n"
+							 "\tNumber of Seats Open: {4}\n\tNumber of Seats Reserved {5}\n\n";
+		
+		fmt::print(stdout, format, auditorium_id, total_seats,
 				   num_seats, num_rows, num_seats_open, num_seats_reserved);
 	}
 	
