@@ -11,12 +11,11 @@ I have included the original project for completeness, so that anyone viewing th
 
 ![Gitlab pipeline status](https://img.shields.io/gitlab/pipeline/willowell/Oh-God-Make-the-Puns-Stop-2?label=GitLab%20CI%2FCD)
 
----
+
 # Features: `TODO`
 
----
-# Building
 
+# Building
 ## Dependencies:
  1. GCC, C++17 enabled
  2. [{fmt}](https://fmt.dev/latest/index.html)
