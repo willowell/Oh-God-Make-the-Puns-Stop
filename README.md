@@ -12,7 +12,7 @@ I have included the original project for completeness, so that anyone viewing th
 # Building
 
 ## Dependencies:
- 1. GCC, C++-17 enabled
+ 1. GCC, C++17 enabled
  2. [{fmt}](https://fmt.dev/latest/index.html)
  3. CMake version 3.13 or higher
  
