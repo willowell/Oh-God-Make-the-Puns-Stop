@@ -9,6 +9,11 @@
 
 //TODO: Add documentation.
 
+//TODO: Add tests?
+
+
+
+
 !!! Bug
 //TODO: Entering only one digit where two are possible causes the program to bug out:
 

@@ -50,3 +50,5 @@ if (fmt_FOUND)
     target_link_libraries(OhGodMakeThePunsStop_version_2 fmt::fmt)
 
 endif ()
+
+add_subdirectory(Google_tests)
