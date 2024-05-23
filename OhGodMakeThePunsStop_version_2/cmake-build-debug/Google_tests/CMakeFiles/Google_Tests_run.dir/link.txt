@@ -1,1 +1,0 @@
-/usr/bin/clang++  -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/Google_Tests_run.dir/test.cpp.o  -o Google_Tests_run ../lib/libgtestd.a ../lib/libgtest_maind.a /usr/local/lib/libfmt.a ../lib/libgtestd.a 
