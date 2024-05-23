@@ -1,0 +1,16 @@
+# IDE Configuration Files
+.idea
+.settings
+.vscode
+.cproject
+.project
+
+# Build output
+cmake-build-debug/
+Debug
+
+# Vendored GoogleTest
+OhGodMakeThePunsStop_version_2/Google_tests/lib
+
+# Misc filesystem stuff
+.DS_Store
